@@ -148,17 +148,41 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
 .tip b { font-size: 15px; }
 .tip.on { opacity: 1; }
 
-/* изображения */
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; align-items: center; }
-.hero-art { margin: 0; }
-.shot { display: block; width: 100%; height: auto; border-radius: var(--radius); background: var(--surface-2); }
-.art-note { color: var(--muted); font-size: 12px; margin: 8px 2px 0; }
-.path { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.step { overflow: hidden; margin: 0; }
-.step .shot { border-radius: 0; }
-.step figcaption { padding: 12px 14px 14px; }
-.step figcaption b { display: block; font-size: 16px; font-weight: 800; }
-.step figcaption span { color: var(--text-2); font-size: 13px; }
+/* фоновые изображения */
+.band { position: relative; isolation: isolate; overflow: hidden; }
+.band > picture { position: absolute; left: 0; right: 0; top: 0; height: var(--art-h, 640px); z-index: -2; }
+.band > picture img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.band::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: var(--art-h, 640px); z-index: -1; pointer-events: none;
+  background: linear-gradient(var(--bg) 0%, color-mix(in srgb, var(--bg) 18%, transparent) 14%,
+    color-mix(in srgb, var(--bg) 22%, transparent) 30%, color-mix(in srgb, var(--bg) 88%, transparent) 56%, var(--bg) 78%); }
+.band:not(.hero-band) { padding-top: var(--art-gap, 250px); }
+.band:not(.hero-band) > .wrap > section:first-child { padding-top: 0; }
+.band-pad { padding-bottom: 56px; }
+
+/* первый экран: Атлант */
+.hero-band { color-scheme: dark; --text: #fff; --text-2: rgba(255,255,255,.82); --muted: rgba(255,255,255,.62);
+  --good: #5fd08f; --surface-2: rgba(255,255,255,.12); color: var(--text); background: #0d0c0a; min-height: min(760px, 92vh); display: flex; }
+.hero-band > picture { height: 100%; }
+.hero-band > picture img { object-position: 72% 12%; }
+.hero-band::before { height: 100%; background:
+  linear-gradient(90deg, rgba(10,9,8,.92) 0%, rgba(10,9,8,.72) 40%, rgba(10,9,8,.08) 72%),
+  linear-gradient(transparent 88%, var(--bg) 100%); }
+.hero-band .wrap { width: 100%; display: flex; flex-direction: column; }
+.hero-band .hero { margin: auto 0 0; padding: 40px 0 8px; max-width: 560px; }
+.hero-band .hero-note { margin-bottom: 0; }
+.hero-band .wrap { padding-bottom: 96px; }
+.hero-band .ridge { height: 90px; }
+.hero-band .dot.off { background: rgba(255,255,255,.4); }
+.hero-band .who .ph { background: rgba(255,255,255,.14); }
+.art-note { position: absolute; right: 16px; bottom: 12px; font-size: 11px; color: var(--muted); margin: 0; }
+@media (max-width: 720px) {
+  .hero-band { min-height: 96vh; }
+  .hero-band > picture img { object-position: 74% 20%; }
+  .hero-band::before { height: 100%; background: linear-gradient(rgba(10,9,8,.55) 0%, rgba(10,9,8,.15) 30%, rgba(10,9,8,.78) 52%, rgba(10,9,8,.96) 72%, rgba(10,9,8,.96) 92%, var(--bg) 100%); }
+  .hero-band .hero { padding-bottom: 4px; }
+  .art-note { display: none; }
+}
+@media (max-width: 720px) { .band { --art-h: 400px; --art-gap: 150px; } }
 
 .skel { color: var(--muted); }
 @media (max-width: 720px) {
@@ -168,102 +192,86 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
   .dlg { grid-template-columns: 1fr; }
   .dlg .th { min-height: 220px; }
   .reels { grid-template-columns: repeat(2, 1fr); }
-  .path { grid-template-columns: 1fr; }
-}
-@media (max-width: 880px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 20px; }
-  .hero-art { order: -1; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="band hero-band">
+  <picture>
+    <source type="image/webp" srcset="img/bodybuilding-atlas-800.webp 800w, img/bodybuilding-atlas-1600.webp 1600w" sizes="100vw">
+    <img src="img/bodybuilding-atlas-1600.jpg" srcset="img/bodybuilding-atlas-800.jpg 800w, img/bodybuilding-atlas-1600.jpg 1600w" sizes="100vw" width="1600" height="900" alt="" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="wrap">
   <header class="top">
-    <a class="who" id="who" href="https://www.instagram.com/" target="_blank" rel="noopener">
-      <span class="ph"></span>
-      <div><b>Игорь Антонников</b><span id="handle">Instagram</span></div>
-    </a>
-    <span class="live"><span class="dot off" id="dot"></span><span id="status">подключаюсь</span></span>
-  </header>
-
-  <div class="hero">
-    <div class="hero-grid">
-      <div>
-        <h1>Веду Instagram<br>в открытую</h1>
-        <p class="lead">Цель - 10 000 подписчиков. Каждый рилс, охват и новый подписчик видны здесь, цифры обновляются сами.</p>
-        <div class="big">
-          <span class="n num" id="followers">-</span>
-          <span class="cap">подписчиков сейчас<br><span class="gain num" id="gain"></span></span>
-        </div>
+      <a class="who" id="who" href="https://www.instagram.com/" target="_blank" rel="noopener">
+        <span class="ph"></span>
+        <div><b>Игорь Антонников</b><span id="handle">Instagram</span></div>
+      </a>
+      <span class="live"><span class="dot off" id="dot"></span><span id="status">подключаюсь</span></span>
+    </header>
+    <div class="hero">
+      <h1>Веду Instagram<br>в открытую</h1>
+      <p class="lead">Цель - 10 000 подписчиков. Каждый рилс, охват и новый подписчик видны здесь, цифры обновляются сами.</p>
+      <div class="big">
+        <span class="n num" id="followers">-</span>
+        <span class="cap">подписчиков сейчас<br><span class="gain num" id="gain"></span></span>
       </div>
-      <figure class="hero-art">
-      <picture>
-        <source type="image/webp" srcset="img/bodybuilding-atlas-800.webp 800w, img/bodybuilding-atlas-1600.webp 1600w" sizes="(min-width: 880px) 500px, calc(100vw - 40px)">
-        <img class="shot" src="img/bodybuilding-atlas-1600.jpg" srcset="img/bodybuilding-atlas-800.jpg 800w, img/bodybuilding-atlas-1600.jpg 1600w" sizes="(min-width: 880px) 500px, calc(100vw - 40px)" width="1600" height="900" alt="Атлет в образе Атланта с каменной сферой" fetchpriority="high" decoding="async">
-      </picture>
-        <figcaption class="art-note">Иллюстрация</figcaption>
-      </figure>
     </div>
     <div class="ridge" id="ridge" aria-label="Охват по дням за 30 дней"></div>
-    <p class="note">Линия - охват по дням за 30 дней. Пики - дни, когда рилс выстрелил.</p>
+    <p class="note hero-note">Линия - охват по дням за 30 дней. Пики - дни, когда рилс выстрелил.</p>
   </div>
+  <p class="art-note">Иллюстрация</p>
+</div>
 
+<div class="band band-pad">
+  <picture>
+    <source type="image/webp" srcset="img/ironman-800.webp 800w, img/ironman-1600.webp 1600w" sizes="100vw">
+    <img src="img/ironman-1600.jpg" srcset="img/ironman-800.jpg 800w, img/ironman-1600.jpg 1600w" sizes="100vw" width="1600" height="900" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="wrap">
   <section>
-    <h2>Последние 30 дней</h2>
-    <div class="tiles" id="tiles"></div>
-  </section>
-
+      <h2>Последние 30 дней</h2>
+      <div class="tiles" id="tiles"></div>
+    </section>
   <section>
-    <h2>По дням</h2>
-    <div class="tabs" id="dayTabs" role="group" aria-label="Метрика"></div>
-    <div class="card chart" id="dayChart"></div>
-  </section>
+      <h2>По дням</h2>
+      <div class="tabs" id="dayTabs" role="group" aria-label="Метрика"></div>
+      <div class="card chart" id="dayChart"></div>
+    </section>
+  </div>
+</div>
 
+<div class="band band-pad">
+  <picture>
+    <source type="image/webp" srcset="img/bosphorus-800.webp 800w, img/bosphorus-1600.webp 1600w" sizes="100vw">
+    <img src="img/bosphorus-1600.jpg" srcset="img/bosphorus-800.jpg 800w, img/bosphorus-1600.jpg 1600w" sizes="100vw" width="1600" height="900" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="wrap">
   <section>
-    <h2>Путь</h2>
-    <div class="path">
-      <figure class="card step">
-      <picture>
-        <source type="image/webp" srcset="img/ironman-800.webp 800w, img/ironman-1600.webp 1600w" sizes="(min-width: 1040px) 330px, (min-width: 721px) calc((100vw - 64px) / 3), calc(100vw - 40px)">
-        <img class="shot" src="img/ironman-1600.jpg" srcset="img/ironman-800.jpg 800w, img/ironman-1600.jpg 1600w" sizes="(min-width: 1040px) 330px, (min-width: 721px) calc((100vw - 64px) / 3), calc(100vw - 40px)" width="1600" height="900" alt="Эмблема IRONMAN и велосипед в тёплом свете" loading="lazy" decoding="async">
-      </picture>
-        <figcaption><b>IRONMAN</b><span>Плавание, велосипед, бег - одним днём</span></figcaption>
-      </figure>
-      <figure class="card step">
-      <picture>
-        <source type="image/webp" srcset="img/bosphorus-800.webp 800w, img/bosphorus-1600.webp 1600w" sizes="(min-width: 1040px) 330px, (min-width: 721px) calc((100vw - 64px) / 3), calc(100vw - 40px)">
-        <img class="shot" src="img/bosphorus-1600.jpg" srcset="img/bosphorus-800.jpg 800w, img/bosphorus-1600.jpg 1600w" sizes="(min-width: 1040px) 330px, (min-width: 721px) calc((100vw - 64px) / 3), calc(100vw - 40px)" width="1600" height="900" alt="Пловцы в Босфоре на фоне моста и Стамбула, со страховочными буями" loading="lazy" decoding="async">
-      </picture>
-        <figcaption><b>Босфор</b><span>Заплыв между Европой и Азией</span></figcaption>
-      </figure>
-      <figure class="card step">
-      <picture>
-        <source type="image/webp" srcset="img/oceanman-800.webp 800w, img/oceanman-1600.webp 1600w" sizes="(min-width: 1040px) 330px, (min-width: 721px) calc((100vw - 64px) / 3), calc(100vw - 40px)">
-        <img class="shot" src="img/oceanman-1600.jpg" srcset="img/oceanman-800.jpg 800w, img/oceanman-1600.jpg 1600w" sizes="(min-width: 1040px) 330px, (min-width: 721px) calc((100vw - 64px) / 3), calc(100vw - 40px)" width="1600" height="900" alt="Заплыв в открытом море к бую OCEANMAN, со страховочными буями" loading="lazy" decoding="async">
-      </picture>
-        <figcaption><b>OCEANMAN</b><span>Открытая вода</span></figcaption>
-      </figure>
-    </div>
-    <p class="method">Изображения - иллюстрации, а не фотографии с соревнований.</p>
-  </section>
+      <h2>Рилсы</h2>
+      <div class="tabs" id="reelTabs" role="group" aria-label="Сортировка"></div>
+      <div class="reels" id="reels"><p class="skel">Загружаю рилсы…</p></div>
+      <p class="method">Сколько подписчиков привёл рилс, Instagram не сообщает. Считаю сам: прирост подписчиков делю между рилсами пропорционально тому, сколько просмотров каждый набрал за это же время. Поэтому это оценка, а не точная цифра.</p>
+    </section>
+  </div>
+</div>
 
+<div class="band">
+  <picture>
+    <source type="image/webp" srcset="img/oceanman-800.webp 800w, img/oceanman-1600.webp 1600w" sizes="100vw">
+    <img src="img/oceanman-1600.jpg" srcset="img/oceanman-800.jpg 800w, img/oceanman-1600.jpg 1600w" sizes="100vw" width="1600" height="900" alt="" loading="lazy" decoding="async">
+  </picture>
+  <div class="wrap">
   <section>
-    <h2>Рилсы</h2>
-    <div class="tabs" id="reelTabs" role="group" aria-label="Сортировка"></div>
-    <div class="reels" id="reels"><p class="skel">Загружаю рилсы…</p></div>
-    <p class="method">Сколько подписчиков привёл рилс, Instagram не сообщает. Считаю сам: прирост подписчиков делю между рилсами пропорционально тому, сколько просмотров каждый набрал за это же время. Поэтому это оценка, а не точная цифра.</p>
-  </section>
-
-  <section>
-    <h2>Кто подписан</h2>
-    <div class="aud" id="aud"></div>
-  </section>
-
+      <h2>Кто подписан</h2>
+      <div class="aud" id="aud"></div>
+    </section>
   <footer>
-    <p class="motto">Всё только начинается.</p>
-    <a class="btn primary" id="follow" href="https://www.instagram.com/" target="_blank" rel="noopener">Подписаться в Instagram</a>
-    <p class="small" id="foot">Цифры приходят напрямую из Instagram API: профиль и рилсы - каждые 15 минут, статистика по дням и аудитория - каждые 6 часов.</p>
-  </footer>
+      <p class="motto">Всё только начинается.</p>
+      <a class="btn primary" id="follow" href="https://www.instagram.com/" target="_blank" rel="noopener">Подписаться в Instagram</a>
+      <p class="small" id="foot">Цифры приходят напрямую из Instagram API: профиль и рилсы - каждые 15 минут, статистика по дням и аудитория - каждые 6 часов. Фоновые изображения - иллюстрации.</p>
+    </footer>
+  </div>
 </div>
 
 <dialog id="dlg"></dialog>
