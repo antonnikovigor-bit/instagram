@@ -58,20 +58,34 @@ let token = SECRET;
 const errors = [];
 let calls = 0;
 
+// Токен отправляется только на серверы Instagram (и на localhost - для локальных тестов)
+const TOKEN_HOSTS = new Set(['graph.instagram.com']);
+const allowedHost = (u) => (u.protocol === 'https:' && TOKEN_HOSTS.has(u.hostname)) ||
+  (process.env.CI !== 'true' && u.protocol === 'http:' && u.hostname === 'localhost');
+
+// Убираем из текста ошибок всё, что похоже на токен, чтобы он не попал в логи и в public.json
+const scrub = (s) => String(s)
+  .replace(/access_token=[^&\s"]+/gi, 'access_token=***')
+  .replace(/\b(IG|EA)[A-Za-z0-9_-]{30,}\b/g, '***');
+
 async function api(pathname, params = {}) {
   const url = new URL(pathname.startsWith('http') ? pathname : API + pathname);
+  if (!allowedHost(url)) throw new Error(`Запрос к недоверенному адресу заблокирован: ${url.hostname}`);
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, String(v));
   url.searchParams.set('access_token', token);
   calls++;
-  const res = await fetch(url);
+  const res = await fetch(url, { redirect: 'error' });
   const json = await res.json().catch(() => ({}));
   if (!res.ok || json.error) {
-    const e = new Error(json.error?.message || `HTTP ${res.status}`);
+    const e = new Error(scrub(json.error?.message || `HTTP ${res.status}`));
     e.code = json.error?.code;
     throw e;
   }
   return json;
 }
+
+// Новый токен прячем в логах GitHub (секрет из настроек GitHub маскирует сам, а продлённый - нет)
+const mask = (t) => { if (process.env.GITHUB_ACTIONS === 'true' && t) console.log(`::add-mask::${t}`); };
 
 // Пытаемся взять все метрики разом; если API ругается на какую-то - берём по одной и пропускаем сломанные.
 async function insights(id, metrics, params = {}) {
@@ -102,7 +116,7 @@ async function main() {
 
   // Токен: сначала обновлённый (зашифрованный), при проблеме - исходный из секрета
   if (state.tokenEnc) {
-    try { token = dec(state.tokenEnc); } catch { token = SECRET; delete state.tokenEnc; delete state.tokenRefreshedAt; }
+    try { token = dec(state.tokenEnc); mask(token); } catch { token = SECRET; delete state.tokenEnc; delete state.tokenRefreshedAt; }
   }
 
   let profile;
@@ -128,6 +142,7 @@ async function main() {
       const r = await api(REFRESH_URL, { grant_type: 'ig_refresh_token' });
       if (r.access_token) {
         token = r.access_token;
+        mask(token);
         state.tokenEnc = enc(token);
         state.tokenRefreshedAt = now;
         console.log('Токен продлён');
@@ -280,7 +295,7 @@ async function main() {
     daily,
     reels,
     audience,
-    errors: errors.slice(0, 20),
+    errors: errors.slice(0, 20).map(scrub),
   };
 
   await writeJson('public.json', out);
@@ -290,7 +305,7 @@ async function main() {
 }
 
 main().catch((e) => {
-  console.error('Ошибка:', e.message);
+  console.error('Ошибка:', scrub(e.message));
   if (e.code === 190) console.error('Токен недействителен. Сгенерируй новый и обнови секрет IG_TOKEN.');
   process.exit(1);
 });
