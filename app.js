@@ -22,6 +22,8 @@ const dayLabel = (d) => dateRu(d + 'T12:00:00+05:00', { day: 'numeric', month: '
 const hostOk = (u, test) => { try { const x = new URL(u); return x.protocol === 'https:' && test(x.hostname); } catch { return false; } };
 const safeImg = (u) => hostOk(u, (h) => h.endsWith('.cdninstagram.com') || h.endsWith('.fbcdn.net')) ? u : '';
 const safeLink = (u) => hostOk(u, (h) => h === 'www.instagram.com' || h === 'instagram.com') ? u : '';
+// Ссылки вида /reel/ID/ Instagram без входа теряет и уводит в ленту. /p/ID/ открывает именно этот рилс.
+const reelLink = (u) => { const l = safeLink(u); return l ? l.replace(/\/reels?\/([\w-]+)/, '/p/$1') : ''; };
 const setBg = (root) => root.querySelectorAll('[data-bg]').forEach((el) => {
   const u = safeImg(el.dataset.bg);
   if (u) el.style.backgroundImage = `url("${u.replace(/["\\\n\r]/g, encodeURIComponent)}")`;
@@ -192,7 +194,7 @@ function per1000(a, views) { return views ? dec1((a || 0) / views * 1000) : '-';
 
 function openReel(id) {
   const r = DATA.reels.find((x) => x.id === id); if (!r) return;
-  const link = safeLink(r.permalink);
+  const link = reelLink(r.permalink);
   $('dlg').innerHTML = `<div class="dlg">
     <div class="th" data-bg="${esc(r.thumb || '')}"></div>
     <div class="body">
