@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Игорь Антонников - Instagram в открытую</title>
+<meta name="description" content="Живая статистика моего Instagram: подписчики, охват и каждый рилс. Цифры обновляются сами.">
+<meta property="og:title" content="Игорь Антонников - Instagram в открытую">
+<meta property="og:description" content="Подписчики, охват и каждый рилс - в открытую.">
+<meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131312" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f5f3ee;
+  --surface: #fcfcfb;
+  --surface-2: #efede7;
+  --line: #e4e1d9;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --muted: #7d7b75;
+  --accent: #2a78d6;
+  --accent-wash: rgba(42,120,214,.10);
+  --good: #0f7b3e;
+  --radius: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #131312;
+    --surface: #1a1a19;
+    --surface-2: #232321;
+    --line: #2e2e2b;
+    --text: #ffffff;
+    --text-2: #c3c2b7;
+    --muted: #8f8e86;
+    --accent: #3987e5;
+    --accent-wash: rgba(57,135,229,.14);
+    --good: #4cc47e;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.5 Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-feature-settings: "tnum" 1;
+}
+a { color: inherit; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* шапка */
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 22px 0 8px; }
+.who { display: flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
+.who img, .who .ph { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: var(--surface-2); flex: none; }
+.who b { display: block; font-weight: 700; line-height: 1.2; }
+.who span { color: var(--muted); font-size: 14px; }
+.live { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-2); white-space: nowrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 0 var(--good); animation: pulse 2s infinite; }
+.dot.off { background: var(--muted); animation: none; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--good) 60%, transparent); } 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+
+/* hero */
+.hero { padding: 40px 0 8px; }
+.hero h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.05; letter-spacing: -.02em; margin: 0 0 14px; font-weight: 800; }
+.hero p.lead { color: var(--text-2); max-width: 560px; margin: 0 0 32px; font-size: 17px; }
+.big { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+.big .n { font-size: clamp(56px, 12vw, 104px); font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.big .cap { color: var(--text-2); font-size: 15px; }
+.gain { font-weight: 700; color: var(--good); }
+.ridge { margin-top: 18px; height: 120px; position: relative; }
+.ridge svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.note { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+
+section { padding: 48px 0 0; }
+h2 { font-size: 24px; letter-spacing: -.01em; margin: 0 0 18px; font-weight: 800; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+
+/* плитки */
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.tile { padding: 18px 18px 16px; }
+.tile .k { font-size: 14px; color: var(--text-2); font-weight: 600; }
+.tile .v { font-size: 34px; font-weight: 800; letter-spacing: -.02em; margin: 6px 0 2px; line-height: 1.1; }
+.tile .d { font-size: 13px; color: var(--muted); }
+
+/* табы */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 14px; }
+.tabs button {
+  font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text-2);
+  padding: 7px 14px; border-radius: 999px;
+}
+.tabs button[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+.chart { padding: 18px 14px 10px; position: relative; }
+.chart svg { width: 100%; height: 240px; display: block; }
+.chart .sum { font-size: 14px; color: var(--text-2); padding: 0 6px 8px; }
+.chart .sum b { color: var(--text); font-size: 20px; }
+
+/* рилсы */
+.reels { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.reel { overflow: hidden; cursor: pointer; text-align: left; font: inherit; color: inherit; padding: 0; display: flex; flex-direction: column; }
+.reel:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.reel .th { aspect-ratio: 9/14; background: var(--surface-2) center/cover no-repeat; position: relative; }
+.reel .th .badge { position: absolute; left: 8px; bottom: 8px; background: rgba(0,0,0,.62); color: #fff; font-size: 13px; font-weight: 700; padding: 3px 8px; border-radius: 999px; backdrop-filter: blur(4px); }
+.reel .meta { padding: 10px 12px 12px; font-size: 13px; color: var(--text-2); }
+.reel .meta .cap { color: var(--text); font-weight: 600; font-size: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 4px; min-height: 2.8em; line-height: 1.4; }
+.method { color: var(--muted); font-size: 13px; max-width: 700px; margin: 14px 0 0; }
+
+/* модалка рилса */
+dialog { border: 1px solid var(--line); border-radius: 22px; padding: 0; background: var(--surface); color: var(--text); width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 32px); }
+dialog::backdrop { background: rgba(0,0,0,.45); }
+.dlg { display: grid; grid-template-columns: 180px 1fr; }
+.dlg .th { background: var(--surface-2) center/cover no-repeat; min-height: 280px; }
+.dlg .body { padding: 18px 20px; }
+.dlg .body h3 { margin: 0 0 4px; font-size: 26px; font-weight: 800; }
+.dlg .body .date { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+.kv { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; font-size: 14px; }
+.kv > span:nth-of-type(odd) { color: var(--text-2); }
+.kv > span:nth-of-type(even) { font-weight: 700; text-align: right; }
+.kv .sep { grid-column: 1 / -1; border-top: 1px solid var(--line); margin: 4px 0; }
+.dlg .actions { display: flex; gap: 8px; margin-top: 16px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; font: inherit; font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); text-decoration: none; cursor: pointer; }
+.btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+/* аудитория */
+.aud { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.aud .card { padding: 18px; }
+.aud h3 { margin: 0 0 12px; font-size: 16px; }
+.bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; margin-bottom: 10px; font-size: 14px; }
+.bar .l { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar .p { font-weight: 700; }
+.bar .track { grid-column: 1 / -1; height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.bar .fill { height: 100%; border-radius: 0 4px 4px 0; background: var(--accent); }
+.empty { color: var(--muted); font-size: 14px; }
+
+footer { padding: 56px 0 48px; }
+.motto { font-size: clamp(28px, 5vw, 44px); font-weight: 800; letter-spacing: -.02em; margin: 0 0 18px; }
+footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
+
+/* подсказка */
+.tip { position: fixed; pointer-events: none; z-index: 20; background: var(--text); color: var(--bg); font-size: 13px; padding: 7px 10px; border-radius: 10px; transform: translate(-50%, calc(-100% - 12px)); opacity: 0; transition: opacity .1s; white-space: nowrap; }
+.tip b { font-size: 15px; }
+.tip.on { opacity: 1; }
+
+.skel { color: var(--muted); }
+@media (max-width: 720px) {
+  .tiles { grid-template-columns: repeat(2, 1fr); }
+  .tile .v { font-size: 24px; }
+  .aud { grid-template-columns: 1fr; }
+  .dlg { grid-template-columns: 1fr; }
+  .dlg .th { min-height: 220px; }
+  .reels { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="who" id="who" href="https://www.instagram.com/" target="_blank" rel="noopener">
+      <span class="ph"></span>
+      <div><b>Игорь Антонников</b><span id="handle">Instagram</span></div>
+    </a>
+    <span class="live"><span class="dot off" id="dot"></span><span id="status">подключаюсь</span></span>
+  </header>
+
+  <div class="hero">
+    <h1>Веду Instagram<br>в открытую</h1>
+    <p class="lead">Цель - 10 000 подписчиков. Каждый рилс, охват и новый подписчик видны здесь, цифры обновляются сами.</p>
+    <div class="big">
+      <span class="n num" id="followers">-</span>
+      <span class="cap">подписчиков сейчас<br><span class="gain num" id="gain"></span></span>
+    </div>
+    <div class="ridge" id="ridge" aria-label="Охват по дням за 30 дней"></div>
+    <p class="note">Линия - охват по дням за 30 дней. Пики - дни, когда рилс выстрелил.</p>
+  </div>
+
+  <section>
+    <h2>Последние 30 дней</h2>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section>
+    <h2>По дням</h2>
+    <div class="tabs" id="dayTabs" role="group" aria-label="Метрика"></div>
+    <div class="card chart" id="dayChart"></div>
+  </section>
+
+  <section>
+    <h2>Рилсы</h2>
+    <div class="tabs" id="reelTabs" role="group" aria-label="Сортировка"></div>
+    <div class="reels" id="reels"><p class="skel">Загружаю рилсы…</p></div>
+    <p class="method">Сколько подписчиков привёл рилс, Instagram не сообщает. Считаю сам: прирост подписчиков делю между рилсами пропорционально тому, сколько просмотров каждый набрал за это же время. Поэтому это оценка, а не точная цифра.</p>
+  </section>
+
+  <section>
+    <h2>Кто подписан</h2>
+    <div class="aud" id="aud"></div>
+  </section>
+
+  <footer>
+    <p class="motto">Всё только начинается.</p>
+    <a class="btn primary" id="follow" href="https://www.instagram.com/" target="_blank" rel="noopener">Подписаться в Instagram</a>
+    <p class="small" id="foot">Цифры приходят напрямую из Instagram API: профиль и рилсы - каждые 15 минут, статистика по дням и аудитория - каждые 6 часов.</p>
+  </footer>
+</div>
+
+<dialog id="dlg"></dialog>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+const DATA_URL = new URLSearchParams(location.search).get('data')?.match(/^[\w.\-/]+$/)
+  ? new URLSearchParams(location.search).get('data')
+  : 'https://raw.githubusercontent.com/antonnikovigor-bit/instagram/data/public.json';
+
+const $ = (id) => document.getElementById(id);
+const nf = new Intl.NumberFormat('ru-RU');
+const fmt = (v) => v == null ? '-' : nf.format(Math.round(v));
+const compact = (v) => {
+  if (v == null) return '-';
+  if (Math.abs(v) >= 1e6) return (v / 1e6).toFixed(v >= 1e7 ? 0 : 1).replace('.', ',') + ' млн';
+  if (Math.abs(v) >= 1e4) return (v / 1e3).toFixed(v >= 1e5 ? 0 : 1).replace('.', ',') + ' тыс.';
+  return nf.format(Math.round(v));
+};
+const dec1 = (v) => v == null ? '-' : (Math.round(v * 10) / 10).toString().replace('.', ',');
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const dateRu = (iso, opts = { day: 'numeric', month: 'long' }) => new Date(iso).toLocaleDateString('ru-RU', { timeZone: 'Asia/Almaty', ...opts });
+const dayLabel = (d) => dateRu(d + 'T12:00:00+05:00', { day: 'numeric', month: 'short' }).replace('.', '');
+const safeUrl = (u) => /^https:\/\//.test(u || '') ? u : '';
+
+const tip = $('tip');
+const showTip = (x, y, html) => { tip.innerHTML = html; tip.style.left = x + 'px'; tip.style.top = y + 'px'; tip.classList.add('on'); };
+const hideTip = () => tip.classList.remove('on');
+
+let DATA = null;
+let dayMetric = 'reach';
+let reelSort = 'new';
+
+function ago(iso) {
+  const m = Math.round((Date.now() - Date.parse(iso)) / 60000);
+  if (m < 1) return 'только что';
+  if (m < 60) return `${m} мин назад`;
+  const h = Math.round(m / 60);
+  if (h < 24) return `${h} ч назад`;
+  return dateRu(iso);
+}
+
+function renderHeader(d) {
+  const p = d.profile;
+  const url = `https://www.instagram.com/${encodeURIComponent(p.username)}/`;
+  $('who').href = url; $('follow').href = url;
+  $('handle').textContent = '@' + p.username;
+  const pic = safeUrl(p.picture);
+  if (pic) {
+    const img = document.createElement('img');
+    img.src = pic; img.alt = ''; img.referrerPolicy = 'no-referrer';
+    img.onerror = () => img.replaceWith(Object.assign(document.createElement('span'), { className: 'ph' }));
+    $('who').querySelector('.ph, img').replaceWith(img);
+  }
+  $('followers').textContent = fmt(p.followers);
+  const g = d.totals30?.followersGain;
+  $('gain').textContent = g == null ? '' : `${g >= 0 ? '+' : ''}${fmt(g)} за 30 дней`;
+  const fresh = Date.now() - Date.parse(d.updatedAt) < 60 * 60 * 1000;
+  $('dot').classList.toggle('off', !fresh);
+  $('status').textContent = 'обновлено ' + ago(d.updatedAt);
+}
+
+function last30(d) { return (d.daily || []).slice(-30); }
+
+function renderRidge(d) {
+  const rows = last30(d).filter((r) => r.reach != null);
+  const box = $('ridge');
+  if (rows.length < 2) { box.innerHTML = '<p class="empty">График появится, когда наберутся данные.</p>'; return; }
+  const W = 1000, H = 120, max = Math.max(...rows.map((r) => r.reach), 1);
+  const x = (i) => (i / (rows.length - 1)) * W;
+  const y = (v) => H - 6 - (v / max) * (H - 16);
+  const pts = rows.map((r, i) => [x(i), y(r.reach)]);
+  const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  const peak = rows.reduce((a, r, i) => r.reach > rows[a].reach ? i : a, 0);
+  box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Охват по дням">
+    <path d="${line} L${W} ${H} L0 ${H} Z" fill="var(--accent-wash)"/>
+    <path d="${line}" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/>
+    <line id="rg" x1="0" x2="0" y1="0" y2="${H}" stroke="var(--muted)" stroke-width="1" vector-effect="non-scaling-stroke" opacity="0"/>
+  </svg>`;
+  const svg = box.querySelector('svg');
+  const onMove = (e) => {
+    const r = svg.getBoundingClientRect();
+    const i = Math.max(0, Math.min(rows.length - 1, Math.round(((e.clientX - r.left) / r.width) * (rows.length - 1))));
+    const gx = x(i);
+    const g = svg.querySelector('#rg'); g.setAttribute('x1', gx); g.setAttribute('x2', gx); g.setAttribute('opacity', 1);
+    showTip(r.left + (gx / W) * r.width, r.top + (pts[i][1] / H) * r.height, `${dayLabel(rows[i].date)} · охват <b>${fmt(rows[i].reach)}</b>`);
+  };
+  svg.addEventListener('pointermove', onMove);
+  svg.addEventListener('pointerleave', () => { hideTip(); svg.querySelector('#rg').setAttribute('opacity', 0); });
+  void peak;
+}
+
+function renderTiles(d) {
+  const t = d.totals30 || {};
+  const tiles = [
+    ['Охват', compact(t.reach), 'уникальных аккаунтов увидели контент'],
+    ['Просмотры', compact(t.views), 'всего показов профиля и рилсов'],
+    ['Часы просмотра', t.watchHours == null ? '-' : dec1(t.watchHours), 'суммарно по рилсам за 30 дней'],
+    ['Средний досмотр', t.avgWatchSec == null ? '-' : dec1(t.avgWatchSec) + ' с', 'столько в среднем смотрят один рилс'],
+    ['Визиты профиля', compact(t.profile), 'зашли посмотреть профиль'],
+    ['Подписчики с рилсов', t.followsFromReels == null ? '-' : '≈ ' + fmt(t.followsFromReels), 'оценка по рилсам за 30 дней'],
+  ];
+  $('tiles').innerHTML = tiles.map(([k, v, dsc]) => `<div class="card tile"><div class="k">${k}</div><div class="v num">${v}</div><div class="d">${dsc}</div></div>`).join('');
+}
+
+const DAY_METRICS = [['reach', 'Охват'], ['views', 'Просмотры'], ['profile', 'Профиль'], ['follows', 'Подписки']];
+
+function renderDayTabs() {
+  $('dayTabs').innerHTML = DAY_METRICS.map(([k, l]) => `<button type="button" data-k="${k}" aria-pressed="${k === dayMetric}">${l}</button>`).join('');
+  $('dayTabs').onclick = (e) => { const b = e.target.closest('button'); if (!b) return; dayMetric = b.dataset.k; renderDayTabs(); renderDayChart(DATA); };
+}
+
+function renderDayChart(d) {
+  const rows = last30(d);
+  const label = DAY_METRICS.find(([k]) => k === dayMetric)[1];
+  const vals = rows.map((r) => r[dayMetric]);
+  const box = $('dayChart');
+  if (!vals.some((v) => v != null)) {
+    box.innerHTML = `<p class="empty" style="padding:24px 6px">${dayMetric === 'follows' ? 'Instagram отдаёт подписки по дням только аккаунтам от 100 подписчиков.' : 'Данные появятся после первого полного сбора.'}</p>`;
+    return;
+  }
+  const total = vals.reduce((a, v) => a + (v || 0), 0);
+  const W = Math.max(320, Math.round(box.clientWidth - 28) || 1000), H = 240, padL = 44, padB = 26, padT = 10;
+  const max = Math.max(...vals.map((v) => v || 0), 1);
+  const step = niceStep(max / 4); const top = Math.ceil(max / step) * step;
+  const bw = (W - padL) / rows.length;
+  const barW = Math.min(24, bw - 2);
+  const y = (v) => padT + (H - padT - padB) * (1 - v / top);
+  let grid = '';
+  for (let v = 0; v <= top + 1e-9; v += step) {
+    grid += `<line x1="${padL}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>
+      <text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" font-size="12" fill="var(--muted)">${compact(v)}</text>`;
+  }
+  let bars = '';
+  rows.forEach((r, i) => {
+    const v = r[dayMetric] || 0;
+    const cx = padL + bw * i + bw / 2;
+    const h = Math.max(0, y(0) - y(v));
+    const rad = Math.min(4, h, barW / 2);
+    const x0 = cx - barW / 2, y0 = y(v);
+    const path = h > 0 ? `M${x0} ${y(0)} V${y0 + rad} Q${x0} ${y0} ${x0 + rad} ${y0} H${x0 + barW - rad} Q${x0 + barW} ${y0} ${x0 + barW} ${y0 + rad} V${y(0)} Z` : '';
+    bars += `<g data-i="${i}"><rect x="${padL + bw * i}" y="${padT}" width="${bw}" height="${H - padT - padB}" fill="transparent"/>${path ? `<path d="${path}" fill="var(--accent)"/>` : ''}</g>`;
+    if (i % (W < 600 ? 7 : 5) === 0) bars += `<text x="${cx}" y="${H - 6}" text-anchor="middle" font-size="12" fill="var(--muted)">${dayLabel(r.date)}</text>`;
+  });
+  box.innerHTML = `<div class="sum">${label} за ${rows.length} дн.: <b class="num">${fmt(total)}</b></div>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label} по дням">${grid}${bars}</svg>`;
+  const svg = box.querySelector('svg');
+  svg.addEventListener('pointermove', (e) => {
+    const g = e.target.closest('g[data-i]'); if (!g) return hideTip();
+    const i = +g.dataset.i; const r = svg.getBoundingClientRect();
+    const cx = padL + bw * i + bw / 2; const v = rows[i][dayMetric];
+    showTip(r.left + (cx / W) * r.width, r.top + (y(v || 0) / H) * r.height, `${dayLabel(rows[i].date)} · ${label.toLowerCase()} <b>${fmt(v)}</b>`);
+  });
+  svg.addEventListener('pointerleave', hideTip);
+}
+
+function niceStep(x) {
+  if (x <= 1) return 1;
+  const p = Math.pow(10, Math.floor(Math.log10(x)));
+  const n = x / p;
+  return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
+}
+
+const REEL_SORTS = [['new', 'Новые'], ['views', 'Просмотры'], ['follows', 'Подписчики']];
+
+function renderReelTabs() {
+  $('reelTabs').innerHTML = REEL_SORTS.map(([k, l]) => `<button type="button" data-k="${k}" aria-pressed="${k === reelSort}">${l}</button>`).join('');
+  $('reelTabs').onclick = (e) => { const b = e.target.closest('button'); if (!b) return; reelSort = b.dataset.k; renderReelTabs(); renderReels(DATA); };
+}
+
+function renderReels(d) {
+  const reels = [...(d.reels || [])];
+  if (!reels.length) { $('reels').innerHTML = '<p class="empty">Рилсов пока нет.</p>'; return; }
+  if (reelSort === 'views') reels.sort((a, b) => (b.views || 0) - (a.views || 0));
+  if (reelSort === 'follows') reels.sort((a, b) => (b.estFollows || 0) - (a.estFollows || 0));
+  $('reels').innerHTML = reels.map((r) => {
+    const th = safeUrl(r.thumb);
+    const cap = (r.caption || '').split('\n')[0] || 'Без подписи';
+    return `<button type="button" class="card reel" data-id="${esc(r.id)}">
+      <div class="th" ${th ? `style="background-image:url('${esc(th)}')"` : ''}><span class="badge num">${compact(r.views)} просм.</span></div>
+      <div class="meta"><div class="cap">${esc(cap)}</div>${dateRu(r.timestamp)} · ≈ ${fmt(r.estFollows)} подп.</div>
+    </button>`;
+  }).join('');
+  $('reels').onclick = (e) => { const b = e.target.closest('.reel'); if (b) openReel(b.dataset.id); };
+}
+
+function per1000(a, views) { return views ? dec1((a || 0) / views * 1000) : '-'; }
+
+function openReel(id) {
+  const r = DATA.reels.find((x) => x.id === id); if (!r) return;
+  const th = safeUrl(r.thumb);
+  const link = safeUrl(r.permalink);
+  $('dlg').innerHTML = `<div class="dlg">
+    <div class="th" ${th ? `style="background-image:url('${esc(th)}')"` : ''}></div>
+    <div class="body">
+      <h3 class="num">${fmt(r.views)}</h3>
+      <div class="date">просмотров · ${dateRu(r.timestamp, { day: 'numeric', month: 'long', year: 'numeric' })}</div>
+      <div class="kv num">
+        <span>Лайки</span><span>${fmt(r.likes)}</span>
+        <span>Комментарии</span><span>${fmt(r.comments)}</span>
+        <span>Репосты</span><span>${fmt(r.shares)}</span>
+        <span>Сохранения</span><span>${fmt(r.saved)}</span>
+        <span>Охват</span><span>${fmt(r.reach)}</span>
+        <div class="sep"></div>
+        <span>Средний досмотр</span><span>${r.avgWatchSec == null ? '-' : dec1(r.avgWatchSec) + ' с'}</span>
+        <span>Часы просмотра</span><span>${r.watchHours == null ? '-' : dec1(r.watchHours)}</span>
+        <div class="sep"></div>
+        <span>Подписались ≈</span><span>${fmt(r.estFollows)}</span>
+        <span>Подписок на 1000 просмотров</span><span>${per1000(r.estFollows, r.views)}</span>
+        <span>Репостов на 1000</span><span>${per1000(r.shares, r.views)}</span>
+        <span>Сохранений на 1000</span><span>${per1000(r.saved, r.views)}</span>
+      </div>
+      <div class="actions">
+        ${link ? `<a class="btn primary" href="${esc(link)}" target="_blank" rel="noopener">Смотреть в Instagram</a>` : ''}
+        <button class="btn" type="button" id="dlgClose">Закрыть</button>
+      </div>
+    </div></div>`;
+  $('dlgClose').onclick = () => $('dlg').close();
+  $('dlg').showModal();
+}
+$('dlg').addEventListener('click', (e) => { if (e.target === $('dlg')) $('dlg').close(); });
+
+const regionNames = (() => { try { return new Intl.DisplayNames(['ru'], { type: 'region' }); } catch { return null; } })();
+const GENDER = { F: 'Женщины', M: 'Мужчины', U: 'Не указан' };
+
+function renderAudience(d) {
+  const a = d.audience || {};
+  const blocks = [
+    ['city', 'Города', (k) => (k || '').split(',')[0]],
+    ['age', 'Возраст', (k) => k],
+    ['country', 'Страны', (k) => (regionNames && k ? regionNames.of(k) : k)],
+    ['gender', 'Пол', (k) => GENDER[k] || k],
+  ];
+  $('aud').innerHTML = blocks.map(([key, title, name]) => {
+    const rows = a[key] || [];
+    if (!rows.length) return `<div class="card"><h3>${title}</h3><p class="empty">Instagram показывает аудиторию, когда подписчиков больше 100.</p></div>`;
+    const sum = rows.reduce((s, r) => s + r[1], 0) || 1;
+    let list = rows;
+    if (key === 'age') list = [...rows].sort((x, y) => String(x[0]).localeCompare(String(y[0])));
+    else list = rows.slice(0, 6);
+    const max = Math.max(...list.map((r) => r[1]));
+    return `<div class="card"><h3>${title}</h3>${list.map(([k, v]) => {
+      const pct = Math.round((v / sum) * 100);
+      return `<div class="bar"><span class="l">${esc(name(k))}</span><span class="p num">${pct}%</span><div class="track"><div class="fill" style="width:${(v / max) * 100}%"></div></div></div>`;
+    }).join('')}</div>`;
+  }).join('');
+}
+
+function render(d) {
+  DATA = d;
+  renderHeader(d); renderRidge(d); renderTiles(d);
+  renderDayTabs(); renderDayChart(d);
+  renderReelTabs(); renderReels(d);
+  renderAudience(d);
+  $('foot').dataset.base ||= $('foot').textContent;
+  $('foot').textContent = $('foot').dataset.base;
+  if (d.totals30?.trackingSince) {
+    $('foot').textContent += ` Слежу с ${dateRu(d.totals30.trackingSince, { day: 'numeric', month: 'long', year: 'numeric' })}. Последнее обновление - ${ago(d.updatedAt)}.`;
+  }
+}
+
+async function load(first) {
+  try {
+    const bust = DATA_URL.startsWith('http') ? (DATA_URL.includes('?') ? '&' : '?') + 't=' + Math.floor(Date.now() / 60000) : '';
+    const res = await fetch(DATA_URL + bust, { cache: 'no-store' });
+    if (!res.ok) throw new Error(res.status);
+    const d = await res.json();
+    if (!DATA || d.updatedAt !== DATA.updatedAt) render(d);
+    else $('status').textContent = 'обновлено ' + ago(d.updatedAt);
+  } catch (e) {
+    if (first) { $('status').textContent = 'данные ещё не собраны'; $('reels').innerHTML = '<p class="empty">Как только сборщик отработает первый раз, здесь появится статистика.</p>'; renderAudience({}); }
+  }
+}
+load(true);
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => DATA && renderDayChart(DATA), 150); });
+setInterval(() => load(false), 2 * 60 * 1000);
+</script>
+</body>
+</html>
