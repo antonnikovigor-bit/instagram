@@ -34,6 +34,9 @@ const showTip = (x, y, html) => { tip.innerHTML = html; tip.style.left = x + 'px
 const hideTip = () => tip.classList.remove('on');
 
 let DATA = null;
+// Цель и эксперимент
+const GOAL_FROM = 3600, GOAL_TO = 10000, GOAL_MARKS = [5000, 7500];
+const EXP_START = '2026-09-27', EXP_DAYS = 90;
 let dayMetric = 'reach';
 let reelSort = 'new';
 
@@ -61,9 +64,24 @@ function renderHeader(d) {
   $('followers').textContent = fmt(p.followers);
   const g = d.totals30?.followersGain;
   $('gain').textContent = g == null ? '' : `${g >= 0 ? '+' : ''}${fmt(g)} за 30 дней`;
+  renderGoal(p.followers, d);
   const fresh = Date.now() - Date.parse(d.updatedAt) < 60 * 60 * 1000;
   $('dot').classList.toggle('off', !fresh);
   $('status').textContent = 'обновлено ' + ago(d.updatedAt);
+}
+
+
+function renderGoal(f, d) {
+  const span = GOAL_TO - GOAL_FROM;
+  const pos = (v) => Math.max(0, Math.min(100, ((v - GOAL_FROM) / span) * 100));
+  const pct = Math.round(pos(f));
+  $('goal').innerHTML = `<div class="track"><div class="fill" style="width:${pos(f)}%"></div>${GOAL_MARKS.map((m) => `<i class="tick" style="left:${pos(m)}%"></i>`).join('')}</div>
+    <div class="lbl num"><span style="left:0">${fmt(GOAL_FROM)}</span>${GOAL_MARKS.map((m) => `<span style="left:${pos(m)}%">${fmt(m)}</span>`).join('')}<span style="left:100%">${fmt(GOAL_TO)}</span></div>
+    <div class="sum">Пройдено <b class="num">${pct}%</b> пути · осталось <b class="num">${fmt(Math.max(0, GOAL_TO - f))}</b></div>`;
+  const start = new Date(EXP_START + 'T00:00:00+05:00');
+  const day = Math.max(1, Math.floor((Date.now() - start) / 86400000) + 1);
+  const n = (d.reels || []).filter((r) => new Date(r.timestamp) >= start).length;
+  $('exp').innerHTML = `День <b>${Math.min(day, EXP_DAYS)}</b> из ${EXP_DAYS} · рилсов с начала эксперимента: <b>${n}</b>`;
 }
 
 function last30(d) { return (d.daily || []).slice(-30); }
@@ -78,18 +96,24 @@ function renderRidge(d) {
   const pts = rows.map((r, i) => [x(i), y(r.reach)]);
   const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
   const peak = rows.reduce((a, r, i) => r.reach > rows[a].reach ? i : a, 0);
+  const reelDays = {};
+  for (const r of d.reels || []) { const k = new Date(r.timestamp).toLocaleDateString('sv-SE', { timeZone: 'Asia/Almaty' }); (reelDays[k] ||= []).push(r); }
   box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Охват по дням">
     <path d="${line} L${W} ${H} L0 ${H} Z" fill="var(--accent-wash)"/>
     <path d="${line}" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/>
     <line id="rg" x1="0" x2="0" y1="0" y2="${H}" stroke="var(--muted)" stroke-width="1" vector-effect="non-scaling-stroke" opacity="0"/>
-  </svg>`;
+    ${rows.map((r, i) => reelDays[r.date] ? `<line x1="${x(i)}" x2="${x(i)}" y1="${pts[i][1]}" y2="${H}" stroke="var(--good)" stroke-width="1" vector-effect="non-scaling-stroke" opacity=".6"/>` : '').join('')}
+  </svg>
+  <div class="rmarks">${rows.map((r, i) => reelDays[r.date] ? `<i style="left:${(x(i) / W) * 100}%;top:${(pts[i][1] / H) * 100}%"></i>` : '').join('')}</div>`;
   const svg = box.querySelector('svg');
   const onMove = (e) => {
     const r = svg.getBoundingClientRect();
     const i = Math.max(0, Math.min(rows.length - 1, Math.round(((e.clientX - r.left) / r.width) * (rows.length - 1))));
     const gx = x(i);
     const g = svg.querySelector('#rg'); g.setAttribute('x1', gx); g.setAttribute('x2', gx); g.setAttribute('opacity', 1);
-    showTip(r.left + (gx / W) * r.width, r.top + (pts[i][1] / H) * r.height, `${dayLabel(rows[i].date)} · охват <b>${fmt(rows[i].reach)}</b>`);
+    const rd = reelDays[rows[i].date];
+    const cap = rd ? rd.map((x) => '<br>🎬 ' + esc(((x.caption || '').split('\n')[0] || 'Рилс').slice(0, 40))).join('') : '';
+    showTip(r.left + (gx / W) * r.width, r.top + (pts[i][1] / H) * r.height, `${dayLabel(rows[i].date)} · охват <b>${fmt(rows[i].reach)}</b>${cap}`);
   };
   svg.addEventListener('pointermove', onMove);
   svg.addEventListener('pointerleave', () => { hideTip(); svg.querySelector('#rg').setAttribute('opacity', 0); });
@@ -192,6 +216,31 @@ function renderReels(d) {
 
 function per1000(a, views) { return views ? dec1((a || 0) / views * 1000) : '-'; }
 
+
+// Сравнение рилса с обычным (медиана по всем рилсам): что именно у него выше или ниже
+function median(a) { const s = a.filter((v) => v != null && isFinite(v)).sort((x, y) => x - y); if (!s.length) return null; const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
+function compareHtml(r) {
+  const all = DATA.reels || [];
+  if (all.length < 4) return '';
+  const k = (x) => (x.views ? 1000 / x.views : null);
+  const rows = [
+    ['Просмотры', (x) => x.views],
+    ['Досмотр', (x) => x.watchPct ?? x.avgWatchSec],
+    ['Репосты на 1000', (x) => (k(x) && x.shares != null ? x.shares * k(x) : null)],
+    ['Сохранения на 1000', (x) => (k(x) && x.saved != null ? x.saved * k(x) : null)],
+    ['Подписки на 1000', (x) => (k(x) ? (x.follows ?? x.estFollows ?? 0) * k(x) : null)],
+  ].map(([name, f]) => {
+    const v = f(r), m = median(all.map(f));
+    if (v == null || !m || m < 0.5) return '';
+    if (v === 0) return `<span>${name}</span><span class="down">нет</span>`;
+    const ratio = v / m;
+    const cls = ratio >= 1.15 ? 'up' : ratio <= 0.85 ? 'down' : '';
+    const txt = ratio >= 1.15 ? 'выше в ' + dec1(ratio) + ' раза' : ratio <= 0.85 ? 'ниже на ' + Math.round((1 - ratio) * 100) + '%' : 'как обычно';
+    return `<span>${name}</span><span class="${cls}">${txt}</span>`;
+  }).join('');
+  return rows ? `<div class="cmp"><h4>По сравнению с обычным рилсом</h4><div class="kv num">${rows}</div></div>` : '';
+}
+
 function openReel(id) {
   const r = DATA.reels.find((x) => x.id === id); if (!r) return;
   const link = reelLink(r.permalink);
@@ -207,14 +256,18 @@ function openReel(id) {
         <span>Сохранения</span><span>${fmt(r.saved)}</span>
         <span>Охват</span><span>${fmt(r.reach)}</span>
         <div class="sep"></div>
-        <span>Средний досмотр</span><span>${r.avgWatchSec == null ? '-' : dec1(r.avgWatchSec) + ' с'}</span>
+        <span>Длительность</span><span>${r.durationSec == null ? '-' : dec1(r.durationSec) + ' с'}</span>
+        <span>Средний досмотр</span><span>${r.avgWatchSec == null ? '-' : dec1(r.avgWatchSec) + ' с'}${r.watchPct == null ? '' : ' · ' + r.watchPct + '%'}</span>
+        ${r.skipRate == null ? '' : `<span>Пролистали сразу</span><span>${Math.round(r.skipRate)}%</span>`}
         <span>Часы просмотра</span><span>${r.watchHours == null ? '-' : dec1(r.watchHours)}</span>
         <div class="sep"></div>
-        <span>Подписались ≈</span><span>${fmt(r.estFollows)}</span>
-        <span>Подписок на 1000 просмотров</span><span>${per1000(r.estFollows, r.views)}</span>
+        ${r.profileVisits == null ? '' : `<span>Зашли в профиль</span><span>${fmt(r.profileVisits)}</span>`}
+        <span>Подписались${r.follows == null ? ' ≈' : ''}</span><span>${fmt(r.follows ?? r.estFollows)}</span>
+        <span>Подписок на 1000 просмотров</span><span>${per1000(r.follows ?? r.estFollows, r.views)}</span>
         <span>Репостов на 1000</span><span>${per1000(r.shares, r.views)}</span>
         <span>Сохранений на 1000</span><span>${per1000(r.saved, r.views)}</span>
       </div>
+      ${compareHtml(r)}
       <div class="actions">
         ${link ? `<a class="btn primary" href="${esc(link)}" target="_blank" rel="noopener">Смотреть в Instagram</a>` : ''}
         <button class="btn" type="button" id="dlgClose">Закрыть</button>

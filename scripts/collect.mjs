@@ -170,9 +170,48 @@ async function main() {
 
   const REEL_METRICS = ['views', 'reach', 'likes', 'comments', 'shares', 'saved', 'total_interactions',
     'ig_reels_avg_watch_time', 'ig_reels_video_view_total_time'];
+  // Дополнительные метрики, которые Instagram отдаёт не всем аккаунтам/версиям API.
+  // Раз в сутки проверяем на одном рилсе, какие работают, и дальше берём только их.
+  const EXTRA = ['follows', 'profile_visits', 'reels_skip_rate'];
+  if (reelsRaw.length && (!state.extraCheckedAt || now - state.extraCheckedAt > DAY)) {
+    const ok = [];
+    for (const m of EXTRA) {
+      try { await api(`/${reelsRaw[0].id}/insights`, { metric: m }); ok.push(m); } catch (e) { if (e.code === 190) throw e; }
+    }
+    state.extraMetrics = ok; state.extraCheckedAt = now;
+  }
+  const metrics = [...REEL_METRICS, ...(state.extraMetrics || [])];
+
+  // Длительность рилса: читаем только начало файла (заголовок mp4), результат кэшируем
+  state.durations ||= {};
+  const mp4Duration = async (url) => {
+    try {
+      const u = new URL(url);
+      if (u.protocol !== 'https:' || !/(\.cdninstagram\.com|\.fbcdn\.net)$/.test(u.hostname)) return null;
+      const r = await fetch(u, { headers: { Range: 'bytes=0-1048575' }, redirect: 'error' });
+      const b = new Uint8Array(await r.arrayBuffer());
+      for (let i = 4; i < b.length - 32; i++) {
+        if (b[i] === 0x6d && b[i + 1] === 0x76 && b[i + 2] === 0x68 && b[i + 3] === 0x64) { // 'mvhd'
+          const dv = new DataView(b.buffer, b.byteOffset);
+          const v = b[i + 4];
+          const ts = dv.getUint32(i + (v === 1 ? 24 : 16));
+          const d = v === 1 ? Number(dv.getBigUint64(i + 28)) : dv.getUint32(i + 20);
+          return ts ? Math.round((d / ts) * 10) / 10 : null;
+        }
+      }
+    } catch {}
+    return null;
+  };
+
   const reels = [];
   for (const m of reelsRaw) {
-    const i = await insights(m.id, REEL_METRICS);
+    const i = await insights(m.id, metrics);
+    if (state.durations[m.id] == null && m.media_url) {
+      const d = await mp4Duration(m.media_url);
+      if (d) state.durations[m.id] = d;
+    }
+    const dur = state.durations[m.id] ?? null;
+    const avg = i.ig_reels_avg_watch_time != null ? i.ig_reels_avg_watch_time / 1000 : null;
     reels.push({
       id: m.id,
       permalink: m.permalink,
@@ -185,8 +224,13 @@ async function main() {
       comments: i.comments ?? m.comments_count ?? null,
       shares: i.shares ?? null,
       saved: i.saved ?? null,
-      avgWatchSec: i.ig_reels_avg_watch_time != null ? i.ig_reels_avg_watch_time / 1000 : null,
+      avgWatchSec: avg,
       watchHours: i.ig_reels_video_view_total_time != null ? i.ig_reels_video_view_total_time / 3600000 : null,
+      durationSec: dur,
+      watchPct: avg != null && dur ? Math.min(100, Math.round((avg / dur) * 100)) : null,
+      follows: i.follows ?? null,
+      profileVisits: i.profile_visits ?? null,
+      skipRate: i.reels_skip_rate ?? null,
     });
   }
 

@@ -189,6 +189,28 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
 }
 @media (max-width: 720px) { .band { --art-h: 400px; --art-gap: 150px; } }
 
+/* прогресс к цели и счётчик эксперимента */
+.goal { margin: 22px 0 0; max-width: 460px; }
+.goal .track { position: relative; height: 8px; border-radius: 4px; background: var(--surface-2); }
+.goal .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: var(--good); }
+.goal .tick { position: absolute; top: -3px; width: 2px; height: 14px; background: var(--muted); border-radius: 1px; }
+.goal .lbl { position: relative; height: 18px; margin-top: 6px; font-size: 12px; color: var(--muted); }
+.goal .lbl span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.goal .lbl span:first-child { transform: none; }
+.goal .lbl span:last-child { transform: translateX(-100%); }
+.goal .sum { font-size: 14px; color: var(--text-2); margin-top: 4px; }
+.goal .sum b { color: var(--text); }
+.exp { margin: 10px 0 0; font-size: 14px; color: var(--text-2); }
+.exp b { color: var(--text); }
+.ridge { position: relative; }
+.rmarks { position: absolute; inset: 0; pointer-events: none; }
+.rmarks i { position: absolute; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 2px var(--bg); }
+.hero-band .rmarks i { box-shadow: 0 0 0 2px #0d0c0a; }
+.cmp { margin-top: 12px; font-size: 13px; }
+.cmp h4 { margin: 0 0 6px; font-size: 13px; color: var(--text-2); font-weight: 700; }
+.cmp .up { color: var(--good); }
+.cmp .down { color: var(--muted); }
+
 .skel { color: var(--muted); }
 @media (max-width: 720px) {
   .tiles { grid-template-columns: repeat(2, 1fr); }
@@ -222,6 +244,8 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
         <span class="n num" id="followers">-</span>
         <span class="cap">подписчиков сейчас<br><span class="gain num" id="gain"></span></span>
       </div>
+      <div class="goal" id="goal" aria-label="Прогресс к цели"></div>
+      <p class="exp num" id="exp"></p>
     </div>
     <div class="ridge" id="ridge" aria-label="Охват по дням за 30 дней"></div>
     <p class="note hero-note">Линия - охват по дням за 30 дней. Пики - дни, когда рилс выстрелил.</p>
@@ -288,7 +312,7 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
 <dialog id="dlg"></dialog>
 <div class="tip" id="tip" role="tooltip"></div>
 
-<script src="app.js?v=25c86514"></script>
+<script src="app.js?v=13d4b9ef"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>
