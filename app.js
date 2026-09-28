@@ -202,12 +202,12 @@ function renderReels(d) {
   const reels = [...(d.reels || [])];
   if (!reels.length) { $('reels').innerHTML = '<p class="empty">Рилсов пока нет.</p>'; return; }
   if (reelSort === 'views') reels.sort((a, b) => (b.views || 0) - (a.views || 0));
-  if (reelSort === 'follows') reels.sort((a, b) => (b.estFollows || 0) - (a.estFollows || 0));
+  if (reelSort === 'follows') reels.sort((a, b) => ((b.follows ?? b.estFollows) || 0) - ((a.follows ?? a.estFollows) || 0));
   $('reels').innerHTML = reels.map((r) => {
     const cap = (r.caption || '').split('\n')[0] || 'Без подписи';
     return `<button type="button" class="card reel" data-id="${esc(r.id)}">
       <div class="th" data-bg="${esc(r.thumb || '')}"><span class="badge num">${compact(r.views)} просм.</span></div>
-      <div class="meta"><div class="cap">${esc(cap)}</div>${dateRu(r.timestamp)} · ≈ ${fmt(r.estFollows)} подп.</div>
+      <div class="meta"><div class="cap">${esc(cap)}</div>${dateRu(r.timestamp)} · ${r.follows == null ? '≈ ' : ''}${fmt(r.follows ?? r.estFollows)} подп.</div>
     </button>`;
   }).join('');
   setBg($('reels'));
@@ -260,6 +260,7 @@ function openReel(id) {
         <span>Длительность</span><span>${r.durationSec == null ? '-' : dec1(r.durationSec) + ' с'}</span>
         <span>Средний досмотр</span><span>${r.avgWatchSec == null ? '-' : dec1(r.avgWatchSec) + ' с'}${r.watchPct == null ? '' : ' · ' + r.watchPct + '%'}</span>
         ${r.skipRate == null ? '' : `<span>Пролистали сразу</span><span>${Math.round(r.skipRate)}%</span>`}
+        ${r.over3s == null ? '' : `<span>Смотрели дольше 3 секунд</span><span>${r.over3s}%</span>`}
         <span>Часы просмотра</span><span>${r.watchHours == null ? '-' : dec1(r.watchHours)}</span>
         <div class="sep"></div>
         ${r.profileVisits == null ? '' : `<span>Зашли в профиль</span><span>${fmt(r.profileVisits)}</span>`}
@@ -269,6 +270,7 @@ function openReel(id) {
         <span>Сохранений на 1000</span><span>${per1000(r.saved, r.views)}</span>
       </div>
       ${compareHtml(r)}
+      ${r.manual ? '<p class="method" style="margin:10px 0 0">Подписки, визиты профиля и удержание - из статистики приложения Instagram.</p>' : ''}
       <div class="actions">
         ${link ? `<a class="btn primary" href="${esc(link)}" target="_blank" rel="noopener">Смотреть в Instagram</a>` : ''}
         <button class="btn" type="button" id="dlgClose">Закрыть</button>
@@ -319,12 +321,30 @@ function render(d) {
   }
 }
 
+// Цифры из приложения Instagram, которых нет в API (подписки и визиты профиля с рилса, удержание).
+// Хранятся в manual.json в репозитории, ключ - код рилса из ссылки (instagram.com/reel/КОД/).
+let MANUAL = {};
+const shortcode = (u) => ((u || '').match(/\/(?:reels?|p)\/([\w-]+)/) || [])[1] || '';
+const loadManual = () => fetch('manual.json', { cache: 'no-store' }).then((r) => (r.ok ? r.json() : {})).then((m) => { MANUAL = m && typeof m === 'object' ? m : {}; }).catch(() => {});
+function applyManual(d) {
+  for (const r of d.reels || []) {
+    const m = MANUAL[shortcode(r.permalink)];
+    if (!m) continue;
+    r.manual = true;
+    if (Number.isFinite(m.follows)) r.follows = m.follows;
+    if (Number.isFinite(m.profileVisits)) r.profileVisits = m.profileVisits;
+    if (Number.isFinite(m.over3s)) r.over3s = m.over3s;
+  }
+}
+
 async function load(first) {
   try {
     const bust = DATA_URL.startsWith('http') ? (DATA_URL.includes('?') ? '&' : '?') + 't=' + Math.floor(Date.now() / 60000) : '';
     const res = await fetch(DATA_URL + bust, { cache: 'no-store' });
     if (!res.ok) throw new Error(res.status);
     const d = await res.json();
+    if (first) await loadManual();
+    applyManual(d);
     if (!DATA || d.updatedAt !== DATA.updatedAt) render(d);
     else $('status').textContent = 'обновлено ' + ago(d.updatedAt);
   } catch (e) {
