@@ -294,3 +294,41 @@ setInterval(() => load(false), 2 * 60 * 1000);
   }), { rootMargin: '200px 0px' });
   vids.forEach((v) => io.observe(v));
 })();
+
+// Фрагменты официальных видео с YouTube (встраивание, не копирование). Пока YouTube не заиграл - виден свой ролик-заглушка.
+(() => {
+  const bands = [...document.querySelectorAll('[data-yt]')];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const save = navigator.connection && navigator.connection.saveData;
+  if (!bands.length || reduce || save || !('IntersectionObserver' in window)) return;
+  let apiReady = null;
+  const loadApi = () => apiReady || (apiReady = new Promise((res) => {
+    window.onYouTubeIframeAPIReady = res;
+    const sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(sc);
+  }));
+  const start = async (band) => {
+    await loadApi();
+    const id = band.dataset.yt; const s = +band.dataset.ytStart; const e = +band.dataset.ytEnd;
+    if (!/^[\w-]{11}$/.test(id)) return;
+    const box = document.createElement('div'); box.className = 'yt'; box.setAttribute('aria-hidden', 'true');
+    const holder = document.createElement('div'); box.appendChild(holder);
+    band.insertBefore(box, band.firstChild);
+    const player = new YT.Player(holder, {
+      host: 'https://www.youtube-nocookie.com', videoId: id,
+      playerVars: { autoplay: 1, mute: 1, controls: 0, start: s, end: e, playsinline: 1, rel: 0, disablekb: 1, fs: 0, iv_load_policy: 3, modestbranding: 1, origin: location.origin },
+      events: {
+        onReady: (ev) => { ev.target.mute(); ev.target.playVideo(); },
+        onStateChange: (ev) => {
+          if (ev.data === YT.PlayerState.PLAYING) box.classList.add('on');
+          if (ev.data === YT.PlayerState.ENDED) { ev.target.seekTo(s, true); ev.target.playVideo(); }
+        },
+        onError: () => box.remove(),
+      },
+    });
+    setInterval(() => { try { if (player.getCurrentTime && player.getCurrentTime() >= e - 0.4) player.seekTo(s, true); } catch {} }, 250);
+  };
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (en.isIntersecting && !en.target.dataset.ytOn) { en.target.dataset.ytOn = '1'; start(en.target); }
+  }), { rootMargin: '300px 0px' });
+  bands.forEach((b) => io.observe(b));
+})();
