@@ -280,3 +280,17 @@ async function load(first) {
 load(true);
 let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => DATA && renderDayChart(DATA), 150); });
 setInterval(() => load(false), 2 * 60 * 1000);
+
+// Фоновые видео: играют только когда видны на экране; при экономии трафика и «уменьшении движения» остаётся кадр-обложка
+(() => {
+  const vids = [...document.querySelectorAll('video[data-autoplay]')];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const save = navigator.connection && navigator.connection.saveData;
+  if (!vids.length || reduce || save || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    const v = e.target;
+    if (e.isIntersecting) { if (v.preload !== 'auto') { v.preload = 'auto'; v.load(); } v.play().catch(() => {}); }
+    else v.pause();
+  }), { rootMargin: '200px 0px' });
+  vids.forEach((v) => io.observe(v));
+})();
