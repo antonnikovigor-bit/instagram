@@ -242,6 +242,42 @@ function compareHtml(r) {
   return rows ? `<div class="cmp"><h4>По сравнению с обычным рилсом</h4><div class="kv num">${rows}</div></div>` : '';
 }
 
+
+// Эффект рилса по точным дневным цифрам аккаунта (подписки и визиты профиля по дням отдаёт API):
+// сумма за день выхода и 2 следующих дня минус обычный уровень, делённая между рилсами этого окна по просмотрам.
+function reelEffect(r) {
+  const daily = DATA.daily || [];
+  if (daily.length < 7) return null;
+  const key = (t) => new Date(t).toLocaleDateString('sv-SE', { timeZone: 'Asia/Almaty' });
+  const d0 = key(r.timestamp);
+  const idx = daily.findIndex((x) => x.date === d0);
+  if (idx < 0) return null;
+  const win = daily.slice(idx, idx + 3);
+  const base = (f) => median(daily.map(f)) || 0;
+  const res = {};
+  for (const [name, f] of [['follows', (x) => x.follows], ['profile', (x) => x.profile]]) {
+    const vals = win.map(f).filter((v) => v != null);
+    if (!vals.length) continue;
+    const total = vals.reduce((s, v) => s + v, 0);
+    const extra = Math.max(0, total - base(f) * vals.length);
+    // рилсы, чьи окна пересекаются с этим, делят прирост по просмотрам
+    const peers = (DATA.reels || []).filter((x) => { const i = daily.findIndex((y) => y.date === key(x.timestamp)); return i >= 0 && Math.abs(i - idx) <= 2; });
+    const vSum = peers.reduce((s, x) => s + (x.views || 0), 0) || 1;
+    res[name] = { total, days: vals.length, usual: Math.round(base(f) * vals.length), share: Math.round(extra * ((r.views || 0) / vSum)) };
+  }
+  return Object.keys(res).length ? res : null;
+}
+function effectHtml(r) {
+  const e = reelEffect(r);
+  if (!e) return '';
+  const row = (lbl, x) => x ? `<span>${lbl}</span><span>${fmt(x.total)} <span class="down">(обычно ${fmt(x.usual)})</span></span>` : '';
+  const shareRow = (lbl, x) => x && x.share > 0 ? `<span>${lbl}</span><span class="up">+${fmt(x.share)}</span>` : '';
+  return `<div class="cmp"><h4>За 3 дня после выхода (весь аккаунт)</h4><div class="kv num">
+    ${row('Новые подписки', e.follows)}${row('Визиты профиля', e.profile)}
+    ${shareRow('Сверх обычного - от этого рилса', e.follows)}${shareRow('Визитов профиля сверх обычного', e.profile)}
+  </div></div>`;
+}
+
 function openReel(id) {
   const r = DATA.reels.find((x) => x.id === id); if (!r) return;
   const link = reelLink(r.permalink);
@@ -259,7 +295,7 @@ function openReel(id) {
         <div class="sep"></div>
         <span>Длительность</span><span>${r.durationSec == null ? '-' : dec1(r.durationSec) + ' с'}</span>
         <span>Средний досмотр</span><span>${r.avgWatchSec == null ? '-' : dec1(r.avgWatchSec) + ' с'}${r.watchPct == null ? '' : ' · ' + r.watchPct + '%'}</span>
-        ${r.skipRate == null ? '' : `<span>Пролистали сразу</span><span>${Math.round(r.skipRate)}%</span>`}
+        ${r.skipRate == null ? '' : `<span>Досмотрели дольше 3 секунд</span><span>${Math.round(100 - r.skipRate)}%</span>`}
         ${r.over3s == null ? '' : `<span>Смотрели дольше 3 секунд</span><span>${r.over3s}%</span>`}
         <span>Часы просмотра</span><span>${r.watchHours == null ? '-' : dec1(r.watchHours)}</span>
         <div class="sep"></div>
@@ -269,6 +305,7 @@ function openReel(id) {
         <span>Репостов на 1000</span><span>${per1000(r.shares, r.views)}</span>
         <span>Сохранений на 1000</span><span>${per1000(r.saved, r.views)}</span>
       </div>
+      ${effectHtml(r)}
       ${compareHtml(r)}
       ${r.manual ? '<p class="method" style="margin:10px 0 0">Подписки, визиты профиля и удержание - из статистики приложения Instagram.</p>' : ''}
       <div class="actions">
