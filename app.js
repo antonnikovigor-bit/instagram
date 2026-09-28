@@ -226,6 +226,7 @@ function compareHtml(r) {
   const rows = [
     ['Просмотры', (x) => x.views],
     ['Досмотр', (x) => x.watchPct ?? x.avgWatchSec],
+    ['Удержали с первых секунд', (x) => (x.skipRate != null ? 100 - x.skipRate : null)],
     ['Репосты на 1000', (x) => (k(x) && x.shares != null ? x.shares * k(x) : null)],
     ['Сохранения на 1000', (x) => (k(x) && x.saved != null ? x.saved * k(x) : null)],
     ['Подписки на 1000', (x) => (k(x) ? (x.follows ?? x.estFollows ?? 0) * k(x) : null)],
