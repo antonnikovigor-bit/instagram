@@ -392,16 +392,32 @@ load(true);
 let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => DATA && renderDayChart(DATA), 150); });
 setInterval(() => load(false), 2 * 60 * 1000);
 
-// Фоновые видео: играют только когда видны на экране; при экономии трафика и «уменьшении движения» остаётся кадр-обложка
+// Медленная сеть: экономия трафика, 2G/3G или канал меньше 1,5 Мбит/с - видео не грузим, остаётся лёгкая обложка
+const SLOW_NET = (() => {
+  const c = navigator.connection;
+  if (!c) return false;
+  return !!c.saveData || /(^|-)(2g|3g)$/.test(c.effectiveType || '') || (c.downlink > 0 && c.downlink < 1.5);
+})();
+
+// Фоновые видео: файл подключается только когда блок рядом с экраном; на телефоне - облегчённая версия.
+// Если ролик не начал играть за 6 с - загрузку бросаем, остаётся обложка.
 (() => {
   const vids = [...document.querySelectorAll('video[data-autoplay]')];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const save = navigator.connection && navigator.connection.saveData;
-  if (!vids.length || reduce || save || !('IntersectionObserver' in window)) return;
+  if (!vids.length || reduce || SLOW_NET || !('IntersectionObserver' in window)) return;
+  const small = matchMedia('(max-width: 760px)').matches;
   const io = new IntersectionObserver((entries) => entries.forEach((e) => {
     const v = e.target;
-    if (e.isIntersecting) { if (v.preload !== 'auto') { v.preload = 'auto'; v.load(); } v.play().catch(() => {}); }
-    else v.pause();
+    if (v.dataset.dead) return;
+    if (e.isIntersecting) {
+      if (!v.getAttribute('src')) {
+        v.src = (small && v.dataset.srcSm) || v.dataset.src;
+        v.preload = 'auto';
+        const giveUp = setTimeout(() => { if (v.readyState >= 3) return; v.dataset.dead = '1'; v.pause(); v.removeAttribute('src'); v.load(); io.unobserve(v); }, 6000);
+        v.addEventListener('playing', () => clearTimeout(giveUp), { once: true });
+      }
+      v.play().catch(() => {});
+    } else v.pause();
   }), { rootMargin: '200px 0px' });
   vids.forEach((v) => io.observe(v));
 })();
@@ -410,8 +426,7 @@ setInterval(() => load(false), 2 * 60 * 1000);
 (() => {
   const bands = [...document.querySelectorAll('[data-yt]')];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const save = navigator.connection && navigator.connection.saveData;
-  if (!bands.length || reduce || save || !('IntersectionObserver' in window)) return;
+  if (!bands.length || reduce || SLOW_NET || !('IntersectionObserver' in window)) return;
   let apiReady = null;
   const loadApi = () => apiReady || (apiReady = new Promise((res) => {
     window.onYouTubeIframeAPIReady = res;
