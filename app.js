@@ -62,8 +62,9 @@ function renderHeader(d) {
     $('who').querySelector('.ph, img').replaceWith(img);
   }
   $('followers').textContent = fmt(p.followers);
-  const g = d.totals30?.followersGain;
-  $('gain').textContent = g == null ? '' : `${g >= 0 ? '+' : ''}${fmt(g)} за 30 дней`;
+  // Прирост считаем от стартовой цифры эксперимента: API-сумма «за 30 дней» отстаёт на 1-2 дня и не совпадает с реальным ростом
+  const g = p.followers - GOAL_FROM;
+  $('gain').textContent = `${g >= 0 ? '+' : ''}${fmt(g)} с начала эксперимента`;
   renderGoal(p.followers, d);
   const fresh = Date.now() - Date.parse(d.updatedAt) < 60 * 60 * 1000;
   $('dot').classList.toggle('off', !fresh);
