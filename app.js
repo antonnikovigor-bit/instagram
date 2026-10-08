@@ -360,6 +360,7 @@ function render(d) {
 }
 
 // Цифры из приложения Instagram, которых нет в API (подписки и визиты профиля с рилса, удержание).
+// views - полные просмотры, если рилс продвигался: API отдаёт только органику.
 // Хранятся в manual.json в репозитории, ключ - код рилса из ссылки (instagram.com/reel/КОД/).
 let MANUAL = {};
 const shortcode = (u) => ((u || '').match(/\/(?:reels?|p)\/([\w-]+)/) || [])[1] || '';
@@ -369,6 +370,7 @@ function applyManual(d) {
     const m = MANUAL[shortcode(r.permalink)];
     if (!m) continue;
     r.manual = true;
+    if (Number.isFinite(m.views)) { r.apiViews = r.views; r.views = m.views; }
     if (Number.isFinite(m.follows)) r.follows = m.follows;
     if (Number.isFinite(m.profileVisits)) r.profileVisits = m.profileVisits;
     if (Number.isFinite(m.over3s)) r.over3s = m.over3s;
