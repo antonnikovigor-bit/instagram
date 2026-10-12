@@ -37,7 +37,7 @@ let DATA = null;
 // Цель и эксперимент
 const GOAL_FROM = 3600, GOAL_TO = 10000, GOAL_MARKS = [5000, 7500];
 const EXP_START = '2026-09-27', EXP_DAYS = 90;
-let dayMetric = 'reach';
+let dayMetric = 'gain';
 let reelSort = 'new';
 
 function ago(iso) {
@@ -134,7 +134,25 @@ function renderTiles(d) {
   $('tiles').innerHTML = tiles.map(([k, v, dsc]) => `<div class="card tile"><div class="k">${k}</div><div class="v num">${v}</div><div class="d">${dsc}</div></div>`).join('');
 }
 
-const DAY_METRICS = [['reach', 'Охват'], ['views', 'Просмотры'], ['profile', 'Профиль'], ['follows', 'Подписки']];
+const DAY_METRICS = [['gain', 'Прирост'], ['reach', 'Охват'], ['views', 'Просмотры'], ['profile', 'Профиль']];
+
+const todayKey = () => new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Almaty' });
+const prevKey = (k) => new Date(Date.parse(k + 'T12:00:00Z') - 86400000).toISOString().slice(0, 10);
+const signed = (v) => v == null ? '-' : (v > 0 ? '+' : v < 0 ? '−' : '') + fmt(Math.abs(v));
+
+// Прирост за день: разница подписчиков на конец дня и на конец предыдущего (подписались минус отписались).
+// Для дней до начала замеров берём «новые подписки» из Instagram. Последние 2 дня Instagram отдаёт с задержкой нулями - их не берём.
+function withGain(d) {
+  const all = d.daily || [];
+  const today = todayKey();
+  return all.map((r, i) => {
+    const p = all[i - 1];
+    let gain = null, src = null;
+    if (r.followers != null && p && p.followers != null && p.date === prevKey(r.date)) { gain = r.followers - p.followers; src = 'net'; }
+    else if (r.follows != null && !(r.follows === 0 && i >= all.length - 2)) { gain = r.follows; src = 'api'; }
+    return { ...r, gain, gainSrc: src, partial: r.date === today };
+  });
+}
 
 function renderDayTabs() {
   $('dayTabs').innerHTML = DAY_METRICS.map(([k, l]) => `<button type="button" data-k="${k}" aria-pressed="${k === dayMetric}">${l}</button>`).join('');
@@ -142,47 +160,75 @@ function renderDayTabs() {
 }
 
 function renderDayChart(d) {
-  const rows = last30(d);
+  const isGain = dayMetric === 'gain';
+  const rows = withGain(d).slice(-30);
   const label = DAY_METRICS.find(([k]) => k === dayMetric)[1];
   const vals = rows.map((r) => r[dayMetric]);
   const box = $('dayChart');
   if (!vals.some((v) => v != null)) {
-    box.innerHTML = `<p class="empty" style="padding:24px 6px">${dayMetric === 'follows' ? 'Instagram отдаёт подписки по дням только аккаунтам от 100 подписчиков.' : 'Данные появятся после первого полного сбора.'}</p>`;
+    box.innerHTML = '<p class="empty" style="padding:24px 6px">Данные появятся после первого полного сбора.</p>';
     return;
   }
   const total = vals.reduce((a, v) => a + (v || 0), 0);
   const W = Math.max(320, Math.round(box.clientWidth - 28) || 1000), H = 240, padL = 44, padB = 26, padT = 10;
   const max = Math.max(...vals.map((v) => v || 0), 1);
-  const step = niceStep(max / 4); const top = Math.ceil(max / step) * step;
+  const min = Math.min(...vals.map((v) => v || 0), 0);
+  const step = niceStep((max - min) / 4);
+  const top = Math.ceil(max / step) * step;
+  // Небольшой минус не растягивает ось на целый шаг сетки
+  const bot = min >= 0 ? 0 : -min < step * 0.25 ? min * 1.6 : Math.floor(min / step) * step;
   const bw = (W - padL) / rows.length;
   const barW = Math.min(24, bw - 2);
-  const y = (v) => padT + (H - padT - padB) * (1 - v / top);
+  const y = (v) => padT + (H - padT - padB) * (top - v) / (top - bot);
   let grid = '';
-  for (let v = 0; v <= top + 1e-9; v += step) {
+  for (let v = Math.ceil(bot / step) * step; v <= top + 1e-9; v += step) {
     grid += `<line x1="${padL}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>
       <text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" font-size="12" fill="var(--muted)">${compact(v)}</text>`;
   }
-  let bars = '';
+  let bars = '', labels = '';
   rows.forEach((r, i) => {
     const v = r[dayMetric] || 0;
     const cx = padL + bw * i + bw / 2;
-    const h = Math.max(0, y(0) - y(v));
+    const x0 = cx - barW / 2;
+    const h = Math.abs(y(0) - y(v));
     const rad = Math.min(4, h, barW / 2);
-    const x0 = cx - barW / 2, y0 = y(v);
-    const path = h > 0 ? `M${x0} ${y(0)} V${y0 + rad} Q${x0} ${y0} ${x0 + rad} ${y0} H${x0 + barW - rad} Q${x0 + barW} ${y0} ${x0 + barW} ${y0 + rad} V${y(0)} Z` : '';
-    bars += `<g data-i="${i}"><rect x="${padL + bw * i}" y="${padT}" width="${bw}" height="${H - padT - padB}" fill="transparent"/>${path ? `<path d="${path}" fill="var(--accent)"/>` : ''}</g>`;
+    let path = '';
+    if (v > 0) { const y0 = y(v); path = `M${x0} ${y(0)} V${y0 + rad} Q${x0} ${y0} ${x0 + rad} ${y0} H${x0 + barW - rad} Q${x0 + barW} ${y0} ${x0 + barW} ${y0 + rad} V${y(0)} Z`; }
+    else if (v < 0) { const y1 = y(v); path = `M${x0} ${y(0)} V${y1 - rad} Q${x0} ${y1} ${x0 + rad} ${y1} H${x0 + barW - rad} Q${x0 + barW} ${y1} ${x0 + barW} ${y1 - rad} V${y(0)} Z`; }
+    const fill = v < 0 ? 'var(--muted)' : 'var(--accent)';
+    bars += `<g data-i="${i}"><rect x="${padL + bw * i}" y="${padT}" width="${bw}" height="${H - padT - padB}" fill="transparent"/>${path ? `<path d="${path}" fill="${fill}"${isGain && r.partial ? ' opacity=".45"' : ''}/>` : ''}</g>`;
+    if (isGain && v && bw >= 26) labels += `<text x="${cx}" y="${v > 0 ? y(v) - 5 : y(v) + 13}" text-anchor="middle" font-size="11" fill="var(--muted)" pointer-events="none">${compact(v)}</text>`;
     if (i % (W < 600 ? 7 : 5) === 0) bars += `<text x="${cx}" y="${H - 6}" text-anchor="middle" font-size="12" fill="var(--muted)">${dayLabel(r.date)}</text>`;
   });
-  box.innerHTML = `<div class="sum">${label} за ${rows.length} дн.: <b class="num">${fmt(total)}</b></div>
-    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label} по дням">${grid}${bars}</svg>`;
+  const sum = isGain
+    ? `Прирост за ${rows.length} дн.: <b class="num">${signed(total)}</b>`
+    : `${label} за ${rows.length} дн.: <b class="num">${fmt(total)}</b>`;
+  box.innerHTML = `<div class="sum">${sum}</div>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${label} по дням">${grid}${bars}${labels}</svg>${isGain ? gainList(rows) : ''}`;
   const svg = box.querySelector('svg');
   svg.addEventListener('pointermove', (e) => {
     const g = e.target.closest('g[data-i]'); if (!g) return hideTip();
     const i = +g.dataset.i; const r = svg.getBoundingClientRect();
-    const cx = padL + bw * i + bw / 2; const v = rows[i][dayMetric];
-    showTip(r.left + (cx / W) * r.width, r.top + (y(v || 0) / H) * r.height, `${dayLabel(rows[i].date)} · ${label.toLowerCase()} <b>${fmt(v)}</b>`);
+    const cx = padL + bw * i + bw / 2; const row = rows[i]; const v = row[dayMetric];
+    const html = isGain
+      ? `${dayLabel(row.date)}${row.partial ? ' (сегодня, день не закончился)' : ''} · прирост <b>${signed(v)}</b>` +
+        (row.followers != null ? `<br>всего ${fmt(row.followers)}` : '') +
+        (row.gainSrc === 'api' ? '<br>новые подписки по данным Instagram' : '')
+      : `${dayLabel(row.date)} · ${label.toLowerCase()} <b>${fmt(v)}</b>`;
+    showTip(r.left + (cx / W) * r.width, r.top + (y(v || 0) / H) * r.height, html);
   });
   svg.addEventListener('pointerleave', hideTip);
+}
+
+// Отчёт по датам: от свежих к старым
+function gainList(rows) {
+  const items = rows.filter((r) => r.gain != null).reverse().map((r) =>
+    `<li><span>${dayLabel(r.date)}${r.partial ? ' <em>сегодня</em>' : ''}</span><b class="num${r.gain < 0 ? ' neg' : ''}">${signed(r.gain)}</b><span class="num">${r.followers != null ? fmt(r.followers) : ''}</span></li>`).join('');
+  const since = rows.find((r) => r.gainSrc === 'net');
+  const note = since && rows.some((r) => r.gainSrc === 'api')
+    ? `<p class="gnote">До ${dayLabel(since.date)} - новые подписки по данным Instagram. С ${dayLabel(since.date)} - чистый прирост: подписались минус отписались.</p>`
+    : '<p class="gnote">Чистый прирост: подписались минус отписались. Сегодняшний день ещё идёт.</p>';
+  return `<ul class="glist"><li class="gh"><span>Дата</span><span>За день</span><span>Всего</span></li>${items}</ul>${note}`;
 }
 
 function niceStep(x) {
