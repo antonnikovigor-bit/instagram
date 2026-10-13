@@ -105,7 +105,9 @@ function renderRidge(d) {
     <line id="rg" x1="0" x2="0" y1="0" y2="${H}" stroke="var(--muted)" stroke-width="1" vector-effect="non-scaling-stroke" opacity="0"/>
     ${rows.map((r, i) => reelDays[r.date] ? `<line x1="${x(i)}" x2="${x(i)}" y1="${pts[i][1]}" y2="${H}" stroke="var(--good)" stroke-width="1" vector-effect="non-scaling-stroke" opacity=".6"/>` : '').join('')}
   </svg>
-  <div class="rmarks">${rows.map((r, i) => reelDays[r.date] ? `<i style="left:${(x(i) / W) * 100}%;top:${(pts[i][1] / H) * 100}%"></i>` : '').join('')}</div>`;
+  <div class="rmarks">${rows.map((r, i) => reelDays[r.date] ? `<i style="left:${(x(i) / W) * 100}%;top:${(pts[i][1] / H) * 100}%"></i>` : '').join('')}</div>${ridgeDates(rows, reelDays, box.clientWidth, x, W)}`;
+  const rd = box.querySelector('.rdates');
+  box.style.marginBottom = rd ? (parseInt(rd.style.height) + 10) + 'px' : '';
   const svg = box.querySelector('svg');
   const onMove = (e) => {
     const r = svg.getBoundingClientRect();
@@ -119,6 +121,28 @@ function renderRidge(d) {
   svg.addEventListener('pointermove', onMove);
   svg.addEventListener('pointerleave', () => { hideTip(); svg.querySelector('#rg').setAttribute('opacity', 0); });
   void peak;
+}
+
+// Даты публикации рилсов под линией охвата. Соседние даты не налезают друг на друга - уходят во второй-третий ряд.
+function ridgeDates(rows, reelDays, boxW, x, W) {
+  const width = boxW || 1000;
+  const short = width < 600;
+  const fmtD = (k) => short ? k.slice(8, 10) + '.' + k.slice(5, 7) : dayLabel(k);
+  const lblW = short ? 34 : 50;
+  const rowsEnd = [];
+  const items = [];
+  rows.forEach((r, i) => {
+    if (!reelDays[r.date]) return;
+    const px = (x(i) / W) * width;
+    const left = Math.max(0, Math.min(width - lblW, px - lblW / 2));
+    let row = rowsEnd.findIndex((end) => left >= end + 4);
+    if (row < 0) { row = rowsEnd.length; rowsEnd.push(0); }
+    rowsEnd[row] = left + lblW;
+    const n = reelDays[r.date].length;
+    items.push(`<span class="num" style="left:${left}px;width:${lblW}px;top:${row * 15}px">${fmtD(r.date)}${n > 1 ? ' ×' + n : ''}</span>`);
+  });
+  if (!items.length) return '';
+  return `<div class="rdates" style="height:${rowsEnd.length * 15}px">${items.join('')}</div>`;
 }
 
 function renderTiles(d) {
@@ -438,7 +462,7 @@ async function load(first) {
   }
 }
 load(true);
-let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => DATA && renderDayChart(DATA), 150); });
+let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (DATA) { renderRidge(DATA); renderDayChart(DATA); } }, 150); });
 setInterval(() => load(false), 2 * 60 * 1000);
 
 // Медленная сеть: экономия трафика, 2G/3G или канал меньше 1,5 Мбит/с - видео не грузим, остаётся лёгкая обложка
