@@ -210,6 +210,16 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
 .goal .sum b { color: var(--text); }
 .exp { margin: 10px 0 0; font-size: 14px; color: var(--text-2); }
 .exp b { color: var(--text); }
+.goal .fill.ghost { background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--good) 45%, transparent) 0 6px, transparent 6px 9px); }
+.fc { margin: 12px 0 0; max-width: 460px; font-size: 14px; color: var(--text-2); }
+.fc:empty { display: none; }
+.fc-h { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.fc-t { display: grid; grid-template-columns: auto 1fr 1fr 1fr; gap: 4px 14px; align-items: baseline; }
+.fc-t > :nth-child(4n+2), .fc-t > :nth-child(4n+3), .fc-t > :nth-child(4n) { text-align: right; }
+.fc-t i { font-style: normal; font-size: 11px; color: var(--muted); }
+.fc b { color: var(--text); }
+.fc-need { margin-top: 6px; font-size: 13px; color: var(--muted); }
+.fc-need b { color: var(--text-2); }
 .ridge { position: relative; }
 .rmarks { position: absolute; inset: 0; pointer-events: none; }
 .rmarks i { position: absolute; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 2px var(--bg); }
@@ -256,6 +266,7 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
       </div>
       <div class="goal" id="goal" aria-label="Прогресс к цели"></div>
       <p class="exp num" id="exp"></p>
+      <div class="fc" id="forecast"></div>
     </div>
     <div class="ridge" id="ridge" aria-label="Охват по дням за 30 дней"></div>
     <p class="note hero-note">Линия - охват по дням за 30 дней. Зелёные точки и даты - дни публикации рилсов.</p>

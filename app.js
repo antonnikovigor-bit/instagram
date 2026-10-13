@@ -76,13 +76,50 @@ function renderGoal(f, d) {
   const span = GOAL_TO - GOAL_FROM;
   const pos = (v) => Math.max(0, Math.min(100, ((v - GOAL_FROM) / span) * 100));
   const pct = Math.round(pos(f));
-  $('goal').innerHTML = `<div class="track"><div class="fill" style="width:${pos(f)}%"></div>${GOAL_MARKS.map((m) => `<i class="tick" style="left:${pos(m)}%"></i>`).join('')}</div>
+  const fc = forecast(f, d);
+  const ghost = fc ? `<div class="fill ghost" style="width:${pos(fc.week.value)}%"></div>` : '';
+  $('goal').innerHTML = `<div class="track">${ghost}<div class="fill" style="width:${pos(f)}%"></div>${GOAL_MARKS.map((m) => `<i class="tick" style="left:${pos(m)}%"></i>`).join('')}</div>
     <div class="lbl num"><span style="left:0">${fmt(GOAL_FROM)}</span>${GOAL_MARKS.map((m) => `<span style="left:${pos(m)}%">${fmt(m)}</span>`).join('')}<span style="left:100%">${fmt(GOAL_TO)}</span></div>
     <div class="sum">Пройдено <b class="num">${pct}%</b> пути · осталось <b class="num">${fmt(Math.max(0, GOAL_TO - f))}</b></div>`;
   const start = new Date(EXP_START + 'T00:00:00+05:00');
   const day = Math.max(1, Math.floor((Date.now() - start) / 86400000) + 1);
   const n = (d.reels || []).filter((r) => new Date(r.timestamp) >= start).length;
   $('exp').innerHTML = `День <b>${Math.min(day, EXP_DAYS)}</b> из ${EXP_DAYS} · рилсов с начала эксперимента: <b>${n}</b>`;
+  $('forecast').innerHTML = fc ? forecastHtml(fc) : '';
+}
+
+// Прогноз к концу эксперимента: текущие подписчики + средний прирост в день × оставшиеся дни.
+// Средний прирост - по замерам на конец полных дней (сегодняшний неполный день не берём).
+function forecast(f, d) {
+  const end = new Date(EXP_START + 'T00:00:00+05:00').getTime() + (EXP_DAYS - 1) * 86400000; // последний день эксперимента
+  const endKey = new Date(end).toLocaleDateString('sv-SE', { timeZone: 'Asia/Almaty' });
+  const today = todayKey();
+  const snaps = (d.daily || []).filter((r) => r.followers != null && r.date < today);
+  if (snaps.length < 8) return null;
+  const last = snaps[snaps.length - 1];
+  const pace = (n) => {
+    const base = snaps[snaps.length - 1 - n];
+    if (!base) return null;
+    const days = Math.round((Date.parse(last.date) - Date.parse(base.date)) / 86400000);
+    return days > 0 ? (last.followers - base.followers) / days : null;
+  };
+  const left = Math.max(0, Math.round((Date.parse(endKey) - Date.parse(today)) / 86400000) + 1); // включая сегодня
+  const mk = (p, n) => p == null ? null : {
+    pace: p, days: n, value: Math.round(f + p * left),
+    goalDate: p > 0 && f < GOAL_TO ? new Date(Date.now() + ((GOAL_TO - f) / p) * 86400000) : null,
+  };
+  return { endKey, left, need: left ? Math.ceil(Math.max(0, GOAL_TO - f) / left) : 0,
+    week: mk(pace(7), 7), two: snaps.length >= 15 ? mk(pace(14), 14) : null };
+}
+
+function forecastHtml(fc) {
+  const end = dayLabel(fc.endKey);
+  const short = (dt) => dateRu(dt.toISOString(), { day: 'numeric', month: 'short' }).replace('.', '');
+  const row = (x, name) => !x ? '' : `<span>${name}</span><b class="num">+${fmt(x.pace)}</b><b class="num">≈ ${fmt(x.value)}</b><span class="num">${x.goalDate ? short(x.goalDate) : '-'}</span>`;
+  const ok = fc.week && fc.week.pace >= fc.need;
+  return `<div class="fc-h">Прогноз при текущем темпе</div>
+    <div class="fc-t"><i>темп за</i><i>в день</i><i>к ${end}</i><i>10 000 к</i>${row(fc.week, '7 дней')}${row(fc.two, '14 дней')}</div>
+    <div class="fc-need">Для 10 000 к ${end} нужно <b class="num">+${fmt(fc.need)}</b>/день${fc.week ? ` · сейчас ${ok ? 'опережаешь план' : 'отстаёшь от плана'}` : ''}</div>`;
 }
 
 function last30(d) { return (d.daily || []).slice(-30); }
