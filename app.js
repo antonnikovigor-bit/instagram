@@ -476,6 +476,12 @@ function applyManual(d) {
   for (const r of d.reels || []) {
     const m = MANUAL[shortcode(r.permalink)];
     if (!m) continue;
+    // Длительность: API не отдаёт файл у части рилсов (например, с лицензированной музыкой)
+    if (Number.isFinite(m.durationSec) && m.durationSec > 0) {
+      r.durationSec = m.durationSec;
+      if (r.avgWatchSec != null) r.watchPct = Math.min(100, Math.round((r.avgWatchSec / m.durationSec) * 100));
+    }
+    if (Object.keys(m).every((k) => k === 'durationSec')) continue;
     r.manual = true;
     if (Number.isFinite(m.views)) { r.apiViews = r.views; r.views = m.views; }
     for (const k of ['likes', 'comments', 'shares', 'saved', 'reach', 'follows']) if (Number.isFinite(m[k])) r[k] = m[k];
