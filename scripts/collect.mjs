@@ -182,27 +182,34 @@ async function main() {
   }
   const metrics = [...REEL_METRICS, ...(state.extraMetrics || [])];
 
-  // Длительность рилса: читаем только начало файла (заголовок mp4), результат кэшируем
+  // Длительность рилса: читаем заголовок mp4 (mvhd), результат кэшируем.
+  // Заголовок бывает в начале файла, а бывает в конце (moov после данных) - тогда читаем хвост.
   state.durations ||= {};
+  const findMvhd = (b) => {
+    for (let i = 4; i < b.length - 32; i++) {
+      if (b[i] === 0x6d && b[i + 1] === 0x76 && b[i + 2] === 0x68 && b[i + 3] === 0x64) { // 'mvhd'
+        const dv = new DataView(b.buffer, b.byteOffset);
+        const v = b[i + 4];
+        const ts = dv.getUint32(i + (v === 1 ? 24 : 16));
+        const d = v === 1 ? Number(dv.getBigUint64(i + 28)) : dv.getUint32(i + 20);
+        return ts ? Math.round((d / ts) * 10) / 10 : null;
+      }
+    }
+    return null;
+  };
   const mp4Duration = async (url) => {
     try {
       const u = new URL(url);
       if (u.protocol !== 'https:' || !/(\.cdninstagram\.com|\.fbcdn\.net)$/.test(u.hostname)) return null;
-      const r = await fetch(u, { headers: { Range: 'bytes=0-1048575' }, redirect: 'error' });
-      const b = new Uint8Array(await r.arrayBuffer());
-      for (let i = 4; i < b.length - 32; i++) {
-        if (b[i] === 0x6d && b[i + 1] === 0x76 && b[i + 2] === 0x68 && b[i + 3] === 0x64) { // 'mvhd'
-          const dv = new DataView(b.buffer, b.byteOffset);
-          const v = b[i + 4];
-          const ts = dv.getUint32(i + (v === 1 ? 24 : 16));
-          const d = v === 1 ? Number(dv.getBigUint64(i + 28)) : dv.getUint32(i + 20);
-          return ts ? Math.round((d / ts) * 10) / 10 : null;
-        }
+      for (const range of ['bytes=0-1048575', 'bytes=-2097152']) {
+        const r = await fetch(u, { headers: { Range: range }, redirect: 'error' });
+        if (!r.ok) continue;
+        const d = findMvhd(new Uint8Array(await r.arrayBuffer()));
+        if (d) return d;
       }
     } catch {}
     return null;
   };
-
   const reels = [];
   for (const m of reelsRaw) {
     const i = await insights(m.id, metrics);
