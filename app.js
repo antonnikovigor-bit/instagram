@@ -185,13 +185,15 @@ function ridgeDates(rows, reelDays, boxW, x, W) {
 
 function renderTiles(d) {
   const t = d.totals30 || {};
+  const month = (d.reels || []).filter((r) => Date.now() - Date.parse(r.timestamp) < 30 * 864e5);
+  const views = month.reduce((a, r) => a + (r.views || 0), 0);
+  const saves = month.reduce((a, r) => a + (r.saved || 0) + (r.shares || 0), 0);
+  const long = month.reduce((a, r) => a + (r.skipRate == null ? 0 : (r.views || 0) * (100 - r.skipRate) / 100), 0);
   const tiles = [
-    ['Охват', compact(t.reach), 'уникальных аккаунтов увидели контент'],
-    ['Просмотры', compact(t.views), 'всего показов профиля и рилсов'],
-    ['Часы просмотра', t.watchHours == null ? '-' : dec1(t.watchHours), 'суммарно по рилсам за 30 дней'],
-    ['Средний досмотр', t.avgWatchSec == null ? '-' : dec1(t.avgWatchSec) + ' с', 'столько в среднем смотрят один рилс'],
-    ['Визиты профиля', compact(t.profile), 'зашли посмотреть профиль'],
     ['Подписчики с рилсов', t.followsFromReels == null ? '-' : '≈ ' + fmt(t.followsFromReels), 'оценка по рилсам за 30 дней'],
+    ['Профиль → подписка', t.profile && t.followsFromReels != null ? Math.round(t.followsFromReels / t.profile * 100) + '%' : '-', t.profile ? fmt(t.followsFromReels) + ' из ' + fmt(t.profile) + ' визитов' : ''],
+    ['Сохранения и пересылки', views ? dec1(saves / views * 1000) : '-', 'на 1 000 просмотров'],
+    ['Смотрят дольше 3 секунд', views ? Math.round(long / views * 100) + '%' : '-', 'доля просмотров, не пролистнули'],
   ];
   $('tiles').innerHTML = tiles.map(([k, v, dsc]) => `<div class="card tile"><div class="k">${k}</div><div class="v num">${v}</div><div class="d">${dsc}</div></div>`).join('');
 }
@@ -300,7 +302,7 @@ function niceStep(x) {
   return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
 }
 
-const REEL_SORTS = [['new', 'Новые'], ['views', 'Просмотры'], ['follows', 'Подписчики']];
+const REEL_SORTS = [['new', 'Новые'], ['views', 'Просмотры'], ['follows', 'Подписчики'], ['s3', '3 секунды и больше'], ['watch', 'Досмотр'], ['sp', 'Сохранения и пересылки']];
 
 function renderReelTabs() {
   $('reelTabs').innerHTML = REEL_SORTS.map(([k, l]) => `<button type="button" data-k="${k}" aria-pressed="${k === reelSort}">${l}</button>`).join('');
@@ -310,17 +312,30 @@ function renderReelTabs() {
 function renderReels(d) {
   const reels = [...(d.reels || [])];
   if (!reels.length) { $('reels').innerHTML = '<p class="empty">Рилсов пока нет.</p>'; return; }
-  if (reelSort === 'views') reels.sort((a, b) => (b.views || 0) - (a.views || 0));
-  if (reelSort === 'follows') reels.sort((a, b) => ((b.follows ?? b.estFollows) || 0) - ((a.follows ?? a.estFollows) || 0));
-  $('reels').innerHTML = reels.map((r) => {
+  const fol = (r) => r.follows ?? r.estFollows;
+  const s3 = (r) => (r.skipRate == null ? null : 100 - r.skipRate);
+  const sp = (r) => (r.views ? ((r.saved || 0) + (r.shares || 0)) / r.views * 1000 : null);
+  const key = { views: (r) => r.views, follows: fol, s3, watch: (r) => r.watchPct, sp }[reelSort];
+  if (key) reels.sort((a, b) => (key(b) ?? -1) - (key(a) ?? -1));
+  const med = median(reels.map(fol));
+  const head = '<div class="rrow rh"><span>Рилс</span><span>Просм.</span><span>Подписчики ≈</span><span>3 с и больше</span><span>Досмотр</span><span>Сохр.</span><span>Пересылки</span><span>Подп. / 1000</span></div>';
+  $('reels').innerHTML = `<p class="rleg">Зелёным отмечены хорошие значения (3 секунды и досмотр от 60%), жёлтым слабые (3 секунды меньше 45%). Строка выделена, если рилс привёл подписчиков в 2 и больше раз выше обычного. Досмотр - средний процент ролика, который досматривают.</p>
+    <div class="rtbl">${head}${reels.map((r) => {
     const cap = (r.caption || '').split('\n')[0] || 'Без подписи';
-    return `<button type="button" class="card reel" data-id="${esc(r.id)}">
-      <div class="th" data-bg="${esc(r.thumb || '')}"><span class="badge num">${compact(r.views)} просм.</span></div>
-      <div class="meta"><div class="cap">${esc(cap)}</div>${dateRu(r.timestamp)} · ${r.follows == null ? '≈ ' : ''}${fmt(r.follows ?? r.estFollows)} подп.</div>
+    const v3 = s3(r), f = fol(r);
+    const hit = f != null && med && f >= med * 2;
+    return `<button type="button" class="rrow${hit ? ' hit' : ''}" data-id="${esc(r.id)}">
+      <span class="rt"><span class="d num">${dateRu(r.timestamp, { day: '2-digit', month: '2-digit' })}</span><span class="c"><b>${esc(cap)}</b><small>${r.durationSec == null ? 'длительность не задана' : Math.round(r.durationSec) + ' с'}${hit ? '<span class="rhit">выбивается</span>' : ''}</small></span></span>
+      <span class="rn num">${fmt(r.views)}</span>
+      <span class="rn num">${f == null ? '-' : fmt(f)}</span>
+      <span class="rn num">${v3 == null ? '-' : `<span class="rp ${v3 >= 60 ? 'good' : v3 < 45 ? 'warn' : ''}">${Math.round(v3)}%</span><small>${fmt(r.views * v3 / 100)} просм.</small>`}</span>
+      <span class="rn num">${r.watchPct == null ? '-' : `<span class="rp ${r.watchPct >= 60 ? 'good' : ''}">${r.watchPct}%</span>`}${r.avgWatchSec == null ? '' : `<small>${dec1(r.avgWatchSec)} с в среднем</small>`}</span>
+      <span class="rn num">${fmt(r.saved)}</span>
+      <span class="rn num">${fmt(r.shares)}</span>
+      <span class="rn num">${per1000(f, r.views)}</span>
     </button>`;
-  }).join('');
-  setBg($('reels'));
-  $('reels').onclick = (e) => { const b = e.target.closest('.reel'); if (b) openReel(b.dataset.id); };
+  }).join('')}</div>`;
+  $('reels').onclick = (e) => { const b = e.target.closest('.rrow[data-id]'); if (b) openReel(b.dataset.id); };
 }
 
 function per1000(a, views) { return views ? dec1((a || 0) / views * 1000) : '-'; }
