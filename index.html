@@ -122,7 +122,7 @@ button.rrow:focus-visible { outline: 2px solid var(--accent); outline-offset: -2
 .rrow.hit { background: var(--accent-wash); }
 .rrow > :not(:first-child) { text-align: right; }
 .rt { display: flex; gap: 10px; align-items: center; min-width: 0; }
-.rt .d { flex: 0 0 42px; font-size: 12px; color: var(--muted); }
+.rt .th { flex: 0 0 40px; height: 58px; border-radius: 8px; background: var(--surface-2) center/cover no-repeat; }
 .rt .c { min-width: 0; }
 .rt .c b { display: block; font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rt .c small { font-size: 11.5px; color: var(--muted); }
@@ -251,6 +251,19 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
   .aud { grid-template-columns: 1fr; }
   .dlg { grid-template-columns: 1fr; }
   .dlg .th { min-height: 220px; }
+  .rleg { font-size: 11.5px; }
+  .rtbl { overflow: visible; }
+  .rrow { min-width: 0; grid-template-columns: 72px repeat(4, minmax(0, 1fr)); gap: 10px 10px; padding: 14px; align-items: start; }
+  .rrow.rh { display: none; }
+  .rt { display: contents; }
+  .rt .th { grid-column: 1; grid-row: 1 / span 2; width: 72px; height: 112px; flex: none; border-radius: 10px; }
+  .rt .c { grid-column: 2 / -1; grid-row: 1; }
+  .rt .c b { white-space: normal; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-size: 15px; line-height: 1.3; margin-bottom: 3px; }
+  .rt .c small { font-size: 12px; }
+  .rrow > :not(:first-child) { text-align: left; }
+  .rn { grid-row: 2; align-self: end; font-size: 15px; }
+  .rn::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 500; color: var(--muted); margin-bottom: 3px; white-space: nowrap; }
+  .rn small, .rx { display: none; }
 }
 </style>
 </head>
@@ -337,7 +350,7 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
 <dialog id="dlg"></dialog>
 <div class="tip" id="tip" role="tooltip"></div>
 
-<script src="app.js?v=b7e3c915"></script>
+<script src="app.js?v=c4d2a7f1"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>
