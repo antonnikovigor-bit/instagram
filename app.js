@@ -37,6 +37,7 @@ let DATA = null;
 // Цель и эксперимент
 const GOAL_FROM = 3600, GOAL_TO = 10000, GOAL_MARKS = [5000, 7500];
 const EXP_START = '2026-09-27', EXP_DAYS = 90;
+const GOAL_DATE = '2026-12-01'; // к этой дате считаем прогноз и нужный темп
 let dayMetric = 'gain';
 let reelSort = 'new';
 
@@ -91,7 +92,7 @@ function renderGoal(f, d) {
 // Прогноз к концу эксперимента: текущие подписчики + средний прирост в день × оставшиеся дни.
 // Средний прирост - по замерам на конец полных дней (сегодняшний неполный день не берём).
 function forecast(f, d) {
-  const end = new Date(EXP_START + 'T00:00:00+05:00').getTime() + (EXP_DAYS - 1) * 86400000; // последний день эксперимента
+  const end = new Date(GOAL_DATE + 'T00:00:00+05:00').getTime(); // дата, к которой считаем прогноз
   const endKey = new Date(end).toLocaleDateString('sv-SE', { timeZone: 'Asia/Almaty' });
   const today = todayKey();
   const snaps = (d.daily || []).filter((r) => r.followers != null && r.date < today);
