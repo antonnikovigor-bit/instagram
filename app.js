@@ -234,7 +234,7 @@ function renderDayChart(d) {
     return;
   }
   const total = vals.reduce((a, v) => a + (v || 0), 0);
-  const W = Math.max(320, Math.round(box.clientWidth - 28) || 1000), H = 240, padL = 44, padB = 26, padT = 10;
+  const W = Math.max(320, Math.round(box.clientWidth - 28) || 1000), H = 240, padL = 54, padB = 26, padT = 10;
   const max = Math.max(...vals.map((v) => v || 0), 1);
   const min = Math.min(...vals.map((v) => v || 0), 0);
   const step = niceStep((max - min) / 4);
@@ -247,7 +247,7 @@ function renderDayChart(d) {
   let grid = '';
   for (let v = Math.ceil(bot / step) * step; v <= top + 1e-9; v += step) {
     grid += `<line x1="${padL}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>
-      <text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" font-size="12" fill="var(--muted)">${compact(v)}</text>`;
+      <text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" font-size="12" fill="var(--muted)">${fmt(v)}</text>`;
   }
   let bars = '', labels = '';
   rows.forEach((r, i) => {
