@@ -325,16 +325,17 @@ function renderReels(d) {
     const v3 = s3(r), f = fol(r);
     const hit = f != null && med && f >= med * 2;
     return `<button type="button" class="rrow${hit ? ' hit' : ''}" data-id="${esc(r.id)}">
-      <span class="rt"><span class="d num">${dateRu(r.timestamp, { day: '2-digit', month: '2-digit' })}</span><span class="c"><b>${esc(cap)}</b><small>${r.durationSec == null ? 'длительность не задана' : Math.round(r.durationSec) + ' с'}${hit ? '<span class="rhit">выбивается</span>' : ''}</small></span></span>
-      <span class="rn num">${fmt(r.views)}</span>
-      <span class="rn num">${f == null ? '-' : fmt(f)}</span>
-      <span class="rn num">${v3 == null ? '-' : `<span class="rp ${v3 >= 60 ? 'good' : v3 < 45 ? 'warn' : ''}">${Math.round(v3)}%</span><small>${fmt(r.views * v3 / 100)} просм.</small>`}</span>
-      <span class="rn num">${r.watchPct == null ? '-' : `<span class="rp ${r.watchPct >= 60 ? 'good' : ''}">${r.watchPct}%</span>`}${r.avgWatchSec == null ? '' : `<small>${dec1(r.avgWatchSec)} с в среднем</small>`}</span>
-      <span class="rn num">${fmt(r.saved)}</span>
-      <span class="rn num">${fmt(r.shares)}</span>
-      <span class="rn num">${per1000(f, r.views)}</span>
+      <span class="rt"><span class="th" data-bg="${esc(r.thumb || '')}"></span><span class="c"><b>${esc(cap)}</b><small>${dateRu(r.timestamp, { day: '2-digit', month: '2-digit' })}${r.durationSec == null ? '' : ' · ' + Math.round(r.durationSec) + ' с'}${hit ? '<span class="rhit">выбивается</span>' : ''}</small></span></span>
+      <span class="rn num" data-l="Просм.">${fmt(r.views)}</span>
+      <span class="rn num" data-l="Подп. ≈">${f == null ? '-' : fmt(f)}</span>
+      <span class="rn num" data-l="3 с+">${v3 == null ? '-' : `<span class="rp ${v3 >= 60 ? 'good' : v3 < 45 ? 'warn' : ''}">${Math.round(v3)}%</span><small>${fmt(r.views * v3 / 100)} просм.</small>`}</span>
+      <span class="rn num" data-l="Досмотр">${r.watchPct == null ? (r.avgWatchSec == null ? '-' : dec1(r.avgWatchSec) + ' с') : `<span class="rp ${r.watchPct >= 60 ? 'good' : ''}">${r.watchPct}%</span>`}${r.watchPct != null && r.avgWatchSec != null ? `<small>${dec1(r.avgWatchSec)} с в среднем</small>` : ''}</span>
+      <span class="rn rx num" data-l="Сохр.">${fmt(r.saved)}</span>
+      <span class="rn rx num" data-l="Пересылки">${fmt(r.shares)}</span>
+      <span class="rn rx num" data-l="Подп. / 1000">${per1000(f, r.views)}</span>
     </button>`;
   }).join('')}</div>`;
+  setBg($('reels'));
   $('reels').onclick = (e) => { const b = e.target.closest('.rrow[data-id]'); if (b) openReel(b.dataset.id); };
 }
 
