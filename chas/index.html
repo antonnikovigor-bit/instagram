@@ -270,9 +270,9 @@ const STEPS=[
   read:()=>{S.agree=[document.getElementById('f-agree-0').checked,true];S.next=document.getElementById('f-hasq').checked?NEXT_Q:NEXT_OK;},
   check:()=>S.next===NEXT_Q||S.agree[0]?'':'Отметь согласие с условиями - без него мы не сможем тебя записать.'},
  {k:'sent',render:()=>`<div class="sent">${S.next===NEXT_Q?'<h1>Записали</h1>':S.paid?'<h1>Спасибо!</h1>':'<h1>Слово<br><em>принято</em></h1>'}
-   <p class="lead">${firstName()?esc(firstName())+', а':'А'}нкета у нас. ${S.next===NEXT_Q?'Куратор напишет в WhatsApp в течение суток и ответит на вопросы. Решение - после разговора, вход до 29 ноября, 21:00.':(S.paid?'Куратор проверит поступление оплаты и свяжется с тобой в WhatsApp, чтобы добавить в группу.':'Последний шаг - оплата:')}</p>
-   ${S.next===NEXT_Q?'':'<a class="btn pay-k kaspi" href="https://pay.kaspi.kz/pay/aropqjkb" target="_blank" rel="noopener">Оплатить 75 000 ₸ в Kaspi</a>'+(S.paid?'<p class="note">Если оплата не прошла, кнопка выше по-прежнему работает. Сумма - 75 000 ₸.</p>':'<p class="note">Сумму 75 000 ₸ введи сам(а). После оплаты вернись сюда и нажми «Я оплатил(а)».</p><button type="button" class="btn ghost pay-k" data-act="paid">Я оплатил(а)</button>')}
-   ${S.next===NEXT_Q||S.paid?'':`<ol class="next"><li>Оплата - до 29 ноября, 21:00</li><li>23 ноября - подготовка, куратор добавит в чат</li><li>30 ноября - старт</li></ol>`}
+   <p class="lead">${firstName()?esc(firstName())+', а':'А'}нкета у нас. ${S.next===NEXT_Q?'Куратор напишет в WhatsApp в течение суток. Готов(а) сразу - оплати здесь:':(S.paid?'Куратор проверит поступление оплаты и свяжется с тобой в WhatsApp, чтобы добавить в группу.':'Последний шаг - оплата:')}</p>
+   ${'<a class="btn pay-k kaspi" href="https://pay.kaspi.kz/pay/aropqjkb" target="_blank" rel="noopener">Оплатить 75 000 ₸ в Kaspi</a>'+(S.paid?'<p class="note">Если оплата не прошла, кнопка выше по-прежнему работает. Сумма - 75 000 ₸.</p>':'<p class="note">Сумму 75 000 ₸ введи сам(а). После оплаты вернись сюда и нажми «Я оплатил(а)».</p><button type="button" class="btn ghost pay-k" data-act="paid">Я оплатил(а)</button>')}
+   ${S.paid?'':`<ol class="next"><li>Оплата - до 29 ноября, 21:00</li><li>23 ноября - подготовка, куратор добавит в чат</li><li>30 ноября - старт</li></ol>`}
    ${SENDER?'':'<p class="note">Тестовый просмотр: в этой версии ответ никуда не отправлен.</p>'}</div>`}
 ];
 const API='https://script.google.com/macros/s/AKfycbwV5CZZ-z2IgfvqsQ5axBqlpbpxgEdy1QLVK2zrlYQr-NRq7q43O2JjDMXpP8vMGys5/exec';
