@@ -171,11 +171,11 @@ const CITIES=['Алматы','Астана','Шымкент','Караганда
 const NEXT_OK='Всё понятно - пришлите реквизиты',NEXT_Q='Есть вопросы - свяжитесь со мной';
 const BLANK=()=>({step:0,name:'',phone:'',insta:'',city:'',delay:{},ago:{},sphere:'',aFor:'',a:'',b:'',ritual:'',why:[],whyOwn:'',reward:'',rhythm:'',agree:[false,false],next:'',question:'',sent:false});
 let S=BLANK();
-try{const d=localStorage.getItem('anketa-chas-v4');if(d)S=Object.assign(S,JSON.parse(d));}catch(e){}
+try{const d=localStorage.getItem('anketa-chas-v5');if(d)S=Object.assign(S,JSON.parse(d));}catch(e){}
 let SHORT=false;
 try{const h=JSON.parse(localStorage.getItem('handoff-chas')||'null');if(h&&Date.now()-h.t<14*864e5&&!S.sent){SHORT=true;if(!S.name)S.name=h.name||'';if(!S.phone)S.phone=h.phone||'';if(!S.city)S.city=h.city||'';if(h.sphere&&sph(h.sphere)&&!S.sphere&&h.main){S.sphere=h.sphere;S.delay[h.sphere]=h.main;S.ago[h.sphere]=h.ago;}if(h.picks)Object.entries(h.picks).forEach(([id,w])=>{if(w&&sph(id)&&!S.delay[id]){S.delay[id]=w;S.ago[id]=S.ago[id]||'-';}});if(!S.sphere)SHORT=false;}}catch(e){}
-const skip=k=>(k==='review'&&S.next===NEXT_Q)||(SHORT&&(k==='delay'||k==='sphere'))||(k==='sphere'&&SPHERES.filter(x=>S.delay[x.id]).length===1);
-const save=()=>{try{localStorage.setItem('anketa-chas-v4',JSON.stringify(S));}catch(e){}};
+const skip=k=>false;
+const save=()=>{try{localStorage.setItem('anketa-chas-v5',JSON.stringify(S));}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const sph=id=>SPHERES.find(s=>s.id===id);
 const low=s=>String(s||'').toLowerCase().replace(/ё/g,'е').trim();
@@ -219,93 +219,72 @@ function ritualExamples(){
 const STEPS=[
  /* Экран условий: человек из директа просил условия - показываем их до любых вопросов */
  {k:'intro',render:()=>`<h1>30 дней.<br><em>Час для себя</em></h1>
-   <p class="lead">Каждый день - час на свою цель, 30 дней подряд.<br>Рядом группа, бадди и куратор.</p>
+   <p class="lead">Каждый день - час на свою цель, 30 дней подряд.</p>
    <div class="terms"><h3>Три ритма</h3>
    ${RHYTHM.map(r=>`<div class="rh"><b>${r.id}</b><span>${r.d}</span></div>`).join('')}</div>
    <div class="terms"><h3>Что ты получаешь</h3>
-   <ul class="list"><li><b>Задание каждое утро.</b> Открывается после кнопки «Проснулся» - не нужно думать, с чего начать</li><li><b>Команда своего ритма и напарник.</b> Бадди видит, встал ли ты, и не даёт соскочить</li><li><b>Куратор Алёна.</b> Отвечает на вопросы и помогает вернуться, если выпал(а)</li><li><b>Результат в цифрах.</b> В анкете ставишь цель на 30 дней - к 29 декабря видно, дошёл(ла) ли</li></ul></div>
+   <ul class="list"><li><b>Задание каждое утро</b></li><li><b>Команда своего ритма и бадди</b> - не даёт соскочить</li><li><b>Куратор</b> - отвечает на вопросы, помогает</li></ul></div>
    <div class="terms"><h3>Даты</h3>
-   <ul class="list"><li><b>Вход - до 29 ноября, 21:00.</b> 30 ноября стартуем, после старта в челлендж никто не добавляется</li><li><b>Подготовительная неделя - с 23 ноября.</b> Задания уже приходят, но цена слова не сгорает. Можно поймать ритм и привыкнуть к формату</li><li><b>Старт - 30 ноября, финиш - 29 декабря</b></li></ul></div>
+   <ul class="list"><li><b>Вход - до 29 ноября, 21:00</b></li><li><b>23-29 ноября - подготовка.</b> Цена слова не сгорает</li><li><b>30 ноября - 29 декабря - челлендж</b></li></ul></div>
    <div class="terms"><h3>Частые вопросы</h3>
-   <details><summary>Сколько стоит?</summary><p>75 000 ₸: 25 000 ₸ - участие и 50 000 ₸ - цена слова, твой залог перед собой. Дошёл(ла) до конца - залог вернём. Подробно - на шаге «Цена слова» перед отправкой.</p></details>
-   <details><summary>Что если я улетаю или меняю часовой пояс?</summary><p>Предупреди куратора минимум за сутки и скажи, в каком часовом поясе будешь. Режим переведём на новое время. Если в момент подъёма ты в самолёте - пришли скрин или фото, которые показывают, что в это время ты не спал(а).</p></details>
-   <details><summary>Что если заболею?</summary><p>Обычная болезнь - температура, простуда - не повод выйти из режима: подъём и задание остаются. Форс-мажор - это экстренный случай: скорая, госпитализация. Напиши куратору, как только сможешь, - он решит в течение суток.</p></details>
-   <details><summary>Я не в Алматы - можно?</summary><p>Да, всё онлайн. Время считается по твоему городу.</p></details>
+   <details><summary>Что если я улетаю или меняю часовой пояс?</summary><p>Предупреди куратора за сутки - переведём время. В самолёте - пришли скрин с временем.</p></details>
+   <details><summary>Что если заболею?</summary><p>Простуда - не повод выйти. Скорая или больница - напиши куратору.</p></details>
+   <details><summary>Я не в Алматы - можно?</summary><p>Да, всё онлайн, время по твоему городу.</p></details>
    <p class="ask">Остались вопросы? <a href="https://wa.me/77015274257?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D1%87%D0%B5%D0%BB%D0%BB%D0%B5%D0%BD%D0%B4%D0%B6%D1%83%20%C2%AB%D0%A7%D0%B0%D1%81%20%D0%B4%D0%BB%D1%8F%20%D1%81%D0%B5%D0%B1%D1%8F%C2%BB" target="_blank" rel="noopener">Напиши куратору Алёне в WhatsApp</a></p>
 </div>
-   <p class="note">${SHORT?'Ты уже прошёл(ла) опрос, поэтому анкета короче: пара минут.':'Дальше - анкета, около 3 минут.'}</p>`},
- {k:'contacts',render:()=>`<h2>Кто ты</h2>
+   <p class="note">${SHORT?'Часть ответов подставим из опроса.':'Дальше - 3 коротких шага.'}</p>`},
+ /* Экран 2: только имя и WhatsApp. После «Дальше» контакт сразу уходит в таблицу - даже если человек не дойдёт до конца */
+ {k:'contacts',render:()=>`<h2>Как с тобой <em>связаться?</em></h2>
    <div class="field"><label for="f-name">Имя и фамилия</label><input id="f-name" type="text" autocomplete="name" value="${esc(S.name)}" placeholder="Имя Фамилия"></div>
-   <div class="field"><label for="f-phone">WhatsApp <span class="sub">- например, +7 701 000 00 00. Сюда напишет куратор</span></label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" value="${esc(fmtPhone(S.phone||'+7'))}" placeholder="+7 701 000 00 00" oninput="this.value=fmtPhone(this.value)"></div>
-   <div class="field"><label for="f-city">Город <span class="sub">- по нему считаем твоё время</span></label><input id="f-city" type="text" autocomplete="address-level2" value="${esc(S.city)}" placeholder="Город">${fillChips('f-city',CITIES)}</div>
-   <div class="field"><label for="f-insta">Instagram</label><input id="f-insta" type="text" value="${esc(S.insta)}" placeholder="@nickname">
-   <div class="hints"><button type="button" class="chip" data-fill="f-insta" data-v="Нет Instagram">Нет Instagram</button></div></div>`,
-  read:()=>{S.name=val('f-name');S.phone=val('f-phone');S.city=val('f-city');S.insta=val('f-insta');},
-  check:()=>!firstName()?'Напиши имя - хотя бы две буквы.':!phoneOk(S.phone)?'Номер WhatsApp - в формате +7 701 000 00 00.':S.city.length<2?'Напиши свой город.':!S.insta?'Напиши ник или нажми «Нет Instagram».':''},
- {k:'delay',render:()=>`<h2>Что ты давно хочешь,<br><em>но откладываешь?</em></h2>
-   ${HOWTO}
-   ${SPHERES.map(s=>`<div class="sphere"><span class="sphere-name">${s.name}</span><p class="sub">${s.ask}</p><input id="f-delay-${s.id}" class="own-in" type="text" value="${esc(S.delay[s.id]||'')}" placeholder="${esc(s.ph)}">${fillChips('f-delay-'+s.id,s.hints.map(h=>h[0]))}</div>`).join('')}`,
-  read:()=>{SPHERES.forEach(s=>{S.delay[s.id]=val('f-delay-'+s.id);});if(S.sphere&&!S.delay[S.sphere])S.sphere='';const f=SPHERES.filter(x=>S.delay[x.id]);if(f.length===1)S.sphere=f[0].id;},
-  check:()=>SPHERES.some(s=>S.delay[s.id])?'':'Заполни хотя бы одну сферу.'},
- {k:'sphere',enter:()=>{const f=SPHERES.filter(s=>S.delay[s.id]);if(f.length===1)S.sphere=f[0].id;},render:()=>`<h2>Выбери, чему<br><em>посвятишь 30 дней</em></h2>
-   <div class="seg one" data-group="sphere">${SPHERES.filter(s=>S.delay[s.id]).map(s=>`<button type="button" class="opt${S.sphere===s.id?' on':''}" data-v="${s.id}"><b>${s.name}</b><span>${esc(S.delay[s.id]||'')}</span></button>`).join('')}</div>
-   ${S.sphere?`<p class="warn">${esc(sph(S.sphere).rule)}</p>`:''}`,
-  pick:(g,v)=>{if(g==='sphere')S.sphere=(S.sphere===v?'':v);},
-  check:()=>!S.sphere?'Выбери одну сферу.':''},
- /* Цель: точка А и точка Б - поле своими словами + подсказки, ничего не подставляется */
- {k:'goal',enter:()=>{const s=sph(S.sphere);const key=s.id+'|'+(S.delay[s.id]||'');if(S.aFor!==key){S.a='';S.b='';S.aFor=key;}},
-  render:()=>{const s=sph(S.sphere),h=findHit(),ex=h?h[1]:goalExamples();
-   return `<h2>Точка А <em>→</em> точка Б</h2>
-   <p class="q">Точка А: где ты сейчас</p>
-   <input id="f-a" class="own-in" type="text" value="${esc(S.a)}" placeholder="${esc(h&&A_HINT[h[0]]?'Например: '+A_HINT[h[0]]:(A_PH[s.id]||''))}">
-   <p class="q">Точка Б: где будешь 29 декабря - обязательно в цифрах <span class="sub">- сколько раз, страниц, минут, км. Так будет видно, дошёл(ла) ли</span></p>
-   <input id="f-b" class="own-in" type="text" value="${esc(S.b)}" placeholder="${esc(ex[0]?'Например: '+ex[0]:'Что будет через 30 дней')}">
-   ${ex.length?fillChips('f-b',ex):''}`;},
-  read:()=>{S.a=val('f-a');S.b=val('f-b');},
-  check:()=>!S.a?'Опиши, где ты сейчас.':!S.b?'Напиши, что будет через 30 дней.':!/\d/.test(S.b)?'Добавь в точку Б цифру: сколько раз, минут, страниц, дней.':''},
- {k:'rhythm',render:()=>`<h2>Твой <em>ритм</em></h2>
-   <p class="lead">Выбери то, что выдержишь 30 дней подряд. Сменить по ходу нельзя.</p>
-   <div class="seg one" data-group="rhythm">${RHYTHM.map(r=>`<button type="button" class="opt${S.rhythm===r.id?' on':''}" data-v="${r.id}"><b>${r.id} · ${r.t}</b><span>${r.d}</span></button>`).join('')}</div>`,
-  pick:(g,v)=>{if(g==='rhythm')S.rhythm=(S.rhythm===v?'':v);},
-  check:()=>!S.rhythm?'Выбери ритм.':''},
- /* Две галочки вместо подписи: согласие с офертой и памяткой + согласие на персональные данные */
- {k:'price',render:()=>`<h2>Цена <em>слова</em></h2>
-   <div class="terms"><div class="pay">
-     <div class="pc"><span class="pl">Стоимость участия</span><b>25 000 ₸</b><span class="pd">Оплата за челлендж. Не возвращается.</span></div>
-     <div class="pc acc"><span class="pl">Цена слова</span><b>50 000 ₸</b><span class="pd">Твой залог перед собой. Вернём, если дойдёшь.</span></div>
-     <div class="total"><span>Итого при вступлении</span><b>75 000 ₸</b></div></div></div>
-   <ul class="list"><li>Цена слова сгорает, если опоздал(а) с подъёмом или заданием (MY AM - с заданием или отчётом о часе).</li></ul>
-   <label class="check"><input type="checkbox" id="f-agree-0" ${S.agree[0]?'checked':''}><span>Я прочитал(а) <a href="#" onclick="event.preventDefault();showDoc('offer')">условия участия</a> и <a href="#" onclick="event.preventDefault();showDoc('rules')">памятку участника</a> и согласен(на) с ними</span></label>
-   <label class="check"><input type="checkbox" id="f-agree-1" ${S.agree[1]?'checked':''}><span>Согласен(на) на обработку моих персональных данных (имя, телефон, Instagram, город, ответы анкеты) для участия в челлендже</span></label>`,
-  read:()=>{S.agree=[0,1].map(i=>document.getElementById('f-agree-'+i).checked);},
-  check:()=>S.agree.every(Boolean)?'':'Отметь обе галочки - без них мы не сможем тебя записать.'},
- {k:'next',render:()=>`<h2>Что <em>дальше?</em></h2>
-   <div class="seg one" data-group="next">${[NEXT_OK,NEXT_Q].map(x=>`<button type="button" class="opt${S.next===x?' on':''}" data-v="${esc(x)}"><b>${x===NEXT_OK?'Всё понятно':'Есть вопросы'}</b><span>${x===NEXT_OK?'Пришлите реквизиты для оплаты':'Куратор свяжется и ответит'}</span></button>`).join('')}</div>
-   ${S.next===NEXT_Q?`<div class="field"><label for="f-question">Какой вопрос? <span class="sub">- необязательно, но так куратор подготовится</span></label><textarea id="f-question" placeholder="Например: можно ли участвовать, если работаю посменно?">${esc(S.question)}</textarea></div>`:''}`,
-  read:()=>{if(S.next===NEXT_Q)S.question=val('f-question');},
-  pick:(g,v)=>{if(g==='next')S.next=(S.next===v?'':v);},
-  check:()=>!S.next?'Выбери вариант.':''},
- /* Декларация: ответственное заявление вместо сухой сводки */
- {k:'review',render:()=>{const d=new Date().toLocaleDateString('ru-RU');return `<h2>Моя <em>декларация</em></h2>
-   <p class="lead">Прочитай про себя или вслух. Если всё верно - заявляй.</p>
+   <div class="field"><label for="f-phone">WhatsApp <span class="sub">- сюда напишет куратор</span></label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" value="${esc(fmtPhone(S.phone||'+7'))}" placeholder="+7 701 000 00 00" oninput="this.value=fmtPhone(this.value)"></div>
+   <p class="note">Нажимая «Дальше», соглашаешься на обработку данных.</p>`,
+  read:()=>{S.name=val('f-name');S.phone=val('f-phone');},
+  check:()=>!firstName()?'Напиши имя - хотя бы две буквы.':!phoneOk(S.phone)?'Номер WhatsApp - в формате +7 701 000 00 00.':'',
+  leave:()=>sendLead()},
+ /* Экран 3: сфера, одно поле «что откладываешь», ритм и город. Цель с цифрой ставим в подготовительную неделю */
+ {k:'focus',render:()=>{const s=sph(S.sphere);return `<h2>Твои <em>30 дней</em></h2>
+   <p class="q">Сфера</p>
+   <div class="seg one small" data-group="sphere">${SPHERES.map(x=>`<button type="button" class="opt${S.sphere===x.id?' on':''}" data-v="${x.id}"><b>${x.name}</b></button>`).join('')}</div>
+   ${s?`<p class="q">Что давно хочешь, но откладываешь?</p>
+   <input id="f-delay" class="own-in" type="text" value="${esc(S.delay[s.id]||'')}" placeholder="${esc(s.ph)}">${fillChips('f-delay',s.hints.map(h=>h[0]))}`:''}
+   <p class="q">Ритм <span class="sub">- менять нельзя</span></p>
+   <div class="seg one small" data-group="rhythm">${RHYTHM.map(r=>`<button type="button" class="opt${S.rhythm===r.id?' on':''}" data-v="${r.id}"><b>${r.id} · ${r.t}</b><span>${r.d}</span></button>`).join('')}</div>
+   <div class="field"><label for="f-city">Город</label><input id="f-city" type="text" autocomplete="address-level2" value="${esc(S.city)}" placeholder="Город">${fillChips('f-city',CITIES)}</div>`;},
+  read:()=>{const s=sph(S.sphere);if(s)S.delay[s.id]=val('f-delay');S.city=val('f-city');},
+  pick:(g,v)=>{if(g==='sphere')S.sphere=(S.sphere===v?'':v);if(g==='rhythm')S.rhythm=(S.rhythm===v?'':v);},
+  check:()=>!S.sphere?'Выбери, чему посвятишь 30 дней.':!S.delay[S.sphere]?'Напиши, что откладываешь, или нажми подсказку.':!S.rhythm?'Выбери ритм.':S.city.length<2?'Напиши свой город.':''},
+ /* Экран 4: декларация + цена + одна галочка. Вопросы - галочкой, без отдельного экрана */
+ {k:'word',render:()=>{const s=sph(S.sphere),d=new Date().toLocaleDateString('ru-RU');return `<h2>Моё <em>слово</em></h2>
    <div class="contract">
      <p class="big">Я, ${esc(S.name)}, заявляю: с 30 ноября по 29 декабря я каждый день беру час для себя.</p>
-     <p>Я выбираю прожить этот месяц осознанно - не откладывать, а делать.</p>
-     <div class="row"><span>Моя цель</span><span>${esc(S.b)}</span></div>
+     <div class="row"><span>Сфера</span><span>${esc(s?s.name:'')}${s&&S.delay[s.id]?' · '+esc(S.delay[s.id]):''}</span></div>
      <div class="row"><span>Мой ритм</span><span>${esc(S.rhythm)}${S.city?' · '+esc(S.city):''}</span></div>
-     <div class="row"><span>Цена слова</span><span>50 000 ₸</span></div>
-     <p>Я делаю это, чтобы стать сильнее, спокойнее и счастливее - для себя и для тех, кто рядом.</p>
      <p class="from">${esc(S.name)} · ${d}</p>
-   </div>`;}},
+   </div>
+   <div class="terms"><div class="pay">
+     <div class="pc"><span class="pl">Стоимость участия</span><b>25 000 ₸</b><span class="pd">Не возвращается</span></div>
+     <div class="pc acc"><span class="pl">Цена слова</span><b>50 000 ₸</b><span class="pd">Залог. Вернём, если дойдёшь</span></div>
+     <div class="total"><span>Итого</span><b>75 000 ₸</b></div></div></div>
+   <label class="check"><input type="checkbox" id="f-agree-0" ${S.agree[0]?'checked':''}><span>Согласен(на) с <a href="#" onclick="event.preventDefault();showDoc('offer')">условиями</a> и <a href="#" onclick="event.preventDefault();showDoc('rules')">памяткой</a></span></label>
+   <label class="check"><input type="checkbox" id="f-hasq" ${S.next===NEXT_Q?'checked':''}><span>Есть вопросы - свяжитесь со мной</span></label>`;},
+  read:()=>{S.agree=[document.getElementById('f-agree-0').checked,true];S.next=document.getElementById('f-hasq').checked?NEXT_Q:NEXT_OK;},
+  check:()=>S.next===NEXT_Q||S.agree[0]?'':'Отметь согласие с условиями - без него мы не сможем тебя записать.'},
  {k:'sent',render:()=>`<div class="sent">${S.next===NEXT_Q?'<h1>Записали</h1>':S.paid?'<h1>Спасибо!</h1>':'<h1>Слово<br><em>принято</em></h1>'}
    <p class="lead">${firstName()?esc(firstName())+', а':'А'}нкета у нас. ${S.next===NEXT_Q?'Куратор напишет в WhatsApp в течение суток и ответит на вопросы. Решение - после разговора, вход до 29 ноября, 21:00.':(S.paid?'Куратор проверит поступление оплаты и свяжется с тобой в WhatsApp, чтобы добавить в группу.':'Последний шаг - оплата:')}</p>
    ${S.next===NEXT_Q?'':'<a class="btn pay-k kaspi" href="https://pay.kaspi.kz/pay/aropqjkb" target="_blank" rel="noopener">Оплатить 75 000 ₸ в Kaspi</a>'+(S.paid?'<p class="note">Если оплата не прошла, кнопка выше по-прежнему работает. Сумма - 75 000 ₸.</p>':'<p class="note">Сумму 75 000 ₸ введи сам(а). После оплаты вернись сюда и нажми «Я оплатил(а)».</p><button type="button" class="btn ghost pay-k" data-act="paid">Я оплатил(а)</button>')}
-   ${S.next===NEXT_Q||S.paid?'':`<ol class="next"><li>Оплата - до 29 ноября, 21:00</li><li>С 23 ноября - подготовительная неделя: задания идут, цена слова не сгорает</li><li>Куратор добавит тебя в чат твоего ритма, 27 ноября - в десятку с бадди</li><li>29 ноября - установочная встреча онлайн, ссылку пришлём</li><li>30 ноября - первый день</li></ol>`}
+   ${S.next===NEXT_Q||S.paid?'':`<ol class="next"><li>Оплата - до 29 ноября, 21:00</li><li>23 ноября - подготовка, куратор добавит в чат</li><li>30 ноября - старт</li></ol>`}
    ${SENDER?'':'<p class="note">Тестовый просмотр: в этой версии ответ никуда не отправлен.</p>'}</div>`}
 ];
 const API='https://script.google.com/macros/s/AKfycbwV5CZZ-z2IgfvqsQ5axBqlpbpxgEdy1QLVK2zrlYQr-NRq7q43O2JjDMXpP8vMGys5/exec';
 function apiCall(fn,arg,ok,fail){fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({fn:fn,arg:arg})}).then(r=>r.json()).then(j=>{if(j&&j.ok){if(ok)ok(j);}else if(fail)fail(j);}).catch(e=>{if(fail)fail(e);});}
 const SENDER={_ok:null,_f:null,withSuccessHandler(f){this._ok=f;return this;},withFailureHandler(f){this._f=f;return this;},submit(d){const o=this._ok,f=this._f;this._ok=this._f=null;apiCall('submit',d,j=>{try{fbq('track','Lead',{content_name:d&&d.next||''});}catch(e){}if(o)o(j);},f);},markPaid(p){try{fbq('trackCustom','PaidClaim');}catch(e){}apiCall('markPaid',p);}};
+/* Контакт уходит в таблицу сразу после экрана 2. Полная анкета потом придёт отдельной строкой с тем же телефоном */
+function sendLead(){
+  if(!SENDER||S.leadPhone===S.phone)return;
+  S.leadPhone=S.phone;save();
+  apiCall('submit',{src:SHORT?'1':'',name:S.name,phone:S.phone,insta:'',city:S.city||'',next:'⏳ Только контакт',question:'Оставил(а) контакт, анкету не закончил(а)',offer:'',pd:'Да',sphere:'',a:'',b:'',rhythm:''},
+    ()=>{try{fbq('trackCustom','LeadContact');}catch(e){}},()=>{S.leadPhone='';save();});
+}
 /* Новые поля - в конце строки, чтобы старые колонки таблицы не съехали */
 function payload(){const r={src:SHORT?'1':'',name:S.name,phone:S.phone,insta:S.insta,sphere:(sph(S.sphere)||{}).name||'',a:S.a,b:S.b,why:S.why.concat(S.whyOwn?[S.whyOwn]:[]).join(', '),reward:S.reward,rhythm:S.rhythm,agree:S.agree.every(Boolean)?'Да':'Нет',
   city:S.city,next:S.next===NEXT_Q?'❓ Вопросы':'💳 К оплате',question:S.next===NEXT_Q?S.question:'',offer:S.agree[0]?'Да':'Нет',pd:S.agree[1]?'Да':'Нет',ritual:S.ritual};
@@ -316,15 +295,16 @@ const idx=k=>STEPS.findIndex(x=>x.k===k);
 function render(keep){
   const st=STEPS[S.step];if(!keep&&st.enter)st.enter();
   main.innerHTML=st.render();document.getElementById('err').textContent='';
-  const total=idx('review');
+  const total=idx('word');
   document.getElementById('count').textContent=S.step===0||st.k==='sent'?'':`${Math.min(S.step,total)} / ${total}`;
   document.getElementById('rail').style.width=(Math.min(S.step,total)/total*100)+'%';
   bar.hidden=st.k==='sent';
   back.hidden=S.step===0;
   next.disabled=false;
-  next.textContent=S.step===0?'Записаться':st.k==='review'?'Заявляю':st.k==='next'&&S.next===NEXT_Q?'Отправить':st.k==='price'?'Дать слово':'Дальше';
+  next.textContent=S.step===0?'Записаться':st.k==='word'?'Дать слово':'Дальше';
   if(!keep)window.scrollTo(0,0);
 }
+main.addEventListener('change',()=>{document.getElementById('err').textContent='';});
 main.addEventListener('click',e=>{
   const st=STEPS[S.step],t=e.target.closest('button');if(!t)return;
   if(t.dataset.fill){const f=document.getElementById(t.dataset.fill);f.value=t.dataset.v;f.focus();return;}
@@ -334,20 +314,20 @@ main.addEventListener('click',e=>{
 });
 next.addEventListener('click',()=>{
   const st=STEPS[S.step];
-  if(st.k==='next'){if(st.read)st.read();const m0=st.check();if(m0){document.getElementById('err').textContent=m0;save();return;}}
-  if(st.k==='review'||(st.k==='next'&&S.next===NEXT_Q)){
-    const err=document.getElementById('err'),lbl=st.k==='review'?'Заявляю':'Отправить';
-    if(!SENDER){S.step=idx('sent');render();return;}
-    next.disabled=true;next.textContent='Отправляю...';err.textContent='';
-    SENDER.withSuccessHandler(()=>{S.sent=true;S.step=idx('sent');save();render();})
-      .withFailureHandler(()=>{next.disabled=false;next.textContent=lbl;err.textContent='Не отправилось. Проверь интернет и нажми «Отправить» ещё раз.';})
-      .submit(payload());
-    return;
-  }
   if(st.read)st.read();
   const m=st.check?st.check():'';
   if(m){document.getElementById('err').textContent=m;save();return;}
-  do{S.step++;}while(S.step<STEPS.length-1&&skip(STEPS[S.step].k));save();render();
+  if(st.k==='word'){
+    const err=document.getElementById('err'),lbl='Дать слово';
+    if(!SENDER){S.step=idx('sent');render();return;}
+    next.disabled=true;next.textContent='Отправляю...';err.textContent='';
+    SENDER.withSuccessHandler(()=>{S.sent=true;S.step=idx('sent');save();render();})
+      .withFailureHandler(()=>{next.disabled=false;next.textContent=lbl;err.textContent='Не отправилось. Проверь интернет и нажми ещё раз.';})
+      .submit(payload());
+    return;
+  }
+  if(st.leave)st.leave();
+  S.step++;save();render();
 });
 back.addEventListener('click',()=>{const st=STEPS[S.step];if(st.read)st.read();do{S.step=Math.max(0,S.step-1);}while(S.step>0&&skip(STEPS[S.step].k));save();render();});
 if(!(S.step>=0&&S.step<STEPS.length))S.step=0;
