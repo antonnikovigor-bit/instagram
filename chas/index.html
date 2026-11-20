@@ -265,10 +265,9 @@ const STEPS=[
      <div class="pc"><span class="pl">Стоимость участия</span><b>25 000 ₸</b><span class="pd">Не возвращается</span></div>
      <div class="pc acc"><span class="pl">Цена слова</span><b>50 000 ₸</b><span class="pd">Залог. Вернём, если дойдёшь</span></div>
      <div class="total"><span>Итого</span><b>75 000 ₸</b></div></div></div>
-   <label class="check"><input type="checkbox" id="f-agree-0" ${S.agree[0]?'checked':''}><span>Согласен(на) с <a href="#" onclick="event.preventDefault();showDoc('offer')">условиями</a> и <a href="#" onclick="event.preventDefault();showDoc('rules')">памяткой</a></span></label>
-   <label class="check"><input type="checkbox" id="f-hasq" ${S.next===NEXT_Q?'checked':''}><span>Есть вопросы - свяжитесь со мной</span></label>`;},
-  read:()=>{S.agree=[document.getElementById('f-agree-0').checked,true];S.next=document.getElementById('f-hasq').checked?NEXT_Q:NEXT_OK;},
-  check:()=>S.next===NEXT_Q||S.agree[0]?'':'Отметь согласие с условиями - без него мы не сможем тебя записать.'},
+   <label class="check"><input type="checkbox" id="f-agree-0" ${S.agree[0]?'checked':''}><span>Согласен(на) с <a href="#" onclick="event.preventDefault();showDoc('offer')">условиями</a> и <a href="#" onclick="event.preventDefault();showDoc('rules')">памяткой</a></span></label>`;},
+  read:()=>{S.agree=[document.getElementById('f-agree-0').checked,true];S.next=NEXT_OK;},
+  check:()=>S.agree[0]?'':'Отметь согласие с условиями - без него мы не сможем тебя записать.'},
  {k:'sent',render:()=>`<div class="sent">${S.next===NEXT_Q?'<h1>Записали</h1>':S.paid?'<h1>Спасибо!</h1>':'<h1>Слово<br><em>принято</em></h1>'}
    <p class="lead">${firstName()?esc(firstName())+', а':'А'}нкета у нас. ${S.next===NEXT_Q?'Куратор напишет в WhatsApp в течение суток. Готов(а) сразу - оплати здесь:':(S.paid?'Куратор проверит поступление оплаты и свяжется с тобой в WhatsApp, чтобы добавить в группу.':'Последний шаг - оплата:')}</p>
    ${'<a class="btn pay-k kaspi" href="https://pay.kaspi.kz/pay/aropqjkb" target="_blank" rel="noopener">Оплатить 75 000 ₸ в Kaspi</a>'+(S.paid?'<p class="note">Если оплата не прошла, кнопка выше по-прежнему работает. Сумма - 75 000 ₸.</p>':'<p class="note">Сумму 75 000 ₸ введи сам(а). После оплаты вернись сюда и нажми «Я оплатил(а)».</p><button type="button" class="btn ghost pay-k" data-act="paid">Я оплатил(а)</button>')}
