@@ -278,13 +278,13 @@ const STEPS=[
 ];
 const API='https://script.google.com/macros/s/AKfycbwV5CZZ-z2IgfvqsQ5axBqlpbpxgEdy1QLVK2zrlYQr-NRq7q43O2JjDMXpP8vMGys5/exec';
 function apiCall(fn,arg,ok,fail){fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({fn:fn,arg:arg})}).then(r=>r.json()).then(j=>{if(j&&j.ok){if(ok)ok(j);}else if(fail)fail(j);}).catch(e=>{if(fail)fail(e);});}
-const SENDER={_ok:null,_f:null,withSuccessHandler(f){this._ok=f;return this;},withFailureHandler(f){this._f=f;return this;},submit(d){const o=this._ok,f=this._f;this._ok=this._f=null;apiCall('submit',d,j=>{try{fbq('track','Lead',{content_name:d&&d.next||''});}catch(e){}if(o)o(j);},f);},markPaid(p){try{fbq('trackCustom','PaidClaim');}catch(e){}apiCall('markPaid',p);}};
+const SENDER={_ok:null,_f:null,withSuccessHandler(f){this._ok=f;return this;},withFailureHandler(f){this._f=f;return this;},submit(d){const o=this._ok,f=this._f;this._ok=this._f=null;apiCall('submit',d,j=>{try{fbq('track','CompleteRegistration',{content_name:d&&d.next||''});}catch(e){}if(o)o(j);},f);},markPaid(p){try{fbq('trackCustom','PaidClaim');}catch(e){}apiCall('markPaid',p);}};
 /* Контакт уходит в таблицу сразу после экрана 2. Полная анкета потом придёт отдельной строкой с тем же телефоном */
 function sendLead(){
   if(!SENDER||S.leadPhone===S.phone)return;
   S.leadPhone=S.phone;save();
   apiCall('submit',{src:SHORT?'1':'',name:S.name,phone:S.phone,insta:'',city:S.city||'',next:'⏳ Только контакт',question:'Оставил(а) контакт, анкету не закончил(а)',offer:'',pd:'Да',sphere:'',a:'',b:'',rhythm:''},
-    ()=>{try{fbq('trackCustom','LeadContact');}catch(e){}},()=>{S.leadPhone='';save();});
+    ()=>{try{fbq('track','Lead',{content_name:'contact'});}catch(e){}},()=>{S.leadPhone='';save();});
 }
 /* Новые поля - в конце строки, чтобы старые колонки таблицы не съехали */
 function payload(){const r={src:SHORT?'1':'',name:S.name,phone:S.phone,insta:S.insta,sphere:(sph(S.sphere)||{}).name||'',a:S.a,b:S.b,why:S.why.concat(S.whyOwn?[S.whyOwn]:[]).join(', '),reward:S.reward,rhythm:S.rhythm,agree:S.agree.every(Boolean)?'Да':'Нет',
