@@ -1,0 +1,47 @@
+name: Пробный рилс
+
+# Пуш ветки reel/<название> с queue/video.mp4 и queue/caption.txt -> публикация пробного рилса.
+# Ветка без видео (например reel/check) -> только проверка права на публикацию.
+# После запуска ветка удаляется, чтобы видео не висело в публичном репозитории.
+on:
+  push:
+    branches: ['reel/**']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-trial
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 20
+
+      - name: Забрать продлённый токен из ветки data
+        run: |
+          REMOTE="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          git clone -q --depth 1 --branch data --single-branch "$REMOTE" data || mkdir -p data
+
+      - name: Опубликовать
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          GRADUATION: MANUAL
+        run: |
+          if [ -f queue/video.mp4 ]; then CHECK=false; else CHECK=true; fi
+          CHECK=$CHECK node scripts/publish-trial.mjs
+
+      - name: Удалить ветку с видео
+        if: always()
+        run: |
+          REMOTE="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          git push -q "$REMOTE" --delete "${GITHUB_REF_NAME}" || true
