@@ -174,7 +174,7 @@ let S=BLANK();
 try{const d=localStorage.getItem('anketa-chas-v5');if(d)S=Object.assign(S,JSON.parse(d));}catch(e){}
 let SHORT=false;
 try{const h=JSON.parse(localStorage.getItem('handoff-chas')||'null');if(h&&Date.now()-h.t<14*864e5&&!S.sent){SHORT=true;if(!S.name)S.name=h.name||'';if(!S.phone)S.phone=h.phone||'';if(!S.city)S.city=h.city||'';if(h.sphere&&sph(h.sphere)&&!S.sphere&&h.main){S.sphere=h.sphere;S.delay[h.sphere]=h.main;S.ago[h.sphere]=h.ago;}if(h.picks)Object.entries(h.picks).forEach(([id,w])=>{if(w&&sph(id)&&!S.delay[id]){S.delay[id]=w;S.ago[id]=S.ago[id]||'-';}});if(!S.sphere)SHORT=false;}}catch(e){}
-/* Метка источника: ?src=ad|dm|bio|fenix|alena. Первая метка живёт 30 дней, пока не придёт новая */
+/* Метка источника: ?src=ad|dm|bio|fenix|alena. Реклама идёт без src - её узнаём по fbclid. Метка живёт 30 дней, пока не придёт новая */
 const SRC_MAP={ad:'Реклама',dm:'Директ «хочу»',bio:'Шапка профиля',fenix:'Фениксы',alena:'Алёна'};
 let SRC='';
 try{const q=new URLSearchParams(location.search);let s=(q.get('src')||'').toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,20);
@@ -182,8 +182,8 @@ try{const q=new URLSearchParams(location.search);let s=(q.get('src')||'').toLowe
   if(s){SRC=s;localStorage.setItem('src-chas',JSON.stringify({s:s,t:Date.now()}));}
   else{const o=JSON.parse(localStorage.getItem('src-chas')||'null');if(o&&o.s&&Date.now()-o.t<30*864e5)SRC=o.s;else if(q.get('fbclid'))SRC='meta';}
 }catch(e){}
-const SRC_LIVE=false; /* true - после правки Apps Script: пишет src в «Источник» как есть */
-const srcOut=()=>{if(!SRC_LIVE)return SHORT?'1':'';const l=SRC?(SRC_MAP[SRC]||(SRC==='meta'?'Instagram/Meta без метки':SRC)):'';return l?(SHORT?l+' + опрос':l):(SHORT?'1':'');};
+const SRC_LIVE=true; /* true - после правки Apps Script: пишет src в «Источник» как есть */
+const srcOut=()=>{if(!SRC_LIVE)return SHORT?'1':'';const l=SRC?(SRC_MAP[SRC]||(SRC==='meta'?'Реклама':SRC)):'';return l?(SHORT?l+' + опрос':l):(SHORT?'1':'');};
 const skip=k=>false;
 const save=()=>{try{localStorage.setItem('anketa-chas-v5',JSON.stringify(S));}catch(e){}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
