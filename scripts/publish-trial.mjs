@@ -93,6 +93,7 @@ async function main() {
   const c = await call('POST', `/${uid}/media`, {
     media_type: 'REELS',
     video_url: VIDEO_URL,
+    ...(process.env.COVER_URL && existsSync('queue/cover.jpg') ? { cover_url: process.env.COVER_URL } : {}),
     caption,
     trial_params: JSON.stringify({ graduation_strategy: GRADUATION }),
   });
