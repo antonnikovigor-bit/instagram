@@ -43,12 +43,11 @@ const ALLOWED = new Set(['graph.instagram.com', 'rupload.facebook.com']);
 async function call(method, pathname, params = {}, opts = {}) {
   const url = new URL(pathname.startsWith('http') ? pathname : API + pathname);
   if (url.protocol !== 'https:' || !ALLOWED.has(url.hostname)) throw new Error(`Недоверенный адрес: ${url.hostname}`);
-  let body;
-  if (method === 'GET') {
+  const body = undefined;
+  // Параметры - в адресе запроса (так их ждёт Instagram API, в том числе upload_type=resumable)
+  if (!opts.body) {
     for (const [k, v] of Object.entries(params)) url.searchParams.set(k, String(v));
     url.searchParams.set('access_token', token);
-  } else if (!opts.body) {
-    body = new URLSearchParams({ ...params, access_token: token });
   }
   const res = await fetch(url, { method, body: opts.body ?? body, headers: opts.headers, redirect: 'error' });
   const json = await res.json().catch(() => ({}));
