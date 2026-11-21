@@ -36,6 +36,7 @@ jobs:
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           GRADUATION: MANUAL
+          VIDEO_URL: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/queue/video.mp4
         run: |
           if [ -f queue/video.mp4 ]; then CHECK=false; else CHECK=true; fi
           CHECK=$CHECK node scripts/publish-trial.mjs

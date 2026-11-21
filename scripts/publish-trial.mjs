@@ -86,24 +86,17 @@ async function main() {
 
   const size = (await stat(VIDEO)).size;
   const caption = existsSync(CAPTION) ? (await readFile(CAPTION, 'utf8')).trim() : '';
-  console.log(`Видео ${VIDEO}: ${(size / 1048576).toFixed(1)} МБ`);
 
-  // 1. Контейнер пробного рилса
+  // 1-2. Контейнер пробного рилса. Instagram сам скачивает видео по публичной ссылке (VIDEO_URL)
+  const VIDEO_URL = process.env.VIDEO_URL;
+  if (!VIDEO_URL) throw new Error('Нет VIDEO_URL');
   const c = await call('POST', `/${uid}/media`, {
     media_type: 'REELS',
-    upload_type: 'resumable',
+    video_url: VIDEO_URL,
     caption,
     trial_params: JSON.stringify({ graduation_strategy: GRADUATION }),
   });
-  console.log(`Контейнер ${c.id}`);
-
-  // 2. Загрузка файла
-  const video = await readFile(VIDEO);
-  await call('POST', c.uri || `https://rupload.facebook.com/ig-api-upload/v23.0/${c.id}`, {}, {
-    body: video,
-    headers: { Authorization: `OAuth ${token}`, offset: '0', file_size: String(size) },
-  });
-  console.log('Файл загружен, Instagram обрабатывает видео');
+  console.log(`Контейнер ${c.id}, видео ${(size / 1048576).toFixed(1)} МБ, Instagram его скачивает`);
 
   // 3. Ждём обработку (до 15 минут)
   let status;
