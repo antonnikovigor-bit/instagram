@@ -533,6 +533,11 @@ details.all section { padding-top: 48px; }
 .nums dt { font: 700 30px/1 Oswald, sans-serif; color: var(--ch2); }
 .nums dd { margin: 6px 0 0; color: var(--text-2); font-size: 13px; line-height: 1.35; }
 .story { --ch2: #ffb15c; }
+.why-3 { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 860px; }
+.why-3 li { padding: 18px; border-radius: 16px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+.why-3 b { display: block; font: 700 24px/1.1 Oswald, Manrope, sans-serif; text-transform: uppercase; color: #ffb15c; margin-bottom: 6px; }
+.why-3 span { color: rgba(255,255,255,.76); font-size: 15px; }
+@media (max-width: 720px) { .why-3 { grid-template-columns: 1fr; } }
 .nums dt small { display: block; font: 600 13px/1.2 Manrope, sans-serif; text-transform: uppercase; letter-spacing: .08em; color: var(--ch2); margin-bottom: 4px; }
 .steps .goals li:has(a) { padding: 0; }
 .goals a { display: block; padding: 7px 12px; color: #fff; text-decoration: none; }
@@ -637,7 +642,7 @@ details.all section { padding-top: 48px; }
 
 <section class="why" aria-labelledby="whyH">
   <div class="wrap">
-    <span class="eb2">За последние 3 месяца я слышал это десятки раз</span>
+    <span class="eb2">За последние 3 месяца я много раз слышал: «начну с января»</span>
     <h2 id="whyH">Ну что, опять <em>с января?</em></h2>
     <div class="pf">
       <div class="pf-h"><span>План</span><span>Факт</span></div>
@@ -646,7 +651,10 @@ details.all section { padding-top: 48px; }
       <div><b>«Прочитаю книгу»</b><span>Дошёл до 12-й страницы. Закладка лежит там с марта.</span></div>
       <div><b>«Возьму гитару»</b><span>Купил. Теперь она красиво стоит в углу.</span></div>
     </div>
-    <p class="why-k">«С Нового года начну». Сначала работа. Потом дела. Потом «я устал». <b>И ты опять переносишь себя на январь.</b> Поэтому старт - сейчас, а не 1 января.</p>
+    <p class="why-k">Кто-то говорил это за 3 месяца до Нового года, кто-то за 2. А кто-то уже решил, что в этом году ничего не изменить. <b>Поэтому я запускаю челлендж в последний месяц года.</b> Когда все уже перестали верить, что получится.</p>
+    <p class="why-k">Цели, которые ты ставил в начале года, никуда не делись. Может, ты их забыл. Может, прошёл часть пути. А может, так и не начал. Декабрь - чтобы:</p>
+    <ul class="why-3"><li><b>Добить</b><span>то, что начал и бросил</span></li><li><b>Начать</b><span>то, что откладывал весь год</span></li><li><b>Заложить фундамент</b><span>для следующего года</span></li></ul>
+    <p class="why-k"><b>И зайти в новый год собранным: с победой 2026-го и боевым настроем.</b></p>
   </div>
 </section>
 
