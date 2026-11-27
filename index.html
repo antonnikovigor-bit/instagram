@@ -502,6 +502,20 @@ details.all section { padding-top: 48px; }
 .live-strip .lv-h { grid-column: 1 / -1; background: none; border: 0; padding: 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ch2); display: flex; align-items: center; gap: 8px; }
 .live-strip .lv-h::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #ff4d3d; animation: pulse 2s infinite; }
 @media (max-width: 720px) { .pr2, .out2 { grid-template-columns: 1fr; } .live-strip b { font-size: 24px; } }
+
+/* Места, условия */
+.seats-pill { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #120b07; background: var(--ch2); border-radius: 999px; padding: 4px 10px; }
+.chal-cta .seats { color: var(--ch2); }
+.rules { padding: 88px 0 0; }
+.rules .eb2 { color: var(--muted); }
+.rules h2 { font: 700 clamp(40px, 6.4vw, 80px)/.95 Oswald, Manrope, sans-serif; text-transform: uppercase; margin: 0 0 30px; }
+.rules-row { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 32px; align-items: center; }
+.leaf { display: block; border-radius: 18px; overflow: hidden; box-shadow: 0 20px 50px -20px rgba(0,0,0,.35); border: 1px solid var(--line); transition: transform .15s; }
+.leaf:hover { transform: translateY(-3px); }
+.leaf img { display: block; width: 100%; height: auto; }
+.rules-t p { color: var(--text-2); font-size: 17px; line-height: 1.55; max-width: 520px; margin: 0 0 20px; }
+.rules .btn { border-radius: 999px; padding: 14px 20px; }
+@media (max-width: 720px) { .rules-row { grid-template-columns: 1fr; } .leaf { max-width: 280px; } }
 </style>
 </head>
 <body>
@@ -530,13 +544,13 @@ details.all section { padding-top: 48px; }
         <span class="n num" id="morphN">10 000</span>
         <span class="cap" id="morphCap">человек были рядом,<br>пока я шёл к цели</span>
       </div>
-      <p class="lead">10 000 человек были рядом, пока я шёл к цели. <b>Теперь я прошу у каждого из вас 1 час в день.</b> Начни то, что откладывал весь год. Пока он ещё идёт.</p>
+      <p class="lead">10 000 человек были рядом, пока я шёл к цели. <b>Теперь я прошу у каждого из вас 1 час в день.</b> До конца года - месяц. Ещё успеешь начать то, что откладывал весь год.</p>
       <div class="h-cta">
-        <p class="h-close" id="heroClose">Набор закрывается <b>29 ноября в 21:00</b> <span class="h-cd num" id="heroCd"></span></p>
+        <p class="h-close" id="heroClose">Набор закрывается <b>29 ноября в 21:00</b> <span class="h-cd num" id="heroCd"></span> <span class="seats-pill">осталось 10 мест</span></p>
         <div class="live-strip" id="liveStrip" hidden></div>
         <div class="h-btns">
           <a class="go js-chal-btn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
-          <a class="more" href="#story">С чего всё началось ↓</a>
+          <a class="more" href="#story">Как всё началось ↓</a>
         </div>
       </div>
     </div>
@@ -545,8 +559,8 @@ details.all section { padding-top: 48px; }
 
 <section class="story" id="story" aria-labelledby="storyH">
   <div class="wrap">
-    <span class="eb2">С чего всё началось</span>
-    <h2 id="storyH">Мой путь начался <em>с раннего подъёма</em></h2>
+    <span class="eb2">Путь моего блога</span>
+    <h2 id="storyH">Мой блог начался <em>с раннего подъёма</em></h2>
     <div class="story-grid">
       <ol class="steps">
         <li><span class="st-n">01</span><div><b>66 дней ранних подъёмов</b><p>Челлендж «Системный путь». Утренние часы я отдавал себе: целям, желаниям, тому, что всегда откладывал.</p></div></li>
@@ -555,8 +569,8 @@ details.all section { padding-top: 48px; }
         <li class="st-now"><span class="st-n">04</span><div><b>Отдаю вам инструмент</b><p>Тот самый час для себя, с которого всё началось. Теперь не только для своего круга, а для всех, кто готов.</p></div></li>
       </ol>
       <div class="reel-card">
-        <div class="reel-embed" id="storyReel" data-reel=""></div>
-        <p class="reel-cap">Ролик «Путь к 10 000 подписчиков»: почему я шёл к этой цели и откуда всё началось.</p>
+        <div class="reel-embed" id="storyReel" data-reel="Dd_cMvpNhWu"></div>
+        <p class="reel-cap">Ролик, с которого начался путь к 10 000: «200 дней подъёма в 5 утра. IRONMAN. OCEANMAN… Не всегда быстро. Не всегда легко. <b>Но системно.</b>»</p>
       </div>
     </div>
   </div>
@@ -607,7 +621,7 @@ details.all section { padding-top: 48px; }
   <div class="wrap">
     <span class="eb">Поток 1 · 30 ноября - 29 декабря</span>
     <h2 id="chalH">30 дней.<em>Час для себя</em></h2>
-    <p class="lead">Каждое утро один час - <b>на то, что ты давно откладываешь.</b> Не «когда-нибудь». Не с января. С 30 ноября.</p>
+    <p class="lead">30 дней - <b>по часу на одну твою цель.</b> Не «когда-нибудь». Не с января. С 30 ноября.</p>
     <div class="cd" id="chalStatus" hidden></div>
     <div class="days" id="chalDays" aria-hidden="true"></div>
     <div class="days-l"><span>Старт 30 ноября</span><span>Финиш 29 декабря</span></div>
@@ -620,31 +634,48 @@ details.all section { padding-top: 48px; }
     <div class="price-box" id="price">
       <h3 class="sub-h">У всего есть цена. <em>У слова тоже.</em></h3>
       <div class="pr2">
-        <div><small>Участие</small><b>25 000 ₸</b><span>меньше 1 000 ₸ в день за час для себя</span></div>
-        <div class="acc"><small>Цена слова</small><b>50 000 ₸</b><span>вернётся, когда сдержишь слово</span></div>
+        <div><small>Участие</small><b>25 000 ₸</b><span>Ты платишь за то, чтобы 30 дней подряд посвящать час себе.</span></div>
+        <div class="acc"><small>Цена слова</small><b>50 000 ₸</b><span>Твой залог. Ставишь на старте - полностью возвращается, когда доходишь до конца.</span></div>
       </div>
-      <p class="pr-t">Цена слова - это твоё обязательство перед собой. Ты решил отдавать час в день своей цели и подкрепляешь это решение залогом. Мы символично выбрали сумму вдвое больше стоимости челленджа.</p>
+      <p class="pr-t">Цена слова - это твоё обязательство перед собой. Ты решил отдавать час в день своей цели, и залог помогает дойти до конца. Мы символично взяли сумму вдвое больше стоимости челленджа. Дошёл до конца - это 30 дней из 30.</p>
       <div class="out2">
-        <div class="ok"><small>Сдержал слово</small><b>25 000 ₸</b><span>Цена слова вернётся. Весь месяц обойдётся меньше 1 000 ₸ в день, а пользу заберёшь кратно больше.</span></div>
-        <div class="no"><small>Не сдержал</small><b>75 000 ₸</b><span>Цена слова сгорает. Твоё «потом» обходится втрое дороже.</span></div>
+        <div class="ok"><small>Сдержал слово</small><b>25 000 ₸</b><span>Цена слова возвращается полностью. Месяц часа для себя стоил тебе только участие.</span></div>
+        <div class="no"><small>Не сдержал</small><b>75 000 ₸</b><span>Цена слова сгорает. Тот же месяц для себя обошёлся втрое дороже.</span></div>
       </div>
     </div>
     <div class="chal-cta">
       <a class="go js-chal-btn" id="chalBtn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
-      <small id="chalNote">Анкета на 3 минуты. Оплата - в конце анкеты.</small>
+      <small id="chalNote"><b class="seats" data-seats="10">Осталось 10 мест.</b> Анкета на 3 минуты.</small>
     </div>
   </div>
 </section>
 
 <section class="get" aria-labelledby="getH">
   <div class="wrap">
-    <span class="eb2">Что будет за 30 дней</span>
-    <h2 id="getH">30 часов <em>на себя</em></h2>
+    <span class="eb2">Что внутри</span>
+    <h2 id="getH">Утро, которое <em>твоё</em></h2>
     <div class="get-grid">
-      <div><b>30</b><span>часов на одну твою цель. Не «когда-нибудь», а каждый день.</span></div>
-      <div><b>1</b><span>ритм подъёма, который ты выбрал сам: 5:00, 6:00 или своё утро.</span></div>
-      <div><b>Круг</b><span>единомышленников, которые встают вместе с тобой и тоже не ждут января.</span></div>
-      <div><b>Слово</b><span>сдержанное перед собой. И цена слова, которая вернётся к тебе.</span></div>
+      <div><b>Чат</b><span>Общий чат единомышленников. Вы встаёте вместе и тоже не ждёте января.</span></div>
+      <div><b>Задание</b><span>Каждое утро - лёгкое, короткое, интерактивное. Помогает проснуться и подтвердить, что это утро ты отдал себе.</span></div>
+      <div><b>Ритм</b><span>5:00, 6:00 или своё утро. Выбираешь один раз и держишь 30 дней.</span></div>
+      <div><b>Час</b><span>На одну твою цель: спорт, книга, язык, проект - то, что ты откладывал весь год.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="rules" id="rules" aria-labelledby="rulesH">
+  <div class="wrap">
+    <span class="eb2">Условия</span>
+    <h2 id="rulesH">Всё на одном листе</h2>
+    <div class="rules-row">
+      <a class="leaf" href="chas/usloviya.jpg" target="_blank" rel="noopener"><img src="chas/usloviya-sm.jpg" width="540" height="960" alt="Листовка: условия челленджа «30 дней. Час для себя»" loading="lazy"></a>
+      <div class="rules-t">
+        <p>Ритмы и дедлайны, что происходит каждое утро, когда сгорает цена слова, сроки и возврат - всё в листовке. Цена слова возвращается до 7 января.</p>
+        <div class="h-btns">
+          <a class="btn" href="chas/usloviya.jpg" target="_blank" rel="noopener">Открыть листовку</a>
+          <a class="btn" href="chas/usloviya.pdf" download>Скачать PDF</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -654,11 +685,10 @@ details.all section { padding-top: 48px; }
     <span class="eb2">Вопросы</span>
     <h2 id="faqH">Коротко о главном</h2>
     <details><summary>Когда старт и сколько длится?</summary><p>30 дней: с 30 ноября по 29 декабря. Набор закрывается 29 ноября в 21:00 по Алматы, после старта новых участников не берём.</p></details>
-    <details><summary>Сколько стоит?</summary><p>Участие - 25 000 ₸. Плюс цена слова - 50 000 ₸: это залог за твоё обещание. Дошёл до конца - цена слова возвращается до 7 января, и месяц стоит тебе 25 000 ₸.</p></details>
+    <details><summary>Сколько стоит?</summary><p>Участие - 25 000 ₸. Плюс цена слова - 50 000 ₸: это залог за твоё обещание. Дошёл до конца, 30 из 30 - цена слова возвращается полностью, до 7 января.</p></details>
     <details><summary>Я не жаворонок. Мне подойдёт?</summary><p>Да. Кроме 5:00 и 6:00 есть ритм MY AM: встаёшь в своё время, а час для себя проводишь, когда удобно, и отчитываешься до 21:00.</p></details>
     <details><summary>Чем заниматься этот час?</summary><p>Своей целью: спорт, чтение, язык, проект, музыка - то, что ты откладывал весь год. Цель ты формулируешь в анкете.</p></details>
-    <details><summary>А если пропущу день?</summary><p>Цена слова сгорает. Вернуться можно: внести её заново до 21:00 того же или следующего дня и идти дальше.</p></details>
-  </div>
+      </div>
 </section>
 
 <div class="dawn-end">
