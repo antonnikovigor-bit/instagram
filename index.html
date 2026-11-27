@@ -566,13 +566,14 @@ details.all section { padding-top: 48px; }
 .proofs span { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 8px; font: 700 clamp(12px, 3.4vw, 15px)/1 Oswald, sans-serif; text-transform: uppercase; white-space: nowrap; background: linear-gradient(transparent, rgba(0,0,0,.75)); }
 .proofs span::after { content: " ↗"; color: #ffb15c; }
 .dawn-hero .top .live { display: none; }
-.dawn-hero h1 .hh-n { display: block; font-size: 1.9em; line-height: .9; }
-.dawn-hero h1 .hh-w { display: block; }
-.dawn-hero h1 .hh-e small { display: block; font-size: .5em; letter-spacing: .04em; color: #fff; opacity: .85; margin-bottom: 6px; }
+.dawn-hero h1 .hh-slot { position: relative; display: block; min-height: 2.25em; }
+.dawn-hero h1 .hh-item { position: absolute; left: 0; right: 0; bottom: 0; transition: opacity .45s ease, transform .45s ease; }
+.dawn-hero h1 .hh-item b { display: block; font-size: 1.35em; line-height: .9; font-weight: inherit; }
+.dawn-hero h1 .hh-item.pre { opacity: 0; transform: translateY(18px); }
+.dawn-hero h1 .hh-item.out { opacity: 0; transform: translateY(-18px); }
+.dawn-hero h1 .hh-e small { display: block; font-size: .5em; line-height: 1.15; letter-spacing: .04em; color: #fff; opacity: .85; margin-bottom: 6px; }
 .dawn-hero h1 .hh-e span { display: block; font-size: .85em; }
-.dawn-hero h1 .hh-e { margin-top: 14px; transition: opacity .9s ease, transform .9s ease; }
-#heroH.anim .hh-w, #heroH.anim .hh-e { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
-#heroH.anim.w-in .hh-w, #heroH.anim.e-in .hh-e { opacity: 1; transform: none; }
+.dawn-hero h1 .hh-e { margin-top: 14px; }
 .dawn-hero .hero-one { margin: 0 0 30px; }
 .lead-lines span { display: block; }
 .lead-lines span + span { margin-top: 10px; }
@@ -617,7 +618,7 @@ details.all section { padding-top: 48px; }
     </header>
     <div class="hero">
       <span class="h-eb">30 дней / час для себя</span>
-      <h1 id="heroH"><span class="hh-n num" id="heroNum">10&nbsp;000</span> <span class="hh-w">подписчиков</span> <em class="hh-e"><small>появились благодаря</small><span>1&nbsp;часу для себя</span></em></h1>
+      <h1 id="heroH"><span class="hh-slot" id="heroSlot"><span class="hh-item"><b class="num" id="heroNum">10&nbsp;000</b> подписчиков</span></span> <em class="hh-e"><small>появилось в моей жизни благодаря</small><span>1&nbsp;часу для себя</span></em></h1>
       <p class="lead hero-one">Всё началось с <b>66 дней подъёмов в 5&nbsp;утра.</b></p>
       <p class="slogan">Час для себя. Сначала себе, потом всем. <em>Начни с себя, и мир вокруг начнёт меняться.</em></p>
       <div class="h-cta">
@@ -784,7 +785,7 @@ details.all section { padding-top: 48px; }
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script src="app.js?v=c4d2a7f1"></script>
-<script src="challenge.js?v=13"></script>
+<script src="challenge.js?v=14"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>

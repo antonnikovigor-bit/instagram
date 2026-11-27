@@ -147,19 +147,32 @@
   setInterval(() => { i = (i + 1) % vids.length; show(i); }, 6500);
 })();
 
-// Заголовок: счёт до 10 000 -> «подписчиков» -> «появились благодаря 1 часу для себя».
+// Заголовок: 10 000 подписчиков (счёт) -> достижения сменяют друг друга -> «появилось в моей жизни благодаря 1 часу для себя».
 (() => {
-  const h = document.getElementById('heroH'), n = document.getElementById('heroNum');
-  if (!h || !n) return;
+  const slot = document.getElementById('heroSlot'), n = document.getElementById('heroNum');
+  if (!slot || !n) return;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const first = slot.firstElementChild.outerHTML;
+  const ITEMS = ['IRONMAN', 'OCEANMAN', 'Проплыть Босфор', 'Встать на лыжи', 'Читать каждый день', 'Медитация', 'Найти хобби', 'Прыжок с\u00a0парашютом', 'Научиться делать сальто', 'И многое другое'];
   const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
-  h.classList.add('anim'); n.textContent = '0';
-  const T = 1600, t0 = performance.now();
+  let cur = slot.firstElementChild, i = -1;
+  const swap = html => {
+    const el = document.createElement('span'); el.className = 'hh-item pre'; el.innerHTML = html;
+    slot.appendChild(el); el.getBoundingClientRect();
+    el.classList.remove('pre'); cur.classList.add('out');
+    const old = cur; setTimeout(() => old.remove(), 500); cur = el;
+  };
+  const next = () => {
+    i = (i + 1) % (ITEMS.length + 1);
+    if (i === ITEMS.length) { swap(first); setTimeout(next, 3200); return; }
+    swap(ITEMS[i]); setTimeout(next, 1700);
+  };
+  n.textContent = '0';
+  const T = 1500, t0 = performance.now();
   const step = t => {
     const k = Math.min(1, (t - t0) / T), e = 1 - Math.pow(1 - k, 3);
     n.textContent = fmt(Math.round(10000 * e / 10) * 10);
-    if (k < 1) requestAnimationFrame(step);
-    else { n.textContent = fmt(10000); h.classList.add('w-in'); setTimeout(() => h.classList.add('e-in'), 600); }
+    if (k < 1) requestAnimationFrame(step); else { n.textContent = fmt(10000); setTimeout(next, 1800); }
   };
   requestAnimationFrame(step);
 })();
