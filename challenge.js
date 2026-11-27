@@ -146,3 +146,20 @@
   show(0);
   setInterval(() => { i = (i + 1) % vids.length; show(i); }, 6500);
 })();
+
+// Заголовок: счёт до 10 000 -> «подписчиков» -> «появились благодаря 1 часу для себя».
+(() => {
+  const h = document.getElementById('heroH'), n = document.getElementById('heroNum');
+  if (!h || !n) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
+  h.classList.add('anim'); n.textContent = '0';
+  const T = 1600, t0 = performance.now();
+  const step = t => {
+    const k = Math.min(1, (t - t0) / T), e = 1 - Math.pow(1 - k, 3);
+    n.textContent = fmt(Math.round(10000 * e / 10) * 10);
+    if (k < 1) requestAnimationFrame(step);
+    else { n.textContent = fmt(10000); h.classList.add('w-in'); setTimeout(() => h.classList.add('e-in'), 600); }
+  };
+  requestAnimationFrame(step);
+})();
