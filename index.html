@@ -566,13 +566,13 @@ details.all section { padding-top: 48px; }
 .proofs span { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 8px; font: 700 clamp(12px, 3.4vw, 15px)/1 Oswald, sans-serif; text-transform: uppercase; white-space: nowrap; background: linear-gradient(transparent, rgba(0,0,0,.75)); }
 .proofs span::after { content: " ↗"; color: #ffb15c; }
 .dawn-hero .top .live { display: none; }
-.dawn-hero h1 .hh-slot { position: relative; display: block; min-height: 2.25em; }
+.dawn-hero h1 .hh-slot { position: relative; display: block; font-size: min(7.2vw, 48px); height: 1em; white-space: nowrap; }
 .dawn-hero h1 .hh-item { position: absolute; left: 0; right: 0; bottom: 0; transition: opacity .45s ease, transform .45s ease; }
-.dawn-hero h1 .hh-item b { display: block; font-size: 1.35em; line-height: .9; font-weight: inherit; }
+.dawn-hero h1 .hh-item b { font-weight: inherit; }
 .dawn-hero h1 .hh-item.pre { opacity: 0; transform: translateY(18px); }
 .dawn-hero h1 .hh-item.out { opacity: 0; transform: translateY(-18px); }
-.dawn-hero h1 .hh-e small { display: block; font-size: .5em; line-height: 1.15; letter-spacing: .04em; color: #fff; opacity: .85; margin-bottom: 6px; }
-.dawn-hero h1 .hh-e span { display: block; font-size: .85em; }
+.dawn-hero h1 .hh-e small { display: block; font-size: min(4.2vw, 24px); line-height: 1.15; letter-spacing: .04em; color: #fff; opacity: .85; margin-bottom: 6px; }
+.dawn-hero h1 .hh-e span { display: block; font-size: min(7.2vw, 48px); line-height: 1; }
 .dawn-hero h1 .hh-e { margin-top: 14px; }
 .dawn-hero .hero-one { margin: 0 0 30px; }
 .lead-lines span { display: block; }
@@ -785,7 +785,7 @@ details.all section { padding-top: 48px; }
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script src="app.js?v=c4d2a7f1"></script>
-<script src="challenge.js?v=14"></script>
+<script src="challenge.js?v=15"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>

@@ -153,7 +153,7 @@
   if (!slot || !n) return;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const first = slot.firstElementChild.outerHTML;
-  const ITEMS = ['IRONMAN', 'OCEANMAN', 'Проплыть Босфор', 'Встать на лыжи', 'Читать каждый день', 'Медитация', 'Найти хобби', 'Прыжок с\u00a0парашютом', 'Научиться делать сальто', 'И многое другое'];
+  const ITEMS = ['Пройти IRONMAN', 'Проплыть OCEANMAN', 'Переплыть Босфор', 'Полюбить горы', 'Читать каждый день', 'Медитировать', 'Прыгнуть с парашютом', 'Научиться делать сальто', 'Обрести хобби'];
   const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   let cur = slot.firstElementChild, i = -1;
   const swap = html => {
