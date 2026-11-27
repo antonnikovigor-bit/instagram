@@ -152,7 +152,7 @@
   const slot = document.getElementById('heroSlot');
   if (!slot) return;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const ITEMS = ['Пройти IRON<span class="im">M</span>AN', 'Проплыть OCEANMAN', 'Переплыть Босфор', 'Полюбить горы', 'Читать каждый день', 'Медитировать', 'Прыгнуть с парашютом', 'Научиться делать сальто', 'Обрести хобби', null];
+  const ITEMS = ['Пройти IRON<span class="im">M</span>AN <i class="hh-em">🏅</i>', 'Проплыть OCEANMAN <i class="hh-em">🦈</i>', 'Переплыть Босфор <i class="hh-em">🌊</i>', 'Полюбить горы <i class="hh-em">🏔️</i>', 'Читать каждый день <i class="hh-em">📖</i>', 'Медитировать <i class="hh-em">🧘</i>', 'Прыгнуть с парашютом <i class="hh-em">🪂</i>', 'Научиться делать сальто <i class="hh-em">🤸</i>', 'Обрести хобби <i class="hh-em">🎨</i>', null];
   const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   let cur = slot.firstElementChild, i = 0;
   const swap = html => {
@@ -167,7 +167,7 @@
     requestAnimationFrame(step); };
   const next = () => {
     i = (i + 1) % ITEMS.length;
-    if (ITEMS[i] === null) { const el = swap('<b class="num">0</b> подписчиков'); roll(el.querySelector('b')); setTimeout(next, 4000); return; }
+    if (ITEMS[i] === null) { const el = swap('<b class="num">0</b> подписчиков <i class="hh-em">📈</i>'); roll(el.querySelector('b')); setTimeout(next, 4000); return; }
     swap(ITEMS[i]); setTimeout(next, 1700);
   };
   setTimeout(next, 1700);
