@@ -265,6 +265,40 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
   .rn::before { content: attr(data-l); display: block; font-size: 11px; font-weight: 500; color: var(--muted); margin-bottom: 3px; white-space: nowrap; }
   .rn small, .rx { display: none; }
 }
+
+/* блок челленджа «30 дней. Час для себя» */
+.chal-wrap { padding: 56px 0 8px; }
+.chal { --ch: #ff6a3d; --ch-wash: color-mix(in srgb, var(--ch) 12%, transparent); padding: 28px; position: relative; overflow: hidden; border-color: color-mix(in srgb, var(--ch) 35%, var(--line)); }
+.chal::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--ch); }
+.chal .eb { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ch); }
+.chal h2 { font-size: clamp(30px, 5vw, 44px); line-height: 1.05; letter-spacing: -.02em; margin: 10px 0 12px; }
+.chal h2 em { font-style: normal; color: var(--ch); }
+.chal .lead { color: var(--text-2); font-size: 17px; max-width: 620px; margin: 0 0 22px; }
+.chal-status { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin: 0 0 10px; }
+.chal-status b { font-size: 22px; font-weight: 800; }
+.chal-status span { color: var(--text-2); font-size: 14px; }
+.days { display: grid; grid-template-columns: repeat(30, minmax(0, 1fr)); gap: 3px; margin: 0 0 6px; }
+.days i { height: 22px; border-radius: 4px; background: var(--surface-2); }
+.days i.on { background: var(--ch); }
+.days i.now { background: var(--ch); box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ch); }
+.days-l { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; margin: 0 0 24px; }
+.rh3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 12px; }
+.rh3 div { background: var(--surface-2); border-radius: 14px; padding: 14px 16px; }
+.rh3 b { display: block; font-size: 24px; font-weight: 800; letter-spacing: -.01em; }
+.rh3 span { color: var(--text-2); font-size: 14px; }
+.how { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 0 0 24px; }
+.how div { border-top: 2px solid var(--ch); padding: 10px 2px 0; }
+.how b { display: block; font-size: 15px; margin-bottom: 2px; }
+.how span { color: var(--text-2); font-size: 14px; line-height: 1.45; }
+.chal-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.chal-cta .btn.primary { background: var(--ch); border-color: var(--ch); color: #121314; font-size: 16px; padding: 14px 22px; }
+.chal-cta small { color: var(--muted); font-size: 13px; }
+@media (max-width: 720px) {
+  .chal { padding: 22px 18px; }
+  .rh3 { grid-template-columns: 1fr; }
+  .how { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .days { gap: 2px; } .days i { height: 16px; border-radius: 3px; }
+}
 </style>
 </head>
 <body>
@@ -297,6 +331,32 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
     <p class="note hero-note">Линия - охват по дням за 30 дней. Зелёные точки и даты - дни публикации рилсов.</p>
   </div>
   <p class="art-note">Иллюстрация</p>
+</div>
+
+<div class="wrap chal-wrap" id="chas">
+  <section class="card chal" aria-labelledby="chalH">
+    <span class="eb">Новый вызов · поток 1</span>
+    <h2 id="chalH">30 дней. <em>Час для себя</em></h2>
+    <p class="lead">10 000 подписчиков я набрал системой, а не мотивацией. Теперь зову тебя попробовать то же самое: 30 дней подряд отдавать один час своей цели. Не в одиночку, а с бадди, десяткой и куратором.</p>
+    <div class="chal-status" id="chalStatus"><b>Старт 30 ноября</b><span>вступление до 29 ноября, 21:00 по Алматы</span></div>
+    <div class="days" id="chalDays" aria-hidden="true"></div>
+    <div class="days-l"><span>30 ноября</span><span>29 декабря</span></div>
+    <div class="rh3">
+      <div><b>5AM</b><span>Подъём в 5:00 и задание дня</span></div>
+      <div><b>6AM</b><span>Подъём в 6:00 и задание дня</span></div>
+      <div><b>MY AM</b><span>Своё время, отчёт о часе до 21:00</span></div>
+    </div>
+    <div class="how">
+      <div><b>Цена слова</b><span>Залог за обещание. Сдержал слово до конца - он возвращается.</span></div>
+      <div><b>Бадди и десятка</b><span>Идёшь в паре и в команде из десяти. Проспал бадди - балла нет у обоих.</span></div>
+      <div><b>Баллы</b><span>1 балл за каждый закрытый день. Итоги и лучшие десятки - 30 декабря.</span></div>
+      <div><b>Куратор</b><span>Отвечает на вопросы, собирает команды, решает особые случаи.</span></div>
+    </div>
+    <div class="chal-cta">
+      <a class="btn primary" id="chalBtn" href="chas/?src=site">Участвовать</a>
+      <small id="chalNote">Анкета на 3 минуты. Условия и цена - внутри.</small>
+    </div>
+  </section>
 </div>
 
 <div class="band band-pad">
@@ -351,6 +411,7 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script src="app.js?v=c4d2a7f1"></script>
+<script src="challenge.js?v=1"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>
