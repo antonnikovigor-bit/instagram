@@ -516,6 +516,24 @@ details.all section { padding-top: 48px; }
 .rules-t p { color: var(--text-2); font-size: 17px; line-height: 1.55; max-width: 520px; margin: 0 0 20px; }
 .rules .btn { border-radius: 999px; padding: 14px 20px; }
 @media (max-width: 720px) { .rules-row { grid-template-columns: 1fr; } .leaf { max-width: 280px; } }
+.steps .book { display: flex; gap: 16px; align-items: center; margin-top: 16px; text-decoration: none; color: #fff; padding: 12px; border: 1px solid rgba(255,255,255,.14); border-radius: 16px; max-width: 420px; }
+.steps .book:hover { border-color: var(--ch2); }
+.book-cover { flex: none; width: 86px; height: 124px; border-radius: 4px 8px 8px 4px; padding: 10px 8px; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(160deg, #1b2a4a, #e0603a 70%, #ffb15c); box-shadow: inset 4px 0 0 rgba(0,0,0,.25), 0 8px 20px rgba(0,0,0,.4); }
+.book-cover i { font: 700 18px/1 Oswald, sans-serif; font-style: normal; }
+.book-cover em { font: 700 13px/1.05 Oswald, sans-serif; font-style: normal; text-transform: uppercase; }
+.book-cover small { font-size: 8px; opacity: .85; }
+.book-t { display: grid; gap: 4px; }
+.steps .book-t b { font-size: 20px; margin: 0; text-transform: none; }
+.book-t span { color: var(--text-2); font-size: 14px; }
+.book-t u { text-decoration: none; color: var(--ch2); font-weight: 700; font-size: 14px; }
+.goals { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.steps .goals li { display: block; border-top: 0; padding: 7px 12px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); font-size: 14px; font-weight: 600; }
+.nums { margin: 16px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.nums div { padding: 14px; border-radius: 14px; background: rgba(255,255,255,.06); }
+.nums dt { font: 700 30px/1 Oswald, sans-serif; color: var(--ch2); }
+.nums dd { margin: 6px 0 0; color: var(--text-2); font-size: 13px; line-height: 1.35; }
+.story { --ch2: #ffb15c; }
+@media (max-width: 860px) { .story .reel-card { position: static; order: -1; margin-bottom: 8px; } .story .reel-embed { max-height: 560px; margin: 0 auto; } }
 </style>
 </head>
 <body>
@@ -563,14 +581,24 @@ details.all section { padding-top: 48px; }
     <h2 id="storyH">Мой блог начался <em>с челленджа раннего подъёма</em></h2>
     <div class="story-grid">
       <ol class="steps">
-        <li><span class="st-n">01</span><div><b>66 дней подъёмов в 5 утра</b><p>Челлендж «Системный путь». Утро стало моим часом для себя и своих целей.</p></div></li>
-        <li><span class="st-n">02</span><div><b>Публичные цели</b><p>Я начал декларировать цели публично и выполнять их. Так появился путь к IRONMAN, хотя плавать я тогда не умел. Потом OCEANMAN. Не всегда быстро, не всегда легко. Но системно.</p></div></li>
-        <li><span class="st-n">03</span><div><b>10 000 подписчиков</b><p>Я задекларировал новую цель: проверить, работает ли тот же принцип в блоге. 10 000 до конца года. Дошёл.</p></div></li>
-        <li class="st-now"><span class="st-n">04</span><div><b>Возвращаю ранние подъёмы</b><p>Всё, к чему я пришёл, началось с утреннего часа для себя. Поэтому я возвращаюсь к нему. И в этот раз зову вас с собой.</p></div></li>
+        <li><span class="st-n">01</span><div><b>Зачем этот сайт</b><p>Я сделал его, чтобы каждый день публично показывать путь от 3 600 к 10 000 подписчиков. Почему - рассказываю в ролике.</p></div></li>
+        <li><span class="st-n">02</span><div><b>66 дней подъёмов в 5 утра</b><p>Всё началось с книги Робина Шармы «Клуб 5 часов утра» и вызова: 66 дней подряд вставать в 5 утра. Это была моя первая публичная декларация.</p>
+          <a class="book" href="https://ast.ru/book/klub-5-chasov-utra-sekret-lichnoy-effektivnosti-ot-monakha-kotoryy-prodal-svoy-ferrari-868045/" target="_blank" rel="noopener">
+            <span class="book-cover" aria-hidden="true"><i>5:00</i><em>Клуб<br>«5 часов<br>утра»</em><small>Робин Шарма</small></span>
+            <span class="book-t"><b>Клуб «5 часов утра»</b><span>Робин Шарма</span><u>Где почитать →</u></span>
+          </a></div></li>
+        <li><span class="st-n">03</span><div><b>Что я понял</b><p>Публичное слово и люди рядом помогают идти к цели быстрее, веселее и надёжнее. Сказал вслух - слиться сложнее.</p></div></li>
+        <li><span class="st-n">04</span><div><b>Дальше - всё публично</b><p>Каждую большую цель я объявлял в Instagram. Пролистай ленту - там всё есть.</p>
+          <ul class="goals"><li>Научиться плавать</li><li>IRONMAN</li><li>OCEANMAN</li><li>Проплыть Босфор</li><li>Встать на лыжи</li><li>Прыжок с парашютом</li><li>Год чтения каждый день</li></ul></div></li>
+        <li><span class="st-n">05</span><div><b>10 000 за 3 месяца</b><p>В сентябре я поставил цель: за 3 месяца сделать больше, чем за 5 лет. И каждый день отдавал ей время.</p>
+          <dl class="nums"><div><dt>3 600</dt><dd>подписчиков за все годы, до сентября 2026</dd></div><div><dt>1 600</dt><dd>из них - за 2 года, пока публично строили с нуля Atlas Capital</dd></div><div><dt>10 000</dt><dd>за 3 месяца фокуса</dd></div><div><dt>1 млн+</dt><dd>просмотров страницы за эти 3 месяца</dd></div></dl></div></li>
+        <li><span class="st-n">06</span><div><b>Мой пример стал чьим-то</b><p>Кто-то научился плавать, кто-то победил страх воды, начал бегать или читать. Вместе идти легче.</p></div></li>
+        <li><span class="st-n">07</span><div><b>«А если я ничего не хочу?»</b><p>Мне часто это пишут. Когда я начинал, у меня тоже не было хобби: работа, семья, дом. Утренний час для себя научил меня слышать, чего я хочу. Пробуя, ошибаясь и делая невозможное возможным.</p></div></li>
+        <li class="st-now"><span class="st-n">08</span><div><b>Почему сейчас</b><p>Я отдаю вам инструмент, с которого начался мой путь. Если откликается - это не случайно. Не откладывай на следующий год: начни в понедельник, 30 ноября, и заложи фундамент следующего года.</p></div></li>
       </ol>
       <div class="reel-card">
         <div class="reel-embed" id="storyReel" data-reel="Dd_cMvpNhWu"></div>
-        <p class="reel-cap">Ролик, с которого начался путь к 10 000.</p>
+        <p class="reel-cap">Ролик, с которого начался путь к 10 000: зачем я это затеял.</p>
       </div>
     </div>
   </div>
