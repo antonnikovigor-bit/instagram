@@ -370,16 +370,90 @@ footer.last .btn { padding: 16px 22px; border-radius: 999px; }
   .path { padding-top: 56px; }
 }
 @media (prefers-reduced-motion: reduce) { .go { transition: none; } }
+
+/* Рассвет: первый экран, «Знакомо?», финал. Всё вокруг «часа для себя» */
+.dawn-hero { position: relative; isolation: isolate; overflow: hidden; color-scheme: dark; color: #fff;
+  --text: #fff; --text-2: rgba(255,255,255,.84); --muted: rgba(255,255,255,.62); --surface-2: rgba(255,255,255,.12);
+  min-height: min(860px, 100vh); display: flex; background: #0b0d1a; }
+.dawn-hero > .wrap { width: 100%; display: flex; flex-direction: column; position: relative; z-index: 1; padding-bottom: 120px; }
+.dawn-hero .hero { margin: auto 0 0; padding: 40px 0 0; max-width: 600px; }
+.dawn-hero .dot.off { background: rgba(255,255,255,.4); }
+.dawn-hero .who .ph { background: rgba(255,255,255,.14); }
+.sky { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(#070915 0%, #121633 30%, #3a2350 52%, #8a3a4a 68%, #e0603a 82%, #ffb15c 94%); }
+.stars { position: absolute; inset: 0 0 45% 0; opacity: .7;
+  background-image: radial-gradient(1.2px 1.2px at 12% 18%, #fff, transparent), radial-gradient(1px 1px at 28% 8%, #fff, transparent), radial-gradient(1.4px 1.4px at 47% 22%, #fff, transparent),
+    radial-gradient(1px 1px at 63% 12%, #fff, transparent), radial-gradient(1.2px 1.2px at 78% 26%, #fff, transparent), radial-gradient(1px 1px at 88% 9%, #fff, transparent),
+    radial-gradient(1px 1px at 6% 34%, #fff, transparent), radial-gradient(1.3px 1.3px at 37% 38%, #fff, transparent), radial-gradient(1px 1px at 94% 40%, #fff, transparent); }
+.sun { position: absolute; left: 68%; bottom: 13%; width: min(46vw, 560px); aspect-ratio: 1; transform: translate(-50%, 50%); border-radius: 50%;
+  background: radial-gradient(closest-side, #fff3d6 0%, #ffd08a 34%, #ffb15c 52%, rgba(255,106,61,.55) 72%, transparent 100%);
+  animation: rise 4.5s cubic-bezier(.2,.7,.2,1) .4s both; }
+@keyframes rise { from { transform: translate(-50%, 95%); opacity: .55; } to { transform: translate(-50%, 50%); opacity: 1; } }
+.hills { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 34%; }
+.hills .h1 { fill: #2c1832; } .hills .h2 { fill: #1a1020; } .hills .h3 { fill: #0b0a09; }
+.dawn-hero::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(7,9,21,.78) 0%, rgba(7,9,21,.45) 45%, transparent 75%); }
+.dawn-hero h1 { font: 700 clamp(48px, 8vw, 92px)/.92 Oswald, Manrope, sans-serif; text-transform: uppercase; letter-spacing: -.01em; margin: 0 0 22px; }
+.dawn-hero h1 em { font-style: normal; display: block; color: var(--ch2); }
+.dawn-hero .lead { font-size: 17px; color: var(--text-2); max-width: 540px; margin: 0 0 26px; }
+.dawn-hero .lead b { color: #fff; }
+.h-eb { color: var(--ch2); }
+.morph.done .n { color: var(--ch2); text-shadow: 0 0 40px rgba(255,177,92,.6); }
+.why { background: #0b0a09; color: #fff; --text-2: rgba(255,255,255,.76); padding: 88px 0 24px; }
+.eb2 { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 12px; }
+.why h2 { font: 700 clamp(44px, 7vw, 88px)/.95 Oswald, Manrope, sans-serif; text-transform: uppercase; margin: 0 0 34px; }
+.why h2 em, .sub-h em { font-style: normal; color: var(--ch); }
+.pf { display: grid; max-width: 920px; }
+.pf > div { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 6px 32px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.12); align-items: baseline; }
+.pf > div:last-child { border-bottom: 1px solid rgba(255,255,255,.12); }
+.pf .pf-h { border-top: 0; padding: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ch); }
+.pf b { font-size: 21px; font-weight: 700; }
+.pf span { color: var(--text-2); font-size: 16px; }
+.why-k { font: 600 clamp(20px, 2.4vw, 26px)/1.35 Manrope, sans-serif; color: var(--text-2); max-width: 760px; margin: 34px 0 0; }
+.why-k b { color: #fff; }
+.chal-band { padding-top: 72px; }
+.sub-h { font: 700 clamp(26px, 3.4vw, 40px)/1.05 Oswald, Manrope, sans-serif; text-transform: uppercase; margin: 0 0 18px; }
+.rh3 span { line-height: 1.45; }
+.word { display: grid; gap: 6px; max-width: 720px; margin: 6px 0 40px; padding: 22px 24px; border-radius: 18px;
+  background: linear-gradient(90deg, rgba(255,106,61,.18), rgba(255,177,92,.06)); border: 1px solid rgba(255,177,92,.35); }
+.word b { font: 700 clamp(22px, 2.6vw, 30px)/1.1 Oswald, Manrope, sans-serif; text-transform: uppercase; }
+.word span { color: var(--text-2); font-size: 15.5px; }
+details.all { margin-top: 26px; }
+details.all > summary { cursor: pointer; font-weight: 700; color: var(--text-2); list-style: none; display: inline-flex; gap: 8px; align-items: center;
+  border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; background: var(--surface); }
+details.all > summary::-webkit-details-marker { display: none; }
+details.all > summary::after { content: "↓"; }
+details.all[open] > summary::after { content: "↑"; }
+details.all .ridge { margin-top: 30px; }
+details.all section { padding-top: 48px; }
+.dawn-end { margin-top: 72px; color: #fff; --text: #fff; --text-2: rgba(255,255,255,.82); --muted: rgba(255,255,255,.6); --line: rgba(255,255,255,.2); --surface-2: rgba(255,255,255,.14);
+  background: linear-gradient(#0b0a09 0%, #2a1730 45%, #b0483a 82%, #ff8a4a 100%); }
+.dawn-end footer.last { padding: 96px 0 56px; }
+.dawn-end .btn { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.3); }
+@media (max-width: 720px) {
+  .dawn-hero { min-height: 100svh; }
+  .dawn-hero > .wrap { padding-bottom: 96px; }
+  .sun { left: 78%; bottom: 20%; width: 92vw; }
+  .dawn-hero::after { background: linear-gradient(rgba(7,9,21,.35) 0%, rgba(7,9,21,.55) 40%, rgba(7,9,21,.25) 100%); }
+  .pf > div { grid-template-columns: 1fr; } .pf .pf-h { display: none; }
+  .why { padding-top: 64px; }
+}
+@media (prefers-reduced-motion: reduce) { .sun { animation: none; } }
 </style>
 </head>
 <body>
-<div class="band hero-band">
-  <picture>
-    <source type="image/webp" srcset="img/bodybuilding-atlas-800.webp 800w, img/bodybuilding-atlas-1600.webp 1600w" sizes="100vw">
-    <img src="img/bodybuilding-atlas-1600.jpg" srcset="img/bodybuilding-atlas-800.jpg 800w, img/bodybuilding-atlas-1600.jpg 1600w" sizes="100vw" width="1600" height="900" alt="" fetchpriority="high" decoding="async">
-  </picture>
+<div class="dawn-hero" id="top">
+  <div class="sky" aria-hidden="true">
+    <i class="stars"></i>
+    <i class="sun" id="sun"></i>
+    <svg class="hills" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path class="h1" d="M0 190 L120 120 L210 160 L330 70 L450 150 L560 95 L700 170 L820 80 L940 140 L1060 60 L1190 150 L1300 100 L1440 160 L1440 320 L0 320 Z"/>
+      <path class="h2" d="M0 240 L160 180 L300 225 L430 170 L600 230 L760 185 L900 240 L1050 190 L1220 245 L1340 205 L1440 230 L1440 320 L0 320 Z"/>
+      <path class="h3" d="M0 285 L220 255 L420 280 L640 250 L880 285 L1100 258 L1300 282 L1440 268 L1440 320 L0 320 Z"/>
+    </svg>
+  </div>
   <div class="wrap">
-  <header class="top">
+    <header class="top">
       <a class="who" id="who" href="https://www.instagram.com/" target="_blank" rel="noopener">
         <span class="ph"></span>
         <div><b>Игорь Антонников</b><span id="handle">Instagram</span></div>
@@ -387,48 +461,57 @@ footer.last .btn { padding: 16px 22px; border-radius: 999px; }
       <span class="live"><span class="dot off" id="dot"></span><span id="status">подключаюсь</span></span>
     </header>
     <div class="hero">
-      <span class="h-eb">Путь к 10 000 пройден · дальше - вы</span>
+      <span class="h-eb">30 дней / час для себя</span>
       <h1>Из 10 000 - <em>в 1 час</em></h1>
       <div class="morph" aria-live="polite">
         <span class="n num" id="morphN">10 000</span>
         <span class="cap" id="morphCap">человек были рядом,<br>пока я шёл к цели</span>
       </div>
-      <p class="lead"><b>30 дней подряд - один час на свою цель.</b> Не в одиночку: с бадди, десяткой и куратором. Старт 30 ноября.</p>
+      <p class="lead">10 000 человек были рядом, пока я шёл к цели. <b>Теперь я прошу у каждого из вас 1 час в день.</b> Начни то, что откладывал весь год. Пока он ещё идёт.</p>
       <div class="h-cta">
         <p class="h-close" id="heroClose">Набор закрывается <b>29 ноября в 21:00</b> <span class="h-cd num" id="heroCd"></span></p>
         <div class="h-btns">
           <a class="go js-chal-btn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
-          <a class="more" href="#chas">Как это устроено ↓</a>
+          <a class="more" href="#chas">Что это за час ↓</a>
         </div>
       </div>
     </div>
   </div>
-  <p class="art-note">Иллюстрация</p>
 </div>
+
+<section class="why" aria-labelledby="whyH">
+  <div class="wrap">
+    <span class="eb2">Знакомо?</span>
+    <h2 id="whyH">Ну что, опять <em>с января?</em></h2>
+    <div class="pf">
+      <div class="pf-h"><span>План</span><span>Факт</span></div>
+      <div><b>«Пойду в зал»</b><span>Купил абонемент. Был два раза. Второй - за полотенцем.</span></div>
+      <div><b>«Начну медитировать»</b><span>Скачал приложение. Оно напоминает. Ты смахиваешь.</span></div>
+      <div><b>«Прочитаю книгу»</b><span>Дошёл до 12-й страницы. Закладка лежит там с марта.</span></div>
+      <div><b>«Возьму гитару»</b><span>Купил. Теперь она красиво стоит в углу.</span></div>
+    </div>
+    <p class="why-k">Сначала работа. Потом дела. Потом «я устал». <b>И ты опять переносишь себя на январь.</b></p>
+  </div>
+</section>
 
 <section class="chal-band" id="chas" aria-labelledby="chalH">
   <span class="ghost" aria-hidden="true">5:00</span>
   <div class="wrap">
-    <span class="eb">Новый вызов · поток 1</span>
+    <span class="eb">Поток 1 · 30 ноября - 29 декабря</span>
     <h2 id="chalH">30 дней.<em>Час для себя</em></h2>
-    <p class="lead">Каждый день <b>один час - на то, что ты давно откладываешь.</b> Подъём в своём ритме, задание дня и отчёт в чате. Рядом бадди, десятка и куратор.</p>
-    <div class="cd" id="chalStatus" hidden>
-      <span class="cap">До закрытия набора · 29 ноября, 21:00 по Алматы</span>
-      <div class="u"><b class="num" data-cd="d">--</b><span>дней</span></div><span class="sep">:</span>
-      <div class="u"><b class="num" data-cd="h">--</b><span>часов</span></div><span class="sep">:</span>
-      <div class="u"><b class="num" data-cd="m">--</b><span>минут</span></div>
-    </div>
+    <p class="lead">Каждое утро один час - <b>на то, что ты давно откладываешь.</b> Не «когда-нибудь». Не с января. С 30 ноября.</p>
+    <div class="cd" id="chalStatus" hidden></div>
     <div class="days" id="chalDays" aria-hidden="true"></div>
     <div class="days-l"><span>Старт 30 ноября</span><span>Финиш 29 декабря</span></div>
+    <h3 class="sub-h">Не всем вставать в 5. <em>Но всем - встать с дивана.</em></h3>
     <div class="rh3">
-      <div><small>Ритм 5AM</small><b>5:00</b><span>Подъём в пять и задание дня</span></div>
-      <div><small>Ритм 6AM</small><b>6:00</b><span>Подъём в шесть и задание дня</span></div>
-      <div><small>Ритм MY AM</small><b>Твоё</b><span>Своё время и отчёт о часе до 21:00</span></div>
+      <div><small>5AM</small><b>5:00</b><span>Ранний подъём. Час для себя до того, как проснётся мир.</span></div>
+      <div><small>6AM</small><b>6:00</b><span>Подъём в шесть. Тот же час, на час позже.</span></div>
+      <div><small>MY AM</small><b>Твоё</b><span>Своё утро. Час для себя в удобное время.</span></div>
     </div>
-    <div class="how">
-      <div><i aria-hidden="true">🤝</i><b>Цена слова</b><span>Залог за обещание. Сдержал слово до конца - он возвращается.</span></div>
-      <div><i aria-hidden="true">👥</i><b>Бадди и десятка</b><span>Идёшь в паре и в команде из десяти. Друг друга не отпускаете.</span></div>
-      <div><i aria-hidden="true">🧭</i><b>Куратор</b><span>Отвечает на вопросы, собирает команды, решает особые случаи.</span></div>
+    <div class="word">
+      <b>Хочешь себе поверить? Держи слово.</b>
+      <span>При входе ты вносишь «цену слова». Дошёл до конца - она возвращается. Не дошёл - узнал точную цену своего «потом».</span>
     </div>
     <div class="chal-cta">
       <a class="go js-chal-btn" id="chalBtn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
@@ -439,9 +522,9 @@ footer.last .btn { padding: 16px 22px; border-radius: 999px; }
 
 <div class="wrap">
   <section class="path" id="path" aria-labelledby="pathH">
-    <span class="p-eb">Доказательство</span>
+    <span class="p-eb">Почему мне можно верить</span>
     <h2 id="pathH">Путь к 10 000 пройден</h2>
-    <p class="p-lead">Я поставил цель публично и открыл все цифры. Каждый день, каждый рилс - здесь. Это не обещание, а отчёт: я довожу цели до конца.</p>
+    <p class="p-lead">Я поставил цель публично и открыл все цифры. Это не обещание, а отчёт: я довожу цели до конца.</p>
     <div class="big">
       <span class="n num" id="followers">-</span>
       <span class="cap">подписчиков сейчас<br><span class="gain num" id="gain"></span></span>
@@ -449,59 +532,29 @@ footer.last .btn { padding: 16px 22px; border-radius: 999px; }
     <div class="goal" id="goal" aria-label="Прогресс к цели"></div>
     <p class="exp num" id="exp"></p>
     <div class="fc" id="forecast" hidden></div>
-    <div class="ridge" id="ridge" aria-label="Охват по дням за 30 дней"></div>
-    <p class="note hero-note">Линия - охват по дням за 30 дней. Зелёные точки и даты - дни публикации рилсов.</p>
+    <details class="all">
+      <summary>Все цифры пути: охват, рилсы, аудитория</summary>
+      <div class="ridge" id="ridge" aria-label="Охват по дням за 30 дней"></div>
+      <p class="note hero-note">Линия - охват по дням за 30 дней. Зелёные точки и даты - дни публикации рилсов.</p>
+      <section><h2>Последние 30 дней</h2><div class="tiles" id="tiles"></div></section>
+      <section><h2>По дням</h2><div class="tabs" id="dayTabs" role="group" aria-label="Метрика"></div><div class="card chart" id="dayChart"></div></section>
+      <section><h2>Рилсы</h2><div class="tabs" id="reelTabs" role="group" aria-label="Сортировка"></div><div class="reels" id="reels"><p class="skel">Загружаю рилсы…</p></div>
+        <p class="method">Сколько подписчиков привёл рилс, Instagram не сообщает. Считаю сам: прирост подписчиков делю между рилсами пропорционально тому, сколько просмотров каждый набрал за это же время. Поэтому это оценка, а не точная цифра.</p></section>
+      <section><h2>Кто подписан</h2><div class="aud" id="aud"></div></section>
+    </details>
   </section>
 </div>
 
-<div class="band band-pad">
-  <video class="bg" data-autoplay muted loop playsinline preload="none" poster="img/bike-poster.webp" data-src="video/bike.mp4" data-src-sm="video/bike-sm.mp4" aria-hidden="true"></video>
+<div class="dawn-end">
   <div class="wrap">
-  <section>
-      <h2>Последние 30 дней</h2>
-      <div class="tiles" id="tiles"></div>
-    </section>
-  </div>
-</div>
-
-<div class="band band-pad" data-yt="A97oKSQV5hY" data-yt-start="152" data-yt-end="164">
-  <video class="bg" data-autoplay muted loop playsinline preload="none" poster="img/run-poster.webp" data-src="video/run.mp4" data-src-sm="video/run-sm.mp4" aria-hidden="true"></video>
-  <div class="wrap">
-  <section>
-      <h2>По дням</h2>
-      <div class="tabs" id="dayTabs" role="group" aria-label="Метрика"></div>
-      <div class="card chart" id="dayChart"></div>
-    </section>
-  </div>
-</div>
-
-<div class="band band-pad" data-yt="HGPXSi-9bhs" data-yt-start="34" data-yt-end="46">
-  <video class="bg" data-autoplay muted loop playsinline preload="none" poster="img/bosphorus-poster.webp" data-src="video/bosphorus.mp4" data-src-sm="video/bosphorus-sm.mp4" aria-hidden="true"></video>
-  <div class="wrap">
-  <section>
-      <h2>Рилсы</h2>
-      <div class="tabs" id="reelTabs" role="group" aria-label="Сортировка"></div>
-      <div class="reels" id="reels"><p class="skel">Загружаю рилсы…</p></div>
-      <p class="method">Сколько подписчиков привёл рилс, Instagram не сообщает. Считаю сам: прирост подписчиков делю между рилсами пропорционально тому, сколько просмотров каждый набрал за это же время. Поэтому это оценка, а не точная цифра.</p>
-    </section>
-  </div>
-</div>
-
-<div class="band">
-  <video class="bg" data-autoplay muted loop playsinline preload="none" poster="img/ocean-poster.webp" data-src="video/ocean.mp4" data-src-sm="video/ocean-sm.mp4" aria-hidden="true"></video>
-  <div class="wrap">
-  <section>
-      <h2>Кто подписан</h2>
-      <div class="aud" id="aud"></div>
-    </section>
-  <footer class="last">
+    <footer class="last">
       <p class="motto">В этом году второго шанса не будет.</p>
       <p class="last-sub" id="lastSub">Поток 1 стартует 30 ноября. Набор закрывается 29 ноября в 21:00 по Алматы.</p>
       <div class="h-btns">
         <a class="go js-chal-btn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
         <a class="btn" id="follow" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
       </div>
-      <p class="small" id="foot">Цифры приходят напрямую из Instagram API: профиль и рилсы - каждые 15 минут, статистика по дням и аудитория - каждые 6 часов. Фоновые видео - Pexels и YouTube (IRONMAN, FlyLine TV), изображение на первом экране - иллюстрация.</p>
+      <p class="small" id="foot">Цифры приходят напрямую из Instagram API: профиль и рилсы - каждые 15 минут, статистика по дням и аудитория - каждые 6 часов.</p>
     </footer>
   </div>
 </div>
@@ -510,7 +563,7 @@ footer.last .btn { padding: 16px 22px; border-radius: 999px; }
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script src="app.js?v=c4d2a7f1"></script>
-<script src="challenge.js?v=3"></script>
+<script src="challenge.js?v=4"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>
