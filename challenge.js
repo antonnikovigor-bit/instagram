@@ -124,8 +124,8 @@
   }).catch(() => {});
 })();
 
-// Анимированные сцены: уважать «уменьшить движение».
+// Видео-сцены: уважать «уменьшить движение».
 (() => {
   if (!window.matchMedia || !matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.querySelectorAll('.scene svg').forEach(s => { try { s.pauseAnimations(); } catch (e) {} });
+  document.querySelectorAll('.scene video').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
 })();
