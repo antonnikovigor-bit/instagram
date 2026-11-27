@@ -285,6 +285,7 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
 .chal-band h2 em { display: block; font-style: normal; background: linear-gradient(90deg, var(--ch), var(--ch2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .chal-band .lead { font-size: clamp(17px, 2vw, 20px); color: var(--text-2); max-width: 560px; margin: 0 0 40px; }
 .chal-band .lead b { color: #fff; }
+.chal-band .lead .start-g { display: inline-block; margin-top: 6px; color: #4cc47e; font-weight: 800; }
 .cd { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px 28px; margin: 0 0 18px; }
 .cd[hidden] { display: none; }
 .cd .cap { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); flex-basis: 100%; }
@@ -696,19 +697,18 @@ details.all section { padding-top: 48px; }
 </section>
 
 <section class="chal-band" id="chas" aria-labelledby="chalH">
-  <span class="ghost" aria-hidden="true">5:00</span>
   <div class="wrap">
     <span class="eb">Поток 1 · 30 ноября - 29 декабря</span>
     <h2 id="chalH">30 дней.<em>Час для себя</em></h2>
-    <p class="lead">30 дней - <b>по часу на одну твою цель.</b> Не «когда-нибудь». Не с января. С 30 ноября.</p>
+    <p class="lead">30 дней - <b>по часу на одну твою цель.</b><br>Не «когда-нибудь». Не с января.<br><strong class="start-g">С 30 ноября.</strong></p>
     <div class="cd" id="chalStatus" hidden></div>
     <div class="days" id="chalDays" aria-hidden="true"></div>
     <div class="days-l"><span>Старт 30 ноября</span><span>Финиш 29 декабря</span></div>
-    <h3 class="sub-h">Не всем вставать в 5. <em>Но всем - встать с дивана.</em></h3>
+    <h3 class="sub-h">Выбери свой режим. <em>Тот, что комфортен тебе.</em></h3>
     <div class="rh3">
-      <div><small>5AM</small><b>5:00</b><span>Ранний подъём. Час для себя до того, как проснётся мир.</span></div>
-      <div><small>6AM</small><b>6:00</b><span>Подъём в шесть. Тот же час, на час позже.</span></div>
-      <div><small>MY AM</small><b>Твоё</b><span>Своё утро. Час для себя в удобное время.</span></div>
+      <div><small>5AM</small><b>5:00</b><span>Для тех, кто хочет вызова: выйти из зоны комфорта и посмотреть на привычную картину по-новому.</span></div>
+      <div><small>6AM</small><b>6:00</b><span>Режим полегче. Тот же час для себя, на час позже.</span></div>
+      <div><small>MY AM</small><b>Твоё</b><span>Подъём в удобное тебе время. Твоё утро и твой час для себя.</span></div>
     </div>
     <h3 class="sub-h">Как провести <em>свой час</em></h3>
     <div class="scenes">
@@ -745,23 +745,6 @@ details.all section { padding-top: 48px; }
       <div><b>Задание</b><span>Каждое утро - лёгкое, короткое, интерактивное. Помогает проснуться и подтвердить, что это утро ты отдал себе.</span></div>
       <div><b>Ритм</b><span>5:00, 6:00 или своё утро. Выбираешь один раз и держишь 30 дней.</span></div>
       <div><b>Час</b><span>На одну твою цель: спорт, книга, язык, проект - то, что ты откладывал весь год.</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="rules" id="rules" aria-labelledby="rulesH">
-  <div class="wrap">
-    <span class="eb2">Условия</span>
-    <h2 id="rulesH">Всё на одном листе</h2>
-    <div class="rules-row">
-      <a class="leaf" href="chas/usloviya.jpg" target="_blank" rel="noopener"><img src="chas/usloviya-sm.jpg" width="540" height="960" alt="Листовка: условия челленджа «30 дней. Час для себя»" loading="lazy"></a>
-      <div class="rules-t">
-        <p>Ритмы и дедлайны, что происходит каждое утро, когда сгорает цена слова, сроки и возврат - всё в листовке. Цена слова возвращается до 7 января.</p>
-        <div class="h-btns">
-          <a class="btn" href="chas/usloviya.jpg" target="_blank" rel="noopener">Открыть листовку</a>
-          <a class="btn" href="chas/usloviya.pdf" download>Скачать PDF</a>
-        </div>
-      </div>
     </div>
   </div>
 </section>
