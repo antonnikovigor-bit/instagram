@@ -134,8 +134,8 @@
 (() => {
   const box = document.getElementById('heroVids');
   if (!box) return;
-  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const vids = [...box.querySelectorAll('video')];
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { vids.forEach(v => { v.removeAttribute('autoplay'); v.pause(); }); return; }
   const load = v => { if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = v.dataset.src; v.load(); } };
   let i = 0;
   const show = n => {
