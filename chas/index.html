@@ -174,8 +174,8 @@ let S=BLANK();
 try{const d=localStorage.getItem('anketa-chas-v5');if(d)S=Object.assign(S,JSON.parse(d));}catch(e){}
 let SHORT=false;
 try{const h=JSON.parse(localStorage.getItem('handoff-chas')||'null');if(h&&Date.now()-h.t<14*864e5&&!S.sent){SHORT=true;if(!S.name)S.name=h.name||'';if(!S.phone)S.phone=h.phone||'';if(!S.city)S.city=h.city||'';if(h.sphere&&sph(h.sphere)&&!S.sphere&&h.main){S.sphere=h.sphere;S.delay[h.sphere]=h.main;S.ago[h.sphere]=h.ago;}if(h.picks)Object.entries(h.picks).forEach(([id,w])=>{if(w&&sph(id)&&!S.delay[id]){S.delay[id]=w;S.ago[id]=S.ago[id]||'-';}});if(!S.sphere)SHORT=false;}}catch(e){}
-/* Метка источника: ?src=ad|dm|bio|fenix|alena|klub. Реклама идёт без src - её узнаём по fbclid. Метка живёт 30 дней, пока не придёт новая */
-const SRC_MAP={ad:'Реклама',dm:'Директ «хочу»',bio:'Шапка профиля',fenix:'Фениксы',alena:'Алёна',klub:'Клуб'};
+/* Метка источника: ?src=ad|dm|bio|fenix|alena|klub|site. Реклама идёт без src - её узнаём по fbclid. Метка живёт 30 дней, пока не придёт новая */
+const SRC_MAP={ad:'Реклама',dm:'Директ «хочу»',bio:'Шапка профиля',fenix:'Фениксы',alena:'Алёна',klub:'Клуб',site:'Сайт'};
 let SRC='';
 try{const q=new URLSearchParams(location.search);let s=(q.get('src')||'').toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,20);
   if(!s&&/link_in_bio/i.test(q.get('utm_content')||''))s='bio';
