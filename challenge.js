@@ -152,7 +152,9 @@
   const slot = document.getElementById('heroSlot');
   if (!slot) return;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const ITEMS = ['Пройти IRON<span class="im">M</span>AN <i class="hh-em">🏅</i>', 'Проплыть OCEANMAN <i class="hh-em">🦈</i>', 'Переплыть Босфор <i class="hh-em">🌊</i>', 'Полюбить горы <i class="hh-em">🏔️</i>', 'Читать каждый день <i class="hh-em">📖</i>', 'Медитировать <i class="hh-em">🧘</i>', 'Прыгнуть с парашютом <i class="hh-em">🪂</i>', 'Научиться делать сальто <i class="hh-em">🤸</i>', 'Обрести хобби <i class="hh-em">🎨</i>', null];
+  const IC = {fin: '<path d="M2 19c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/><path d="M7 15.5C8 10 11 6 17 5c-1.5 3-1.5 7 .5 10.5"/>', bridge: '<path d="M2 13h20M6 13V5M18 13V5M6 5c2 5 10 5 12 0"/><path d="M2 19c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/>', peaks: '<path d="M2 20 9 8l4 6 3-4 6 10z"/><path d="m7.2 11 1.8 1.5 1.6-1.6"/>', book: '<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3zM21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>', lotus: '<circle cx="12" cy="5" r="2"/><path d="M12 8v5M6 11.5l6 1.5 6-1.5M4 19c3-3 5-4 8-4s5 1 8 4"/>', chute: '<path d="M3 11a9 7 0 0 1 18 0zM3 11l9 7 9-7M12 11v7"/><rect x="10.5" y="18" width="3" height="3" rx="1"/>', flip: '<path d="M19.5 9.5A8 8 0 1 0 20 14"/><path d="M20 4v5.5h-5.5"/>', palette: '<path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-.9 2-1.8 0-1.2-1-1.5-1-2.6 0-.9.7-1.6 1.6-1.6H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/>', ig: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/>'};
+  const ic = k => '<svg class="hh-ic" viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + '</svg>';
+  const ITEMS = ['Пройти IRON<span class="im">M</span>AN', 'Проплыть OCEANMAN ' + ic('fin'), 'Переплыть Босфор ' + ic('bridge'), 'Полюбить горы ' + ic('peaks'), 'Читать каждый день ' + ic('book'), 'Медитировать ' + ic('lotus'), 'Прыгнуть с парашютом ' + ic('chute'), 'Научиться делать сальто ' + ic('flip'), 'Обрести хобби ' + ic('palette'), null];
   const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   let cur = slot.firstElementChild, i = 0;
   const swap = html => {
@@ -167,7 +169,7 @@
     requestAnimationFrame(step); };
   const next = () => {
     i = (i + 1) % ITEMS.length;
-    if (ITEMS[i] === null) { const el = swap('<b class="num">0</b> подписчиков <i class="hh-em">📈</i>'); roll(el.querySelector('b')); setTimeout(next, 4000); return; }
+    if (ITEMS[i] === null) { const el = swap('<b class="num">0</b> подписчиков ' + ic('ig')); roll(el.querySelector('b')); setTimeout(next, 4000); return; }
     swap(ITEMS[i]); setTimeout(next, 1700);
   };
   setTimeout(next, 1700);
