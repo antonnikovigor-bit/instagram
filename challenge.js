@@ -147,19 +147,28 @@
   setInterval(() => { i = (i + 1) % vids.length; show(i); }, 6500);
 })();
 
-// Заголовок: счёт до 10 000 -> «подписчиков» -> «появились благодаря 1 часу для себя».
+// Заголовок: достижения сменяют друг друга, последним - 10 000 подписчиков (число накручивается), дальше по кругу.
 (() => {
-  const h = document.getElementById('heroH'), n = document.getElementById('heroNum');
-  if (!h || !n) return;
+  const slot = document.getElementById('heroSlot');
+  if (!slot) return;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const ITEMS = ['Пройти IRON<span class="im">M</span>AN', 'Проплыть OCEANMAN', 'Переплыть Босфор', 'Полюбить горы', 'Читать каждый день', 'Медитировать', 'Прыгнуть с парашютом', 'Научиться делать сальто', 'Обрести хобби', null];
   const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
-  h.classList.add('anim'); n.textContent = '0';
-  const T = 1600, t0 = performance.now();
-  const step = t => {
-    const k = Math.min(1, (t - t0) / T), e = 1 - Math.pow(1 - k, 3);
-    n.textContent = fmt(Math.round(10000 * e / 10) * 10);
-    if (k < 1) requestAnimationFrame(step);
-    else { n.textContent = fmt(10000); h.classList.add('w-in'); setTimeout(() => h.classList.add('e-in'), 600); }
+  let cur = slot.firstElementChild, i = 0;
+  const swap = html => {
+    const el = document.createElement('span'); el.className = 'hh-item pre'; el.innerHTML = html;
+    slot.appendChild(el); el.getBoundingClientRect();
+    el.classList.remove('pre'); cur.classList.add('out');
+    const old = cur; setTimeout(() => old.remove(), 500); cur = el; return el;
   };
-  requestAnimationFrame(step);
+  const roll = n => { const T = 1400, t0 = performance.now();
+    const step = t => { const k = Math.min(1, (t - t0) / T), e = 1 - Math.pow(1 - k, 3);
+      n.textContent = fmt(Math.round(10000 * e / 10) * 10); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step); };
+  const next = () => {
+    i = (i + 1) % ITEMS.length;
+    if (ITEMS[i] === null) { const el = swap('<b class="num">0</b> подписчиков'); roll(el.querySelector('b')); setTimeout(next, 4000); return; }
+    swap(ITEMS[i]); setTimeout(next, 1700);
+  };
+  setTimeout(next, 1700);
 })();
