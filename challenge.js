@@ -18,7 +18,7 @@
     const finish = () => {
       mN.textContent = '1'; mN.parentElement.classList.add('done');
       mCap.classList.add('fade');
-      setTimeout(() => { mCap.innerHTML = 'час в день -<br>прошу у каждого из вас'; mCap.classList.remove('fade'); }, 300);
+      setTimeout(() => { mCap.innerHTML = 'час в день -<br>для себя'; mCap.classList.remove('fade'); }, 300);
     };
     if (reduce) { setTimeout(finish, 1200); return; }
     setTimeout(() => {
@@ -122,4 +122,27 @@
     box.hidden = false;
     const hc = document.getElementById('heroClose'); if (hc) hc.hidden = true;
   }).catch(() => {});
+})();
+
+// Видео-сцены: уважать «уменьшить движение».
+(() => {
+  if (!window.matchMedia || !matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.scene video').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+})();
+
+// Фон первого экрана: сменяющиеся видео (рассвет, пробежка, медитация, чтение).
+(() => {
+  const box = document.getElementById('heroVids');
+  if (!box) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const vids = [...box.querySelectorAll('video')];
+  const load = v => { if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = v.dataset.src; v.load(); } };
+  let i = 0;
+  const show = n => {
+    const v = vids[n]; load(v);
+    const go = () => { vids.forEach(x => x !== v && x.classList.remove('on')); v.classList.add('on'); v.currentTime = 0; v.play().catch(() => {}); box.parentElement.classList.add('has-vid'); load(vids[(n + 1) % vids.length]); };
+    if (v.readyState >= 3) go(); else v.addEventListener('canplay', go, { once: true });
+  };
+  show(0);
+  setInterval(() => { i = (i + 1) % vids.length; show(i); }, 6500);
 })();
