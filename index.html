@@ -545,6 +545,20 @@ details.all section { padding-top: 48px; }
 .goals li:has(a):hover { border-color: var(--ch2); }
 .nums-a { color: var(--ch2); text-decoration: underline; text-underline-offset: 2px; }
 @media (max-width: 860px) { .story .reel-card { position: static; order: -1; margin-bottom: 8px; } .story .reel-embed { max-height: 560px; margin: 0 auto; } }
+.dawn-ph { position: relative; margin: 16px 0 0; max-width: 420px; border-radius: 16px; overflow: hidden; }
+.dawn-ph img { display: block; width: 100%; height: 150px; object-fit: cover; }
+.dawn-ph figcaption { position: absolute; left: 14px; bottom: 10px; font: 700 34px/1 Oswald, sans-serif; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.5); }
+.proofs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; max-width: 520px; }
+.proofs a { position: relative; display: block; border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 5; color: #fff; text-decoration: none; }
+.proofs img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.proofs a:hover img { transform: scale(1.05); }
+.proofs span { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 10px 8px; font: 700 clamp(12px, 3.4vw, 15px)/1 Oswald, sans-serif; text-transform: uppercase; white-space: nowrap; background: linear-gradient(transparent, rgba(0,0,0,.75)); }
+.proofs span::after { content: " ↗"; color: #ffb15c; }
+.rituals { list-style: none; padding: 0; margin: 0 0 8px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.rituals li { display: grid; justify-items: center; gap: 10px; padding: 18px 8px; border-radius: 16px; text-align: center; background: linear-gradient(180deg, rgba(255,177,92,.14), rgba(255,106,61,.05)); border: 1px solid rgba(255,255,255,.12); }
+.rituals svg { width: 40px; height: 40px; color: #ffb15c; }
+.rituals b { font-size: 14px; line-height: 1.2; }
+@media (max-width: 860px) { .rituals { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 </style>
 </head>
 <body>
@@ -594,12 +608,18 @@ details.all section { padding-top: 48px; }
       <ol class="steps">
         <li><span class="st-n">01</span><div><b>Зачем этот сайт</b><p>Я сделал его, чтобы каждый день публично показывать путь от 3 600 к 10 000 подписчиков. Почему - рассказываю в ролике.</p></div></li>
         <li><span class="st-n">02</span><div><b>66 дней подъёмов в 5 утра</b><p>Всё началось с книги Робина Шармы «Клуб 5 часов утра» и вызова: 66 дней подряд вставать в 5 утра. Это была моя первая публичная декларация.</p>
+          <figure class="dawn-ph"><img src="img/run-poster.webp" alt="Рассвет на старте" loading="lazy" width="960" height="248"><figcaption>5:00</figcaption></figure>
           <a class="book" href="https://ast.ru/book/klub-5-chasov-utra-sekret-lichnoy-effektivnosti-ot-monakha-kotoryy-prodal-svoy-ferrari-868045/" target="_blank" rel="noopener">
             <span class="book-cover" aria-hidden="true"><i>5:00</i><em>Клуб<br>«5 часов<br>утра»</em><small>Робин Шарма</small></span>
             <span class="book-t"><b>Клуб «5 часов утра»</b><span>Робин Шарма</span><u>Где почитать →</u></span>
           </a></div></li>
         <li><span class="st-n">03</span><div><b>Что я понял</b><p>Публичное слово и люди рядом помогают идти к цели быстрее, веселее и надёжнее. Сказал вслух - слиться сложнее.</p></div></li>
         <li><span class="st-n">04</span><div><b>Дальше - всё публично</b><p>Каждую большую цель я объявлял в Instagram. Пролистай ленту - там всё есть.</p>
+          <div class="proofs">
+            <a href="https://www.instagram.com/p/CjfpX_atD4K/" target="_blank" rel="noopener"><img src="img/bike-poster.webp" alt="IRONMAN" loading="lazy"><span>IRONMAN</span></a>
+            <a href="https://www.instagram.com/p/DUf-v2cje_o/" target="_blank" rel="noopener"><img src="img/ocean-poster.webp" alt="OCEANMAN" loading="lazy"><span>OCEANMAN</span></a>
+            <a href="https://www.instagram.com/p/DcY30WYBLGk/" target="_blank" rel="noopener"><img src="img/bosphorus-poster.webp" alt="Босфор" loading="lazy"><span>Босфор</span></a>
+          </div>
           <ul class="goals"><li><a href="https://www.instagram.com/p/CaiqQO6tzhN/" target="_blank" rel="noopener">Научиться плавать</a></li><li><a href="https://www.instagram.com/p/CjfpX_atD4K/" target="_blank" rel="noopener">IRONMAN</a></li><li><a href="https://www.instagram.com/p/DUf-v2cje_o/" target="_blank" rel="noopener">OCEANMAN</a></li><li><a href="https://www.instagram.com/p/DcY30WYBLGk/" target="_blank" rel="noopener">Проплыть Босфор</a></li><li><a href="https://www.instagram.com/reel/CLJl7wmDzSl/" target="_blank" rel="noopener">Встать на лыжи</a></li><li><a href="https://www.instagram.com/reel/CsQCnROuv_j/" target="_blank" rel="noopener">Прыжок с парашютом</a></li><li><a href="img/chtenie-400-dney.jpg" target="_blank" rel="noopener">Год чтения каждый день</a></li><li><a href="https://www.instagram.com/p/DThI9vpApgD/" target="_blank" rel="noopener">Построить лучшую управляющую компанию в стране</a></li><li><a href="https://www.instagram.com/reel/Df12ViuNUaU/" target="_blank" rel="noopener">Научиться делать сальто</a></li></ul></div></li>
         <li><span class="st-n">05</span><div><b>10 000 за 3 месяца</b><p>В сентябре я поставил цель: за 3 месяца сделать больше, чем за 5 лет. И каждый день отдавал ей время.</p>
           <dl class="nums"><div><dt>3 600</dt><dd>подписчиков за все годы, до сентября 2026</dd></div><div><dt>1 600</dt><dd>из них - за 2 года, пока публично строили с нуля <a class="nums-a" href="https://www.instagram.com/atlas_capital.kz/" target="_blank" rel="noopener">Atlas Capital</a></dd></div><div><dt><small>Дошёл до</small>10&nbsp;000</dt><dd>за 3 месяца фокуса</dd></div><div><dt>1 млн+</dt><dd>просмотров страницы за эти 3 месяца</dd></div></dl></div></li>
@@ -670,6 +690,11 @@ details.all section { padding-top: 48px; }
       <div><small>6AM</small><b>6:00</b><span>Подъём в шесть. Тот же час, на час позже.</span></div>
       <div><small>MY AM</small><b>Твоё</b><span>Своё утро. Час для себя в удобное время.</span></div>
     </div>
+    <h3 class="sub-h">Как провести <em>свой час</em></h3>
+    <ul class="rituals">
+      <li><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="9" r="4"/><path d="M24 14v14M24 18l-12 6M24 18l12 6M24 28l-10 12h20L24 28"/></svg><b>Йога</b></li><li><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="10" r="4"/><path d="M24 15v12M14 22c3 4 6 5 10 5s7-1 10-5M10 38c4-6 9-9 14-9s10 3 14 9H10z"/></svg><b>Медитация</b></li><li><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="8" r="4"/><path d="M28 14l-8 8 6 6-4 12M20 22l-8-2M26 28l10 4M28 14l8 8"/></svg><b>Бег</b></li>
+      <li><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 14c-5-3-11-4-17-3v24c6-1 12 0 17 3 5-3 11-4 17-3V11c-6-1-12 0-17 3zM24 14v24"/></svg><b>Чтение</b></li><li><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="9"/><circle cx="24" cy="24" r="2"/></svg><b>Твоя цель</b></li><li><svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 34h32M14 34a10 10 0 0120 0M24 14v-4M12 22l-3-3M36 22l3-3M6 28H3M45 28h-3"/></svg><b>Рассвет без телефона</b></li>
+    </ul>
     <div class="price-box" id="price">
       <h3 class="sub-h">У всего есть цена. <em>У слова тоже.</em></h3>
       <div class="pr2">
