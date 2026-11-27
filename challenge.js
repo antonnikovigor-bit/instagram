@@ -18,7 +18,7 @@
     const finish = () => {
       mN.textContent = '1'; mN.parentElement.classList.add('done');
       mCap.classList.add('fade');
-      setTimeout(() => { mCap.innerHTML = 'час в день -<br>прошу у каждого из вас'; mCap.classList.remove('fade'); }, 300);
+      setTimeout(() => { mCap.innerHTML = 'час в день -<br>для себя'; mCap.classList.remove('fade'); }, 300);
     };
     if (reduce) { setTimeout(finish, 1200); return; }
     setTimeout(() => {
