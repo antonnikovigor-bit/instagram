@@ -76,7 +76,9 @@
   const box = document.getElementById('storyReel');
   if (!box) return;
   const code = (box.dataset.reel || '').replace(/[^\w-]/g, '');
-  if (code) {
+  // Встраивание рилса работает только на своём домене; в превью - карточка со ссылкой на ролик.
+  const own = /(^|\.)igorantonnikov\.com$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+  if (code && own) {
     const f = document.createElement('iframe');
     f.src = `https://www.instagram.com/reel/${code}/embed`; f.loading = 'lazy'; f.title = 'Путь к 10 000 подписчиков'; f.allow = 'encrypted-media';
     box.append(f); return;
@@ -84,8 +86,9 @@
   const ph = document.createElement('div'); ph.className = 'reel-ph';
   const b = document.createElement('b'); b.textContent = 'Путь к 10 000 подписчиков';
   const a = document.createElement('a'); a.textContent = 'Смотреть в Instagram'; a.target = '_blank'; a.rel = 'noopener';
-  a.href = (document.getElementById('who') || {}).href || 'https://www.instagram.com/';
   ph.append(b, a); box.append(ph);
+  if (code) { a.href = `https://www.instagram.com/reel/${code}/`; return; }
+  a.href = (document.getElementById('who') || {}).href || 'https://www.instagram.com/';
   // ссылка на профиль приходит из данных чуть позже
   setTimeout(() => { const w = document.getElementById('who'); if (w) a.href = w.href; }, 4000);
 })();
