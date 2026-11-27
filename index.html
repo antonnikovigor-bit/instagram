@@ -480,6 +480,28 @@ details.all section { padding-top: 48px; }
   .get-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 720px) { .story { padding-top: 64px; } .steps li { grid-template-columns: 44px minmax(0, 1fr); } .steps .st-n { font-size: 24px; } }
+
+/* Цена и цена слова */
+.price-box { margin: 8px 0 40px; max-width: 900px; }
+.pr2, .out2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.pr2 div, .out2 div { border-radius: 18px; padding: 20px 22px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); display: grid; gap: 4px; }
+.pr2 small, .out2 small { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.pr2 b { font: 700 clamp(40px, 5vw, 60px)/1 Oswald, Manrope, sans-serif; }
+.pr2 .acc { background: linear-gradient(90deg, rgba(255,106,61,.2), rgba(255,177,92,.07)); border-color: rgba(255,177,92,.4); }
+.pr2 .acc b { color: var(--ch2); }
+.pr2 span, .out2 span { color: var(--text-2); font-size: 15px; line-height: 1.45; }
+.pr-t { color: var(--text-2); font-size: 16px; line-height: 1.55; margin: 18px 0; max-width: 760px; }
+.out2 b { font: 700 34px/1 Oswald, Manrope, sans-serif; }
+.out2 .ok b { color: #6fdc9b; } .out2 .no b { color: #ff8a7a; }
+.out2 .no { background: rgba(0,0,0,.25); }
+/* Живая трансляция потока */
+.live-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; max-width: 560px; }
+.live-strip div { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; padding: 12px 14px; }
+.live-strip b { display: block; font: 700 30px/1 Oswald, Manrope, sans-serif; color: #fff; }
+.live-strip span { font-size: 12.5px; color: var(--text-2); }
+.live-strip .lv-h { grid-column: 1 / -1; background: none; border: 0; padding: 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ch2); display: flex; align-items: center; gap: 8px; }
+.live-strip .lv-h::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #ff4d3d; animation: pulse 2s infinite; }
+@media (max-width: 720px) { .pr2, .out2 { grid-template-columns: 1fr; } .live-strip b { font-size: 24px; } }
 </style>
 </head>
 <body>
@@ -511,6 +533,7 @@ details.all section { padding-top: 48px; }
       <p class="lead">10 000 человек были рядом, пока я шёл к цели. <b>Теперь я прошу у каждого из вас 1 час в день.</b> Начни то, что откладывал весь год. Пока он ещё идёт.</p>
       <div class="h-cta">
         <p class="h-close" id="heroClose">Набор закрывается <b>29 ноября в 21:00</b> <span class="h-cd num" id="heroCd"></span></p>
+        <div class="live-strip" id="liveStrip" hidden></div>
         <div class="h-btns">
           <a class="go js-chal-btn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
           <a class="more" href="#story">С чего всё началось ↓</a>
@@ -594,13 +617,21 @@ details.all section { padding-top: 48px; }
       <div><small>6AM</small><b>6:00</b><span>Подъём в шесть. Тот же час, на час позже.</span></div>
       <div><small>MY AM</small><b>Твоё</b><span>Своё утро. Час для себя в удобное время.</span></div>
     </div>
-    <div class="word">
-      <b>Хочешь себе поверить? Держи слово.</b>
-      <span>При входе ты вносишь «цену слова». Дошёл до конца - она возвращается. Не дошёл - узнал точную цену своего «потом».</span>
+    <div class="price-box" id="price">
+      <h3 class="sub-h">У всего есть цена. <em>У слова тоже.</em></h3>
+      <div class="pr2">
+        <div><small>Участие</small><b>25 000 ₸</b><span>меньше 1 000 ₸ в день за час для себя</span></div>
+        <div class="acc"><small>Цена слова</small><b>50 000 ₸</b><span>вернётся, когда сдержишь слово</span></div>
+      </div>
+      <p class="pr-t">Цена слова - это твоё обязательство перед собой. Ты решил отдавать час в день своей цели и подкрепляешь это решение залогом. Мы символично выбрали сумму вдвое больше стоимости челленджа.</p>
+      <div class="out2">
+        <div class="ok"><small>Сдержал слово</small><b>25 000 ₸</b><span>Цена слова вернётся. Весь месяц обойдётся меньше 1 000 ₸ в день, а пользу заберёшь кратно больше.</span></div>
+        <div class="no"><small>Не сдержал</small><b>75 000 ₸</b><span>Цена слова сгорает. Твоё «потом» обходится втрое дороже.</span></div>
+      </div>
     </div>
     <div class="chal-cta">
       <a class="go js-chal-btn" id="chalBtn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
-      <small id="chalNote">Анкета на 3 минуты. Условия и цена - внутри.</small>
+      <small id="chalNote">Анкета на 3 минуты. Оплата - в конце анкеты.</small>
     </div>
   </div>
 </section>
@@ -623,7 +654,7 @@ details.all section { padding-top: 48px; }
     <span class="eb2">Вопросы</span>
     <h2 id="faqH">Коротко о главном</h2>
     <details><summary>Когда старт и сколько длится?</summary><p>30 дней: с 30 ноября по 29 декабря. Набор закрывается 29 ноября в 21:00 по Алматы, после старта новых участников не берём.</p></details>
-    <details><summary>Сколько стоит?</summary><p>Стоимость участия и «цена слова» указаны в анкете. Цена слова - это залог за твоё обещание: дошёл до конца - она возвращается.</p></details>
+    <details><summary>Сколько стоит?</summary><p>Участие - 25 000 ₸. Плюс цена слова - 50 000 ₸: это залог за твоё обещание. Дошёл до конца - цена слова возвращается до 7 января, и месяц стоит тебе 25 000 ₸.</p></details>
     <details><summary>Я не жаворонок. Мне подойдёт?</summary><p>Да. Кроме 5:00 и 6:00 есть ритм MY AM: встаёшь в своё время, а час для себя проводишь, когда удобно, и отчитываешься до 21:00.</p></details>
     <details><summary>Чем заниматься этот час?</summary><p>Своей целью: спорт, чтение, язык, проект, музыка - то, что ты откладывал весь год. Цель ты формулируешь в анкете.</p></details>
     <details><summary>А если пропущу день?</summary><p>Цена слова сгорает. Вернуться можно: внести её заново до 21:00 того же или следующего дня и идти дальше.</p></details>
@@ -648,7 +679,7 @@ details.all section { padding-top: 48px; }
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script src="app.js?v=c4d2a7f1"></script>
-<script src="challenge.js?v=5"></script>
+<script src="challenge.js?v=6"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>

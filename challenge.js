@@ -89,3 +89,34 @@
   // ссылка на профиль приходит из данных чуть позже
   setTimeout(() => { const w = document.getElementById('who'); if (w) a.href = w.href; }, 4000);
 })();
+
+// Живая трансляция потока (с 30 ноября): цифры из chas-live.json. Пустые значения - блок скрыт.
+(() => {
+  const box = document.getElementById('liveStrip');
+  if (!box) return;
+  const START = Date.parse('2026-11-30T00:00:00+05:00'), DAYS = 30;
+  const day = Math.floor((Date.now() - START) / 864e5) + 1;
+  if (day < 1 || day > DAYS + 1) return;
+  const nf = new Intl.NumberFormat('ru-RU');
+  const LOCAL = ['localhost', '127.0.0.1'].includes(location.hostname);
+  const q = new URLSearchParams(location.search).get('live');
+  const url = LOCAL && /^[\w.-]+\.json$/.test(q || '') ? q : 'chas-live.json';
+  fetch(url, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).then((d) => {
+    if (!d) return;
+    const items = [
+      [d.participants, 'участников в потоке'],
+      [d.hours, 'часов отдали себе'],
+      [d.tasks, 'заданий выполнено'],
+      [d.sleep, 'часов сна в среднем'],
+    ].filter(([v]) => typeof v === 'number' && v >= 0).slice(0, 3);
+    if (!items.length) return;
+    box.innerHTML = '';
+    const h = document.createElement('div'); h.className = 'lv-h'; h.textContent = 'Прямо сейчас · день ' + Math.min(day, DAYS) + ' из ' + DAYS; box.append(h);
+    for (const [v, l] of items) {
+      const c = document.createElement('div'); const b = document.createElement('b'); b.textContent = nf.format(v);
+      const s = document.createElement('span'); s.textContent = l; c.append(b, s); box.append(c);
+    }
+    box.hidden = false;
+    const hc = document.getElementById('heroClose'); if (hc) hc.hidden = true;
+  }).catch(() => {});
+})();
