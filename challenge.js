@@ -1,31 +1,71 @@
-// Блок «30 дней. Час для себя»: обратный отсчёт, день потока и полоса из 30 дней. Время - Алматы (UTC+5).
+// «Из 10 000 - в 1 час»: счётчик подписчиков превращается в «1 час», отсчёт до закрытия набора,
+// день потока и полоса из 30 дней. Время - Алматы (UTC+5).
 (() => {
   const START = Date.parse('2026-11-30T00:00:00+05:00');
   const CLOSE = Date.parse('2026-11-29T21:00:00+05:00'); // конец вступления
   const DAYS = 30;
-  const box = document.getElementById('chalDays');
-  const st = document.getElementById('chalStatus');
-  if (!box || !st) return;
+  const $ = (id) => document.getElementById(id);
   const pad = (n) => String(n).padStart(2, '0');
-  const btn = document.getElementById('chalBtn'), note = document.getElementById('chalNote');
-  const later = () => { btn.firstChild.textContent = 'Хочу в следующий поток '; note.textContent = 'Оставь контакт - напишем, когда откроем набор.'; };
-  const big = (cap, val, unit) => { st.innerHTML = ''; const c = document.createElement('span'); c.className = 'cap'; c.textContent = cap;
+  const nf = new Intl.NumberFormat('ru-RU');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 1. Счётчик: подписчики -> 1 час. Число берём из #followers, которое заполняет app.js.
+  const mN = $('morphN'), mCap = $('morphCap'), src = $('followers');
+  let morphed = false;
+  function morph(from) {
+    if (morphed || !mN) return; morphed = true;
+    mN.textContent = nf.format(from);
+    const finish = () => {
+      mN.textContent = '1'; mN.parentElement.classList.add('done');
+      mCap.classList.add('fade');
+      setTimeout(() => { mCap.innerHTML = 'час в день -<br>прошу у каждого из вас'; mCap.classList.remove('fade'); }, 300);
+    };
+    if (reduce) { setTimeout(finish, 1200); return; }
+    setTimeout(() => {
+      const t0 = performance.now(), dur = 2200;
+      const step = (t) => {
+        const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        const v = Math.max(1, Math.round(from - (from - 1) * e));
+        mN.textContent = nf.format(v);
+        if (k < 1) requestAnimationFrame(step); else finish();
+      };
+      requestAnimationFrame(step);
+    }, 1800);
+  }
+  const readSrc = () => { const v = parseInt((src && src.textContent || '').replace(/\D/g, ''), 10); return v > 0 ? v : 0; };
+  if (src) {
+    const go = () => { const v = readSrc(); if (v) { morph(v); return true; } return false; };
+    if (!go()) {
+      const mo = new MutationObserver(() => { if (go()) mo.disconnect(); });
+      mo.observe(src, { childList: true, characterData: true, subtree: true });
+      setTimeout(() => { mo.disconnect(); morph(10000); }, 6000); // данные не пришли - анимируем от 10 000
+    }
+  }
+
+  // 2. Отсчёт, полоса дней, кнопки
+  const box = $('chalDays'), st = $('chalStatus'), heroCd = $('heroCd'), heroClose = $('heroClose'), lastSub = $('lastSub');
+  const btns = document.querySelectorAll('.js-chal-btn');
+  const later = () => {
+    btns.forEach((b) => { b.firstChild.textContent = 'Хочу в следующий поток '; });
+    const n = $('chalNote'); if (n) n.textContent = 'Оставь контакт - напишем, когда откроем набор.';
+  };
+  const big = (cap, val, unit) => { if (!st) return; st.hidden = false; st.innerHTML = ''; const c = document.createElement('span'); c.className = 'cap'; c.textContent = cap;
     const u = document.createElement('div'); u.className = 'u'; const b = document.createElement('b'); b.className = 'num'; b.textContent = val;
     const s = document.createElement('span'); s.textContent = unit; u.append(b, s); st.append(c, u); };
   function tick() {
     const now = Date.now();
     const day = Math.floor((now - START) / 864e5) + 1;
-    box.innerHTML = Array.from({ length: DAYS }, (_, i) => `<i class="${day > DAYS || i + 1 < day ? 'on' : i + 1 === day ? 'now' : ''}"></i>`).join('');
+    if (box) box.innerHTML = Array.from({ length: DAYS }, (_, i) => `<i class="${day > DAYS || i + 1 < day ? 'on' : i + 1 === day ? 'now' : ''}"></i>`).join('');
     if (now < CLOSE) {
       const left = CLOSE - now;
-      const set = (k, v) => { const el = st.querySelector(`[data-cd="${k}"]`); if (el) el.textContent = pad(v); };
-      set('d', Math.floor(left / 864e5)); set('h', Math.floor(left % 864e5 / 36e5)); set('m', Math.floor(left % 36e5 / 6e4));
+      if (heroCd) heroCd.textContent = `${pad(Math.floor(left / 864e5))} д : ${pad(Math.floor(left % 864e5 / 36e5))} ч : ${pad(Math.floor(left % 36e5 / 6e4))} м`;
       return true;
     }
     later();
-    if (day < 1) big('Набор закрыт · старт 30 ноября', '00', 'до старта считанные часы');
-    else if (day <= DAYS) big('Поток 1 идёт · итоги 30 декабря', pad(day) + ' / ' + DAYS, 'день потока');
-    else big('Поток 1 завершён', '30 / 30', 'итоги подведены 30 декабря');
+    if (day < 1) { big('Набор закрыт · старт 30 ноября', '00', 'до старта считанные часы'); if (heroClose) heroClose.innerHTML = 'Набор закрыт. <b>Старт 30 ноября</b>'; }
+    else if (day <= DAYS) { big('Поток 1 идёт · итоги 30 декабря', pad(day) + ' / ' + DAYS, 'день потока'); if (heroClose) heroClose.innerHTML = 'Поток 1 идёт: <b>день ' + day + ' из ' + DAYS + '</b>'; }
+    else { big('Поток 1 завершён', '30 / 30', 'итоги подведены 30 декабря'); if (heroClose) heroClose.innerHTML = '<b>Поток 1 завершён</b>'; }
+    if (lastSub) lastSub.textContent = 'Набор в поток 1 закрыт. Оставь контакт - напишем, когда откроем следующий.';
     return false;
   }
   if (tick()) { const t = setInterval(() => { if (!tick()) clearInterval(t); }, 30000); }
