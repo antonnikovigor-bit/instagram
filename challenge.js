@@ -70,3 +70,22 @@
   }
   if (tick()) { const t = setInterval(() => { if (!tick()) clearInterval(t); }, 30000); }
 })();
+
+// Ролик «Путь к 10 000 подписчиков»: вставь код рилса в data-reel у #storyReel (instagram.com/reel/КОД/).
+(() => {
+  const box = document.getElementById('storyReel');
+  if (!box) return;
+  const code = (box.dataset.reel || '').replace(/[^\w-]/g, '');
+  if (code) {
+    const f = document.createElement('iframe');
+    f.src = `https://www.instagram.com/reel/${code}/embed`; f.loading = 'lazy'; f.title = 'Путь к 10 000 подписчиков'; f.allow = 'encrypted-media';
+    box.append(f); return;
+  }
+  const ph = document.createElement('div'); ph.className = 'reel-ph';
+  const b = document.createElement('b'); b.textContent = 'Путь к 10 000 подписчиков';
+  const a = document.createElement('a'); a.textContent = 'Смотреть в Instagram'; a.target = '_blank'; a.rel = 'noopener';
+  a.href = (document.getElementById('who') || {}).href || 'https://www.instagram.com/';
+  ph.append(b, a); box.append(ph);
+  // ссылка на профиль приходит из данных чуть позже
+  setTimeout(() => { const w = document.getElementById('who'); if (w) a.href = w.href; }, 4000);
+})();
