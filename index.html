@@ -345,7 +345,7 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
 .hero-band .lead b { color: #fff; }
 .hero-band .lead { margin-bottom: 14px; }
 .slogan { font: 600 17px/1.4 Manrope, sans-serif; color: #fff; max-width: 520px; margin: 0 0 26px; padding-left: 14px; border-left: 3px solid var(--ch2, #ffb15c); }
-.slogan em { font-style: normal; color: var(--ch2, #ffb15c); }
+.slogan em { font-style: normal; color: var(--ch2, #ffb15c); display: block; margin-top: 6px; }
 .h-cta { display: grid; gap: 14px; }
 .h-close { margin: 0; font-size: 15px; color: var(--text-2); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
 .h-close b { color: #fff; }
@@ -520,7 +520,13 @@ details.all section { padding-top: 48px; }
 .rules .btn { border-radius: 999px; padding: 14px 20px; }
 @media (max-width: 720px) { .rules-row { grid-template-columns: 1fr; } .leaf { max-width: 280px; } }
 .steps .book { display: flex; gap: 16px; align-items: center; margin-top: 16px; text-decoration: none; color: #fff; padding: 12px; border: 1px solid rgba(255,255,255,.14); border-radius: 16px; max-width: 420px; }
-.steps .book:hover { border-color: var(--ch2); }
+.steps .book:hover { border-color: rgba(255,255,255,.14); }
+.book-img { flex: none; width: 96px; height: auto; border-radius: 3px 6px 6px 3px; box-shadow: 0 8px 20px rgba(0,0,0,.45); }
+.book-t a { color: var(--ch2); font-weight: 700; font-size: 14px; text-decoration: none; }
+.book-t a:hover { text-decoration: underline; }
+.st-link { display: inline-block; margin-top: 8px; color: var(--ch2); font-weight: 700; font-size: 15px; text-decoration: none; }
+.st-link:hover { text-decoration: underline; }
+.steps p + p { margin-top: 10px; }
 .book-cover { flex: none; width: 86px; height: 124px; border-radius: 4px 8px 8px 4px; padding: 10px 8px; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(160deg, #1b2a4a, #e0603a 70%, #ffb15c); box-shadow: inset 4px 0 0 rgba(0,0,0,.25), 0 8px 20px rgba(0,0,0,.4); }
 .book-cover i { font: 700 18px/1 Oswald, sans-serif; font-style: normal; }
 .book-cover em { font: 700 13px/1.05 Oswald, sans-serif; font-style: normal; text-transform: uppercase; }
@@ -611,7 +617,6 @@ details.all section { padding-top: 48px; }
         <div class="live-strip" id="liveStrip" hidden></div>
         <div class="h-btns">
           <a class="go js-chal-btn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
-          <a class="more" href="#story">Как всё началось ↓</a>
         </div>
       </div>
     </div>
@@ -622,27 +627,23 @@ details.all section { padding-top: 48px; }
   <div class="wrap">
     <div class="story-grid">
       <ol class="steps">
-        <li><span class="st-n">01</span><div><b>Как появился этот сайт</b><p>Я сделал его, чтобы каждый день публично показывать путь от 3 600 к 10 000 подписчиков.</p></div></li>
+        <li><span class="st-n">01</span><div><b>Как появился этот сайт</b><p>Я сделал его в сентябре, когда поставил публичную цель: до конца года дойти до 10 000 подписчиков.</p><a class="st-link" href="https://www.instagram.com/reel/Dd_cMvpNhWu/" target="_blank" rel="noopener">Смотреть ролик, с которого начался этот путь ↗</a></div></li>
         <li><span class="st-n">02</span><div><b>66 дней подъёмов в 5 утра</b><p>Всё началось с книги Робина Шармы «Клуб 5 часов утра» и вызова: 66 дней подряд вставать в 5 утра. Это была моя первая публичная декларация.</p>
-          <figure class="dawn-ph scene"><video src="video/dawn-5am.mp4" poster="video/dawn-5am.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Рассвет в горах"></video><figcaption>5:00</figcaption></figure>
-          <a class="book" href="https://ast.ru/book/klub-5-chasov-utra-sekret-lichnoy-effektivnosti-ot-monakha-kotoryy-prodal-svoy-ferrari-868045/" target="_blank" rel="noopener">
-            <span class="book-cover" aria-hidden="true"><i>5:00</i><em>Клуб<br>«5 часов<br>утра»</em><small>Робин Шарма</small></span>
-            <span class="book-t"><b>Клуб «5 часов утра»</b><span>Робин Шарма</span><u>Где почитать →</u></span>
-          </a></div></li>
+          <div class="book">
+            <img class="book-img" src="img/klub-5-chasov-utra.jpg" alt="Обложка книги Робина Шармы «Клуб 5 часов утра»" width="300" height="472" loading="lazy">
+            <span class="book-t"><b>Клуб «5 часов утра»</b><span>Робин Шарма</span>
+              <a href="https://www.litres.ru/book/robin-sharma-2/klub-5-chasov-utra-sekret-lichnoy-effektivnosti-ot-monaha-k-48428075/" target="_blank" rel="noopener">Читать электронную книгу ↗</a>
+              <a href="https://www.litres.ru/audiobook/robin-sharma-2/klub-5-chasov-utra-sekret-lichnoy-effektivnosti-ot-monaha-k-48504319/" target="_blank" rel="noopener">Слушать аудиокнигу ↗</a></span>
+          </div></div></li>
         <li><span class="st-n">03</span><div><b>Что я понял</b><p>Публичное слово и люди рядом помогают идти к цели быстрее, веселее и надёжнее. Сказал вслух - слиться сложнее.</p></div></li>
         <li><span class="st-n">04</span><div><b>Дальше - всё публично</b><p>Каждую большую цель я объявлял в Instagram. Пролистай ленту - там всё есть.</p>
-          <div class="proofs">
-            <a href="https://www.instagram.com/p/CjfpX_atD4K/" target="_blank" rel="noopener"><img src="img/bike-poster.webp" alt="IRONMAN" loading="lazy"><span>IRONMAN</span></a>
-            <a href="https://www.instagram.com/p/DUf-v2cje_o/" target="_blank" rel="noopener"><img src="img/ocean-poster.webp" alt="OCEANMAN" loading="lazy"><span>OCEANMAN</span></a>
-            <a href="https://www.instagram.com/p/DcY30WYBLGk/" target="_blank" rel="noopener"><img src="img/bosphorus-poster.webp" alt="Босфор" loading="lazy"><span>Босфор</span></a>
-          </div>
           <ul class="goals"><li><a href="https://www.instagram.com/p/CaiqQO6tzhN/" target="_blank" rel="noopener">Научиться плавать</a></li><li><a href="https://www.instagram.com/p/CjfpX_atD4K/" target="_blank" rel="noopener">IRONMAN</a></li><li><a href="https://www.instagram.com/p/DUf-v2cje_o/" target="_blank" rel="noopener">OCEANMAN</a></li><li><a href="https://www.instagram.com/p/DcY30WYBLGk/" target="_blank" rel="noopener">Проплыть Босфор</a></li><li><a href="https://www.instagram.com/reel/CLJl7wmDzSl/" target="_blank" rel="noopener">Встать на лыжи</a></li><li><a href="https://www.instagram.com/reel/CsQCnROuv_j/" target="_blank" rel="noopener">Прыжок с парашютом</a></li><li><a href="img/chtenie-400-dney.jpg" target="_blank" rel="noopener">Год чтения каждый день</a></li><li><a href="https://www.instagram.com/p/DThI9vpApgD/" target="_blank" rel="noopener">Построить лучшую управляющую компанию в стране</a></li><li><a href="https://www.instagram.com/reel/Df12ViuNUaU/" target="_blank" rel="noopener">Научиться делать сальто</a></li></ul></div></li>
         <li><span class="st-n">05</span><div><b>10 000 за 3 месяца</b><p>В сентябре я поставил цель: за 3 месяца сделать больше, чем за 5 лет. И каждый день отдавал ей время.</p>
           <dl class="nums"><div><dt>3 600</dt><dd>подписчиков за все годы, до сентября 2026</dd></div><div><dt>1 600</dt><dd>из них - за 2 года, пока публично строили с нуля <a class="nums-a" href="https://www.instagram.com/atlas_capital.kz/" target="_blank" rel="noopener">Atlas Capital</a></dd></div><div><dt><small>Дошёл до</small>10&nbsp;000</dt><dd>за 3 месяца фокуса</dd></div><div><dt>1,4 млн</dt><dd>просмотров страницы за эти 3 месяца</dd></div></dl>
           <a class="stats-proof" href="img/stats-90-dney.jpg" target="_blank" rel="noopener"><img src="img/stats-90-dney.jpg" alt="Статистика Instagram за 90 дней: 1 429 043 просмотра, 10 622 подписчика, +6 901" loading="lazy" width="1320" height="831"><span>Статистика Instagram за 90 дней ↗</span></a></div></li>
-        <li><span class="st-n">06</span><div><b>Мой пример стал чьим-то</b><p>Кто-то научился плавать, кто-то победил страх воды, начал бегать или читать. Вместе идти легче.</p></div></li>
-        <li><span class="st-n">07</span><div><b>«А если я ничего не хочу?»</b><p>Мне часто это пишут. Когда я начинал, у меня тоже не было хобби: работа, семья, дом. Утренний час для себя научил меня слышать, чего я хочу. Пробуя, ошибаясь и делая невозможное возможным.</p></div></li>
-        <li class="st-now"><span class="st-n">08</span><div><b>Почему сейчас</b><p>Я отдаю вам инструмент, с которого начался мой путь. Если откликается - это не случайно. Не откладывай на следующий год: начни в понедельник, 30 ноября, и заложи фундамент следующего года.</p></div></li>
+        <li><span class="st-n">06</span><div><b>Мои декларации целей послужили кому-то примером</b><p>Кто-то научился плавать, кто-то победил страх воды, начал бегать или читать. Вместе идти легче.</p></div></li>
+        <li><span class="st-n">07</span><div><b>«А если я ничего не хочу?»</b><p>Это один из самых частых вопросов. Такой этап бывает у всех, и утренний час для себя - хорошее средство от него. Когда ты наедине с собой, в тишине, ты начинаешь слышать свои настоящие интересы и желания. Днём, в шуме информационного потока, времени подумать, чего хочешь именно ты, почти не остаётся.</p></div></li>
+        <li class="st-now"><span class="st-n">08</span><div><b>Почему сейчас</b><p>Последние 3 месяца я всё чаще слышу: «Начну с января». Но времени достаточно, чтобы начать уже сейчас. Не надо откладывать на Новый год или на следующий понедельник - делай здесь и сейчас.</p><p>Я дошёл до 10 000 подписчиков и закрыл свою цель. Теперь хочу поделиться с новой аудиторией инструментом, который помог мне прийти и к этой цели, и ко всем целям, которые я здесь декларировал. Старт - 30 ноября.</p></div></li>
       </ol>
 
     </div>
