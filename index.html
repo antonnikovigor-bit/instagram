@@ -6,6 +6,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Из 10 000 - в 1 час · Игорь Антонников</title>
+<link rel="preload" as="image" href="video/hero-dawn.jpg">
 <meta name="description" content="1,4 млн просмотров и 10 622 подписчика за 90 дней. А началось всё с 66 дней подъёмов в 5 утра. Челлендж «30 дней. Час для себя», старт 30 ноября.">
 <meta property="og:title" content="Из 10 000 - в 1 час">
 <meta property="og:description" content="Челлендж «30 дней. Час для себя». Набор до 29 ноября, 21:00.">
@@ -573,7 +574,7 @@ details.all section { padding-top: 48px; }
 .scenes .scene figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 14px 12px; font: 700 18px/1 Oswald, sans-serif; text-transform: uppercase; color: #fff; background: linear-gradient(transparent, rgba(10,6,14,.8)); }
 .scenes-k { color: var(--text-2); font-size: 15px; margin: 12px 0 28px; }
 @media (max-width: 720px) { .scenes { grid-template-columns: 1fr; } }
-.hero-vids { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s; }
+.hero-vids { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s; background: #0b0a09 url(video/hero-dawn.jpg) center / cover no-repeat; }
 .sky.has-vid .hero-vids { opacity: 1; }
 .hero-vids video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; }
 .hero-vids video.on { opacity: 1; }
@@ -584,10 +585,10 @@ details.all section { padding-top: 48px; }
 </head>
 <body>
 <div class="dawn-hero" id="top">
-  <div class="sky" aria-hidden="true">
+  <div class="sky has-vid" aria-hidden="true">
     <i class="stars"></i>
     <i class="sun" id="sun"></i>
-    <div class="hero-vids" id="heroVids"><video muted playsinline loop preload="none" poster="video/hero-dawn.jpg" data-src="video/hero-dawn.mp4"></video><video muted playsinline loop preload="none" poster="video/hero-run.jpg" data-src="video/hero-run.mp4"></video><video muted playsinline loop preload="none" poster="video/hero-meditation.jpg" data-src="video/hero-meditation.mp4"></video><video muted playsinline loop preload="none" poster="video/hero-reading.jpg" data-src="video/hero-reading.mp4"></video></div>
+    <div class="hero-vids" id="heroVids"><video class="on" muted playsinline loop autoplay preload="auto" poster="video/hero-dawn.jpg" src="video/hero-dawn.mp4" data-src="video/hero-dawn.mp4"></video><video muted playsinline loop preload="none" poster="video/hero-run.jpg" data-src="video/hero-run.mp4"></video><video muted playsinline loop preload="none" poster="video/hero-meditation.jpg" data-src="video/hero-meditation.mp4"></video><video muted playsinline loop preload="none" poster="video/hero-reading.jpg" data-src="video/hero-reading.mp4"></video></div>
     <svg class="hills" viewBox="0 0 1440 320" preserveAspectRatio="none">
       <path class="h1" d="M0 190 L120 120 L210 160 L330 70 L450 150 L560 95 L700 170 L820 80 L940 140 L1060 60 L1190 150 L1300 100 L1440 160 L1440 320 L0 320 Z"/>
       <path class="h2" d="M0 240 L160 180 L300 225 L430 170 L600 230 L760 185 L900 240 L1050 190 L1220 245 L1340 205 L1440 230 L1440 320 L0 320 Z"/>
@@ -790,7 +791,7 @@ details.all section { padding-top: 48px; }
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script src="app.js?v=c4d2a7f1"></script>
-<script src="challenge.js?v=11"></script>
+<script src="challenge.js?v=12"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>
