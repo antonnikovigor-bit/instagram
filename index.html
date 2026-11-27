@@ -447,7 +447,7 @@ details.all section { padding-top: 48px; }
 .story { background: #0b0a09; color: #fff; --text-2: rgba(255,255,255,.76); padding: 96px 0 16px; }
 .story h2, .get h2, .faq h2 { font: 700 clamp(40px, 6.4vw, 80px)/.95 Oswald, Manrope, sans-serif; text-transform: uppercase; margin: 0 0 36px; }
 .story h2 em, .get h2 em { font-style: normal; color: var(--ch2); }
-.story-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.story-grid { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 760px; }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; }
 .steps li { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid rgba(255,255,255,.12); }
 .steps .st-n { font: 700 30px/1 Oswald, sans-serif; color: rgba(255,255,255,.35); }
@@ -567,6 +567,13 @@ details.all section { padding-top: 48px; }
 .scenes .scene figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 14px 12px; font: 700 18px/1 Oswald, sans-serif; text-transform: uppercase; color: #fff; background: linear-gradient(transparent, rgba(10,6,14,.8)); }
 .scenes-k { color: var(--text-2); font-size: 15px; margin: 12px 0 28px; }
 @media (max-width: 720px) { .scenes { grid-template-columns: 1fr; } }
+.hero-vids { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s; }
+.sky.has-vid .hero-vids { opacity: 1; }
+.hero-vids video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; }
+.hero-vids video.on { opacity: 1; }
+.hero-vids::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(7,9,21,.7) 0%, rgba(7,9,21,.35) 35%, rgba(7,9,21,.45) 65%, #0b0a09 100%); }
+.sky.has-vid .sun, .sky.has-vid .stars, .sky.has-vid .hills .h1, .sky.has-vid .hills .h2 { opacity: 0; transition: opacity 1.2s; }
+@media (max-width: 720px) { .hero-vids::after { background: linear-gradient(rgba(7,9,21,.72) 0%, rgba(7,9,21,.55) 40%, rgba(7,9,21,.7) 75%, #0b0a09 100%); } }
 </style>
 </head>
 <body>
@@ -574,6 +581,7 @@ details.all section { padding-top: 48px; }
   <div class="sky" aria-hidden="true">
     <i class="stars"></i>
     <i class="sun" id="sun"></i>
+    <div class="hero-vids" id="heroVids"><video muted playsinline loop preload="none" poster="video/hero-dawn.jpg" data-src="video/hero-dawn.mp4"></video><video muted playsinline loop preload="none" poster="video/hero-run.jpg" data-src="video/hero-run.mp4"></video><video muted playsinline loop preload="none" poster="video/hero-meditation.jpg" data-src="video/hero-meditation.mp4"></video><video muted playsinline loop preload="none" poster="video/hero-reading.jpg" data-src="video/hero-reading.mp4"></video></div>
     <svg class="hills" viewBox="0 0 1440 320" preserveAspectRatio="none">
       <path class="h1" d="M0 190 L120 120 L210 160 L330 70 L450 150 L560 95 L700 170 L820 80 L940 140 L1060 60 L1190 150 L1300 100 L1440 160 L1440 320 L0 320 Z"/>
       <path class="h2" d="M0 240 L160 180 L300 225 L430 170 L600 230 L760 185 L900 240 L1050 190 L1220 245 L1340 205 L1440 230 L1440 320 L0 320 Z"/>
@@ -599,7 +607,7 @@ details.all section { padding-top: 48px; }
       <p class="lead">А началось всё с одного челленджа: <b>66 дней подъёмов в 5 утра.</b> Тогда я просто хотел час для себя. Этот час научил меня дисциплине, дал хобби, привёл к IRONMAN, Босфору и 10 000.</p>
       <p class="slogan">Час для себя. Сначала себе, потом всем. <em>Начни с себя, и мир вокруг начнёт меняться.</em></p>
       <div class="h-cta">
-        <p class="h-close" id="heroClose">Набор закрывается <b>29 ноября в 21:00</b> <span class="h-cd num" id="heroCd"></span> <span class="seats-pill">осталось 13 мест</span></p>
+        <p class="h-close" id="heroClose">Набор закрывается <b>29 ноября в 21:00</b> <span class="h-cd num" id="heroCd"></span></p>
         <div class="live-strip" id="liveStrip" hidden></div>
         <div class="h-btns">
           <a class="go js-chal-btn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
@@ -610,13 +618,11 @@ details.all section { padding-top: 48px; }
   </div>
 </div>
 
-<section class="story" id="story" aria-labelledby="storyH">
+<section class="story" id="story" aria-label="Как появился этот сайт">
   <div class="wrap">
-    <span class="eb2">Путь моего блога</span>
-    <h2 id="storyH">Мой блог начался <em>с челленджа раннего подъёма</em></h2>
     <div class="story-grid">
       <ol class="steps">
-        <li><span class="st-n">01</span><div><b>Зачем этот сайт</b><p>Я сделал его, чтобы каждый день публично показывать путь от 3 600 к 10 000 подписчиков. Почему - рассказываю в ролике.</p></div></li>
+        <li><span class="st-n">01</span><div><b>Как появился этот сайт</b><p>Я сделал его, чтобы каждый день публично показывать путь от 3 600 к 10 000 подписчиков.</p></div></li>
         <li><span class="st-n">02</span><div><b>66 дней подъёмов в 5 утра</b><p>Всё началось с книги Робина Шармы «Клуб 5 часов утра» и вызова: 66 дней подряд вставать в 5 утра. Это была моя первая публичная декларация.</p>
           <figure class="dawn-ph scene"><video src="video/dawn-5am.mp4" poster="video/dawn-5am.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Рассвет в горах"></video><figcaption>5:00</figcaption></figure>
           <a class="book" href="https://ast.ru/book/klub-5-chasov-utra-sekret-lichnoy-effektivnosti-ot-monakha-kotoryy-prodal-svoy-ferrari-868045/" target="_blank" rel="noopener">
@@ -638,10 +644,7 @@ details.all section { padding-top: 48px; }
         <li><span class="st-n">07</span><div><b>«А если я ничего не хочу?»</b><p>Мне часто это пишут. Когда я начинал, у меня тоже не было хобби: работа, семья, дом. Утренний час для себя научил меня слышать, чего я хочу. Пробуя, ошибаясь и делая невозможное возможным.</p></div></li>
         <li class="st-now"><span class="st-n">08</span><div><b>Почему сейчас</b><p>Я отдаю вам инструмент, с которого начался мой путь. Если откликается - это не случайно. Не откладывай на следующий год: начни в понедельник, 30 ноября, и заложи фундамент следующего года.</p></div></li>
       </ol>
-      <div class="reel-card">
-        <div class="reel-embed" id="storyReel" data-reel="Dd_cMvpNhWu"></div>
-        <p class="reel-cap">Ролик, с которого начался путь к 10 000: зачем я это затеял.</p>
-      </div>
+
     </div>
   </div>
 </section>
@@ -722,7 +725,7 @@ details.all section { padding-top: 48px; }
     </div>
     <div class="chal-cta">
       <a class="go js-chal-btn" id="chalBtn" href="chas/?src=site">Участвовать <span aria-hidden="true">→</span></a>
-      <small id="chalNote"><b class="seats" data-seats="13">Осталось 13 мест.</b> Анкета на 3 минуты.</small>
+      <small id="chalNote">Анкета на 3 минуты.</small>
     </div>
   </div>
 </section>
@@ -786,7 +789,7 @@ details.all section { padding-top: 48px; }
 <div class="tip" id="tip" role="tooltip"></div>
 
 <script src="app.js?v=c4d2a7f1"></script>
-<script src="challenge.js?v=10"></script>
+<script src="challenge.js?v=11"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>
