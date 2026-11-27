@@ -152,7 +152,7 @@
   const slot = document.getElementById('heroSlot');
   if (!slot) return;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const ITEMS = ['Пройти IRONMAN', 'Проплыть OCEANMAN', 'Переплыть Босфор', 'Полюбить горы', 'Читать каждый день', 'Медитировать', 'Прыгнуть с парашютом', 'Научиться делать сальто', 'Обрести хобби', null];
+  const ITEMS = ['Пройти IRON<span class="im">M</span>AN', 'Проплыть OCEANMAN', 'Переплыть Босфор', 'Полюбить горы', 'Читать каждый день', 'Медитировать', 'Прыгнуть с парашютом', 'Научиться делать сальто', 'Обрести хобби', null];
   const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   let cur = slot.firstElementChild, i = 0;
   const swap = html => {
