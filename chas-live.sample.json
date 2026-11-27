@@ -1,0 +1,136 @@
+{
+ "_": "Тестовые данные для превью табло (?live=chas-live.sample.json на localhost).",
+ "day": 5,
+ "updatedAt": "2026-12-04T09:35:00+05:00",
+ "participants": 68,
+ "hours": 320,
+ "tasks": null,
+ "sleep": 7.1,
+ "today": {
+  "up5": 27,
+  "of5": 30,
+  "up6": 18,
+  "of6": 20
+ },
+ "teams": [
+  {
+   "name": "Десятка 1",
+   "rhythm": "5AM",
+   "size": 10,
+   "today": {
+    "closed": 10,
+    "of": 10
+   },
+   "daily": [
+    1.0,
+    1.0,
+    0.9,
+    0.8,
+    1.0
+   ],
+   "allIn": 3
+  },
+  {
+   "name": "Десятка 2",
+   "rhythm": "5AM",
+   "size": 10,
+   "today": {
+    "closed": 9,
+    "of": 10
+   },
+   "daily": [
+    1.0,
+    0.9,
+    1.0,
+    1.0,
+    0.9
+   ],
+   "allIn": 3
+  },
+  {
+   "name": "Десятка 3",
+   "rhythm": "5AM",
+   "size": 10,
+   "today": {
+    "closed": 10,
+    "of": 10
+   },
+   "daily": [
+    1.0,
+    0.9,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "allIn": 4
+  },
+  {
+   "name": "Десятка 1",
+   "rhythm": "6AM",
+   "size": 10,
+   "today": {
+    "closed": 10,
+    "of": 10
+   },
+   "daily": [
+    0.9,
+    0.9,
+    1.0,
+    0.9,
+    1.0
+   ],
+   "allIn": 2
+  },
+  {
+   "name": "Десятка 2",
+   "rhythm": "6AM",
+   "size": 10,
+   "today": {
+    "closed": 10,
+    "of": 10
+   },
+   "daily": [
+    0.9,
+    0.9,
+    1.0,
+    0.9,
+    1.0
+   ],
+   "allIn": 2
+  },
+  {
+   "name": "Десятка 1",
+   "rhythm": "MY AM",
+   "size": 9,
+   "today": {
+    "closed": 9,
+    "of": 9
+   },
+   "daily": [
+    1.0,
+    0.78,
+    0.78,
+    0.89,
+    1.0
+   ],
+   "allIn": 2
+  },
+  {
+   "name": "Десятка 2",
+   "rhythm": "MY AM",
+   "size": 9,
+   "today": {
+    "closed": 9,
+    "of": 9
+   },
+   "daily": [
+    0.89,
+    0.89,
+    0.89,
+    1.0,
+    1.0
+   ],
+   "allIn": 2
+  }
+ ]
+}

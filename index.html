@@ -298,6 +298,33 @@ footer .small { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
 .days i.on { background: linear-gradient(var(--ch2), var(--ch)); border-color: transparent; }
 .days i.now { background: linear-gradient(var(--ch2), var(--ch)); border-color: transparent; box-shadow: 0 0 22px 4px rgba(255,106,61,.65); }
 .days-l { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 56px; }
+/* Табло потока: общие цифры и баллы десяток по ритмам (данные из chas-live.json) */
+.board { margin: -24px 0 64px; max-width: 760px; }
+.board[hidden] { display: none; }
+.bd-h { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ch2); margin: 0 0 18px; }
+.bd-h::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #ff4d3d; animation: pulse 2s infinite; }
+.bd-h small { margin-left: auto; font-size: 11px; letter-spacing: .08em; color: var(--muted); font-weight: 600; text-transform: none; }
+.bd-n { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 0 0 30px; }
+.bd-n div { background: rgba(255,255,255,.06); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.bd-n b { display: block; font: 700 34px/1 Oswald, Manrope, sans-serif; font-variant-numeric: tabular-nums; color: #fff; }
+.bd-n b small { font-size: .55em; color: var(--muted); margin-left: 2px; }
+.bd-n span { display: block; font-size: 12.5px; color: var(--text-2); margin-top: 6px; }
+.bd-tabs { display: flex; gap: 8px; margin: 0 0 14px; }
+.bd-tabs button { font: 700 13px/1 Manrope, sans-serif; letter-spacing: .1em; color: var(--text-2); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 10px 16px; cursor: pointer; }
+.bd-tabs button[aria-pressed="true"] { color: #120b07; background: linear-gradient(90deg, var(--ch), var(--ch2)); border-color: transparent; }
+.bd-t { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.bd-t li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; align-items: center; gap: 4px 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.bd-t .pl { font: 700 18px/1 Oswald, sans-serif; color: var(--muted); text-align: center; }
+.bd-t li.top .pl { color: var(--ch2); }
+.bd-t .nm { font-weight: 700; color: #fff; }
+.bd-t .nm small { display: block; font-weight: 500; font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+.bd-t .sc { text-align: right; font: 700 26px/1 Oswald, sans-serif; font-variant-numeric: tabular-nums; color: #fff; }
+.bd-t .sc small { display: block; font: 600 12px/1.2 Manrope, sans-serif; color: #4cc47e; margin-top: 4px; }
+.bd-t .bars { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(30, minmax(0, 1fr)); gap: 2px; align-items: end; height: 22px; }
+.bd-t .bars i { display: block; border-radius: 2px; background: rgba(255,255,255,.08); height: 4px; }
+.bd-t .bars i.on { background: linear-gradient(var(--ch2), var(--ch)); }
+.bd-note { font-size: 12.5px; color: var(--muted); margin: 14px 0 0; }
+@media (max-width: 720px) { .bd-n { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bd-n b { font-size: 28px; } .board { margin-top: -32px; } }
 .rh3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0 0 14px; }
 .rh3 div { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 22px 22px 20px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .rh3 small { display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ch2); }
@@ -713,6 +740,7 @@ details.all section { padding-top: 48px; }
     <div class="cd" id="chalStatus" hidden></div>
     <div class="days" id="chalDays" aria-hidden="true"></div>
     <div class="days-l"><span>Старт 30&nbsp;ноября</span><span>Финиш 29&nbsp;декабря</span></div>
+    <div class="board" id="board" hidden></div>
     <h3 class="sub-h">Выбери свой режим. <em>Тот, что комфортен тебе.</em></h3>
     <div class="rh3">
       <div><small>5AM</small><b>5:00</b><span>Для тех, кто хочет вызова: выйти из&nbsp;зоны комфорта и&nbsp;посмотреть на&nbsp;привычную картину по-новому.</span></div>
@@ -788,6 +816,7 @@ details.all section { padding-top: 48px; }
 
 <script src="app.js?v=c4d2a7f1"></script>
 <script src="challenge.js?v=17"></script>
+<script src="board.js?v=1"></script>
 <!-- Cloudflare Web Analytics: без куки, без персональных данных --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "11e036a747004eea9f4191d522e23948"}'></script>
 </body>
 </html>
