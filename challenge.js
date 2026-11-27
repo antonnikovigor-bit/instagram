@@ -152,7 +152,15 @@
   const slot = document.getElementById('heroSlot');
   if (!slot) return;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const ITEMS = ['Пройти IRON<span class="im">M</span>AN', 'Проплыть OCEANMAN', 'Переплыть Босфор', 'Полюбить горы', 'Читать каждый день', 'Медитировать', 'Прыгнуть с парашютом', 'Научиться делать сальто', 'Обрести хобби', null];
+  const IC = {fin: '<path d="M2 19c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/><path d="M7 15.5C8 10 11 6 17 5c-1.5 3-1.5 7 .5 10.5"/>', bridge: '<path d="M2 13h20M6 13V5M18 13V5M6 5c2 5 10 5 12 0"/><path d="M2 19c2 0 3-1.5 5-1.5s3 1.5 5 1.5 3-1.5 5-1.5 3 1.5 5 1.5"/>', peaks: '<path d="M2 20 9 8l4 6 3-4 6 10z"/><path d="m7.2 11 1.8 1.5 1.6-1.6"/>', book: '<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3zM21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>', lotus: '<circle cx="12" cy="4.5" r="2"/><path d="M12 7.5v5M12 9l-4 4 2.5 1.2M12 9l4 4-2.5 1.2M4.5 17.5c2-1.6 4.6-2.2 7.5-2.2s5.5.6 7.5 2.2c-2 1.4-4.6 2-7.5 2s-5.5-.6-7.5-2z"/>', chute: '<path d="M3 11a9 7 0 0 1 18 0zM3 11l9 7 9-7M12 11v7"/><rect x="10.5" y="18" width="3" height="3" rx="1"/>', flip: '<path d="M4.5 9.5a8 8 0 0 1 15 0"/><path d="M20.5 5.5l-1 4-4-1"/><circle cx="12" cy="19.5" r="1.8"/><path d="M12 17.5v-5.5M12 12l-3-4.5M12 12l3-4.5M12 15.5l-3 1.8M12 15.5l3 1.8"/>', palette: '<path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-.9 2-1.8 0-1.2-1-1.5-1-2.6 0-.9.7-1.6 1.6-1.6H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/>', ig: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/>'};
+  const MDOT = '<svg class="hh-logo hh-mdot" viewBox="150 4 428 592" aria-label="IRONMAN"><circle cx="363" cy="122" r="113"/><path d="M156 245H571V592H444V535L408 592H320L284 535V592H156z"/></svg>';
+  const PIC = (n, a) => '<img class="hh-logo hh-pic" src="img/icon-' + n + '.png" alt="' + a + '">';
+  const OCEAN = '<img class="hh-logo hh-ocean" src="img/logo-oceanman.png" alt="OCEANMAN">';
+  const ic = k => '<svg class="hh-ic" viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + '</svg>';
+  const ITEMS = ['Пройти IRON<span class="im">M</span>AN ' + MDOT, 'Проплыть OCEANMAN ' + OCEAN, 'Переплыть Босфор ' + ic('bridge'), 'Полюбить горы ' + ic('peaks'), 'Читать каждый день ' + ic('book'), 'Медитировать ' + PIC('meditation', 'Медитация'), 'Прыгнуть с парашютом ' + PIC('chute', 'Парашют'), 'Научиться делать сальто ' + PIC('flip', 'Сальто'), 'Обрести хобби <img class="hh-logo hh-pic hh-hobby" src="img/hobby-guitar.png" alt="Хобби">', null];
+  const HOB = ['guitar', 'easel', 'chess', 'fishing', 'cooking', 'plants'].map(n => 'img/hobby-' + n + '.png');
+  HOB.concat(['img/icon-meditation.png', 'img/icon-flip.png', 'img/icon-chute.png']).forEach(u => { new Image().src = u; });
+  const cycle = img => { let k = 0; const t = setInterval(() => { k++; if (k >= HOB.length) return clearInterval(t); img.src = HOB[k]; }, 400); };
   const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   let cur = slot.firstElementChild, i = 0;
   const swap = html => {
@@ -167,8 +175,10 @@
     requestAnimationFrame(step); };
   const next = () => {
     i = (i + 1) % ITEMS.length;
-    if (ITEMS[i] === null) { const el = swap('<b class="num">0</b> подписчиков'); roll(el.querySelector('b')); setTimeout(next, 4000); return; }
-    swap(ITEMS[i]); setTimeout(next, 1700);
+    if (ITEMS[i] === null) { const el = swap('<b class="num">0</b> подписчиков ' + ic('ig')); roll(el.querySelector('b')); setTimeout(next, 4000); return; }
+    const el = swap(ITEMS[i]); const h = el.querySelector('.hh-hobby');
+    if (h) { cycle(h); setTimeout(next, 400 * HOB.length + 300); return; }
+    setTimeout(next, 1700);
   };
   setTimeout(next, 1700);
 })();
