@@ -58,7 +58,7 @@
     if (box) box.innerHTML = Array.from({ length: DAYS }, (_, i) => `<i class="${day > DAYS || i + 1 < day ? 'on' : i + 1 === day ? 'now' : ''}"></i>`).join('');
     if (now < CLOSE) {
       const left = CLOSE - now;
-      if (heroCd) heroCd.textContent = `${pad(Math.floor(left / 864e5))} д : ${pad(Math.floor(left % 864e5 / 36e5))} ч : ${pad(Math.floor(left % 36e5 / 6e4))} м`;
+      if (heroCd) heroCd.textContent = `${pad(Math.floor(left / 864e5))} д : ${pad(Math.floor(left % 864e5 / 36e5))} ч : ${pad(Math.floor(left % 36e5 / 6e4))} м : ${pad(Math.floor(left % 6e4 / 1e3))} с`;
       return true;
     }
     later();
@@ -68,7 +68,7 @@
     if (lastSub) lastSub.textContent = 'Набор в поток 1 закрыт. Оставь контакт - напишем, когда откроем следующий.';
     return false;
   }
-  if (tick()) { const t = setInterval(() => { if (!tick()) clearInterval(t); }, 30000); }
+  if (tick()) { const t = setInterval(() => { if (!tick()) clearInterval(t); }, 1000); }
 })();
 
 // Ролик «Путь к 10 000 подписчиков»: вставь код рилса в data-reel у #storyReel (instagram.com/reel/КОД/).
