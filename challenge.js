@@ -159,7 +159,7 @@
   const ic = k => '<svg class="hh-ic" viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + '</svg>';
   const ITEMS = ['Пройти IRON<span class="im">M</span>AN ' + MDOT, 'Проплыть OCEANMAN ' + OCEAN, 'Переплыть Босфор ' + ic('bridge'), 'Полюбить горы ' + ic('peaks'), 'Читать каждый день ' + ic('book'), 'Медитировать ' + PIC('meditation', 'Медитация'), 'Прыгнуть с парашютом ' + PIC('chute', 'Парашют'), 'Научиться делать сальто ' + PIC('flip', 'Сальто'), 'Обрести хобби <img class="hh-logo hh-pic hh-hobby" src="img/hobby-guitar.png" alt="Хобби">', null];
   const HOB = ['guitar', 'easel', 'chess', 'fishing', 'cooking', 'plants'].map(n => 'img/hobby-' + n + '.png');
-  HOB.concat(['img/icon-meditation.png', 'img/icon-flip.png', 'img/icon-chute.png']).forEach(u => { new Image().src = u; });
+  HOB.concat(['img/logo-oceanman.png', 'img/icon-meditation.png', 'img/icon-flip.png', 'img/icon-chute.png']).forEach(u => { new Image().src = u; });
   const cycle = img => { let k = 0; const t = setInterval(() => { k++; if (k >= HOB.length) return clearInterval(t); img.src = HOB[k]; }, 400); };
   const fmt = v => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   let cur = slot.firstElementChild, i = 0;
