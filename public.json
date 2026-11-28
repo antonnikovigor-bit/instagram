@@ -1,0 +1,1670 @@
+{
+ "updatedAt": "2026-11-28T14:15:47.000Z",
+ "profile": {
+  "username": "igor_antonnikov",
+  "name": "Игорь Антонников",
+  "biography": "IRONMAN | OCEANMAN\nО дисциплине, целях и новых начинаниях.\nЧеллендж «Час для себя» - старт 30.11\nАнкета по сайте 👇",
+  "picture": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-19/858283078_18622987561065152_5908307635714412618_n.jpg?stp=dst-jpg_s240x240_tt6&_nc_cat=111&_nc_map=urlgen_bucketless&ig_cache_key=GEZcKDPA2jsugilCAEpQfLp9hv5RbmNDAQAB2402400j-ccb7-5&ccb=7-5&_nc_sid=669407&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=ZHqhsZcBhYYQ7kNvwGGiAN8&_nc_oc=AdrQyg7K9qAwGssHMCbhacl2ZINp_eQnZvmCwjPxsjW_JGHYzSqkESNKVn7Y4lJPNtI&_nc_zt=24&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=AP4hL3IEAAAA&_nc_gid=UIFTLL0pjwAoZlsvltZYVQ&_nc_tpa=Q5bMBQKRG3-hiCi3MwBSeuwZhvB635X-85Ef80ooObcIJOaxZqtMaIpLkRIBmI4-P4RV__YfchBk5H8yqw&_nc_ct=RQosPBUCFQIAAAA&oh=00_AQWUM9LMgn4Us0G84KD4OM6slxeBn3PhHx1EgKdEEDkNCA&oe=6B10C929",
+  "followers": 10757,
+  "follows": 228,
+  "media": 181
+ },
+ "totals30": {
+  "reach": 418829,
+  "views": 786084,
+  "profile": 26267,
+  "followersGain": 3594,
+  "followersGainSource": "api",
+  "watchHours": 297.4,
+  "avgWatchSec": 9.3,
+  "followsFromReels": 2631,
+  "trackingSince": "2026-09-27T02:43:12.000Z"
+ },
+ "daily": [
+  {
+   "date": "2026-08-29",
+   "reach": 12283,
+   "views": 22136,
+   "profile": 168,
+   "follows": 6
+  },
+  {
+   "date": "2026-08-30",
+   "reach": 7908,
+   "views": 13944,
+   "profile": 115,
+   "follows": 4
+  },
+  {
+   "date": "2026-08-31",
+   "reach": 1295,
+   "views": 2931,
+   "profile": 74,
+   "follows": 2
+  },
+  {
+   "date": "2026-09-01",
+   "reach": 819,
+   "views": 3596,
+   "profile": 90,
+   "follows": 1
+  },
+  {
+   "date": "2026-09-02",
+   "reach": 552,
+   "views": 1620,
+   "profile": 52,
+   "follows": 0
+  },
+  {
+   "date": "2026-09-03",
+   "reach": 495,
+   "views": 1920,
+   "profile": 43,
+   "follows": 0
+  },
+  {
+   "date": "2026-09-04",
+   "reach": 509,
+   "views": 1342,
+   "profile": 47,
+   "follows": 0
+  },
+  {
+   "date": "2026-09-05",
+   "reach": 331,
+   "views": 629,
+   "profile": 27,
+   "follows": 0
+  },
+  {
+   "date": "2026-09-06",
+   "reach": 313,
+   "views": 688,
+   "profile": 30,
+   "follows": 2
+  },
+  {
+   "date": "2026-09-07",
+   "reach": 360,
+   "views": 1358,
+   "profile": 47,
+   "follows": 0
+  },
+  {
+   "date": "2026-09-08",
+   "reach": 320,
+   "views": 1146,
+   "profile": 31,
+   "follows": 0
+  },
+  {
+   "date": "2026-09-09",
+   "reach": 476,
+   "views": 1669,
+   "profile": 54,
+   "follows": 2
+  },
+  {
+   "date": "2026-09-10",
+   "reach": 486,
+   "views": 1942,
+   "profile": 167,
+   "follows": 8
+  },
+  {
+   "date": "2026-09-11",
+   "reach": 520,
+   "views": 26139,
+   "profile": 174,
+   "follows": 6
+  },
+  {
+   "date": "2026-09-12",
+   "reach": 832,
+   "views": 8213,
+   "profile": 42,
+   "follows": 1
+  },
+  {
+   "date": "2026-09-13",
+   "reach": 478,
+   "views": 4380,
+   "profile": 48,
+   "follows": 1
+  },
+  {
+   "date": "2026-09-14",
+   "reach": 1264,
+   "views": 4497,
+   "profile": 32,
+   "follows": 1
+  },
+  {
+   "date": "2026-09-15",
+   "reach": 1309,
+   "views": 8193,
+   "profile": 135,
+   "follows": 5
+  },
+  {
+   "date": "2026-09-16",
+   "reach": 2525,
+   "views": 8009,
+   "profile": 111,
+   "follows": 6
+  },
+  {
+   "date": "2026-09-17",
+   "reach": 1220,
+   "views": 3278,
+   "profile": 96,
+   "follows": 6
+  },
+  {
+   "date": "2026-09-18",
+   "reach": 136,
+   "views": 798,
+   "profile": 36,
+   "follows": 1
+  },
+  {
+   "date": "2026-09-19",
+   "reach": 1091,
+   "views": 3349,
+   "profile": 93,
+   "follows": 1
+  },
+  {
+   "date": "2026-09-20",
+   "reach": 1038,
+   "views": 2969,
+   "profile": 60,
+   "follows": 2
+  },
+  {
+   "date": "2026-09-21",
+   "reach": 495,
+   "views": 2148,
+   "profile": 51,
+   "follows": 5
+  },
+  {
+   "date": "2026-09-22",
+   "reach": 190,
+   "views": 767,
+   "profile": 33,
+   "follows": 2
+  },
+  {
+   "date": "2026-09-23",
+   "reach": 80,
+   "views": 465,
+   "profile": 35,
+   "follows": 3
+  },
+  {
+   "date": "2026-09-24",
+   "reach": 3094,
+   "views": 4849,
+   "profile": 195,
+   "follows": 9
+  },
+  {
+   "date": "2026-09-25",
+   "reach": 9656,
+   "views": 15828,
+   "profile": 484,
+   "follows": 22
+  },
+  {
+   "date": "2026-09-26",
+   "reach": 8464,
+   "views": 12385,
+   "profile": 434,
+   "follows": 30
+  },
+  {
+   "date": "2026-09-27",
+   "reach": 8620,
+   "views": 12335,
+   "profile": 412,
+   "followers": 3698,
+   "follows": 26
+  },
+  {
+   "date": "2026-09-28",
+   "reach": 5162,
+   "views": 7215,
+   "profile": 247,
+   "followers": 3722,
+   "follows": 25
+  },
+  {
+   "date": "2026-09-29",
+   "reach": 3045,
+   "views": 4048,
+   "profile": 142,
+   "followers": 3742,
+   "follows": 15
+  },
+  {
+   "date": "2026-09-30",
+   "reach": 400,
+   "views": 2164,
+   "profile": 36,
+   "followers": 3740,
+   "follows": 1
+  },
+  {
+   "date": "2026-10-01",
+   "reach": 1003,
+   "views": 3201,
+   "profile": 51,
+   "followers": 3738,
+   "follows": 0
+  },
+  {
+   "date": "2026-10-02",
+   "reach": 2011,
+   "views": 6028,
+   "profile": 331,
+   "followers": 3758,
+   "follows": 24
+  },
+  {
+   "date": "2026-10-03",
+   "reach": 1632,
+   "views": 4072,
+   "profile": 202,
+   "followers": 3764,
+   "follows": 14
+  },
+  {
+   "date": "2026-10-04",
+   "reach": 3499,
+   "views": 5130,
+   "profile": 151,
+   "followers": 3793,
+   "follows": 39
+  },
+  {
+   "date": "2026-10-05",
+   "reach": 2549,
+   "views": 3273,
+   "profile": 147,
+   "followers": 3839,
+   "follows": 48
+  },
+  {
+   "date": "2026-10-06",
+   "reach": 8613,
+   "views": 10866,
+   "profile": 357,
+   "followers": 3912,
+   "follows": 153
+  },
+  {
+   "date": "2026-10-07",
+   "reach": 12241,
+   "views": 15607,
+   "profile": 561,
+   "followers": 4145,
+   "follows": 242
+  },
+  {
+   "date": "2026-10-08",
+   "reach": 12645,
+   "views": 16716,
+   "profile": 652,
+   "followers": 4366,
+   "follows": 212
+  },
+  {
+   "date": "2026-10-09",
+   "reach": 12998,
+   "views": 17949,
+   "profile": 677,
+   "followers": 4533,
+   "follows": 162
+  },
+  {
+   "date": "2026-10-10",
+   "reach": 15767,
+   "views": 27287,
+   "profile": 895,
+   "followers": 4713,
+   "follows": 181
+  },
+  {
+   "date": "2026-10-11",
+   "reach": 14181,
+   "views": 20688,
+   "profile": 796,
+   "followers": 4857,
+   "follows": 135
+  },
+  {
+   "date": "2026-10-12",
+   "reach": 12543,
+   "views": 19147,
+   "profile": 707,
+   "followers": 4952,
+   "follows": 119
+  },
+  {
+   "date": "2026-10-13",
+   "reach": 13535,
+   "views": 18623,
+   "profile": 764,
+   "followers": 5103,
+   "follows": 127
+  },
+  {
+   "date": "2026-10-14",
+   "reach": 10653,
+   "views": 15107,
+   "profile": 664,
+   "followers": 5213,
+   "follows": 121
+  },
+  {
+   "date": "2026-10-15",
+   "reach": 11054,
+   "views": 14139,
+   "profile": 595,
+   "followers": 5333,
+   "follows": 122
+  },
+  {
+   "date": "2026-10-16",
+   "reach": 11645,
+   "views": 19543,
+   "profile": 662,
+   "followers": 5445,
+   "follows": 135
+  },
+  {
+   "date": "2026-10-17",
+   "reach": 11804,
+   "views": 16674,
+   "profile": 647,
+   "followers": 5583,
+   "follows": 149
+  },
+  {
+   "date": "2026-10-18",
+   "reach": 10013,
+   "views": 13635,
+   "profile": 546,
+   "followers": 5721,
+   "follows": 111
+  },
+  {
+   "date": "2026-10-19",
+   "reach": 12903,
+   "views": 16684,
+   "profile": 747,
+   "followers": 5797,
+   "follows": 99
+  },
+  {
+   "date": "2026-10-20",
+   "reach": 12934,
+   "views": 18095,
+   "profile": 703,
+   "followers": 5914,
+   "follows": 97
+  },
+  {
+   "date": "2026-10-21",
+   "reach": 10852,
+   "views": 14129,
+   "profile": 575,
+   "followers": 5987,
+   "follows": 104
+  },
+  {
+   "date": "2026-10-22",
+   "reach": 12047,
+   "views": 16066,
+   "profile": 664,
+   "followers": 6096,
+   "follows": 97
+  },
+  {
+   "date": "2026-10-23",
+   "reach": 12601,
+   "views": 23234,
+   "profile": 790,
+   "followers": 6208,
+   "follows": 134
+  },
+  {
+   "date": "2026-10-24",
+   "reach": 17747,
+   "views": 25869,
+   "profile": 1080,
+   "followers": 6344,
+   "follows": 147
+  },
+  {
+   "date": "2026-10-25",
+   "reach": 20797,
+   "views": 29529,
+   "profile": 1139,
+   "followers": 6501,
+   "follows": 178
+  },
+  {
+   "date": "2026-10-26",
+   "reach": 20200,
+   "views": 26212,
+   "profile": 1033,
+   "followers": 6679,
+   "follows": 167
+  },
+  {
+   "date": "2026-10-27",
+   "reach": 18357,
+   "views": 22824,
+   "profile": 919,
+   "followers": 6843,
+   "follows": 168
+  },
+  {
+   "date": "2026-10-28",
+   "reach": 18961,
+   "views": 21741,
+   "profile": 891,
+   "followers": 6986,
+   "follows": 152
+  },
+  {
+   "date": "2026-10-29",
+   "reach": 19466,
+   "views": 21427,
+   "profile": 883,
+   "followers": 7132,
+   "follows": 129
+  },
+  {
+   "date": "2026-10-30",
+   "reach": 19714,
+   "views": 22459,
+   "profile": 991,
+   "followers": 7248,
+   "follows": 121
+  },
+  {
+   "date": "2026-10-31",
+   "reach": 22833,
+   "views": 33065,
+   "profile": 1087,
+   "followers": 7367,
+   "follows": 142
+  },
+  {
+   "date": "2026-11-01",
+   "reach": 27585,
+   "views": 36537,
+   "profile": 1331,
+   "followers": 7501,
+   "follows": 115
+  },
+  {
+   "date": "2026-11-02",
+   "reach": 21398,
+   "views": 26508,
+   "profile": 1122,
+   "followers": 7602,
+   "follows": 119
+  },
+  {
+   "date": "2026-11-03",
+   "reach": 15980,
+   "views": 18770,
+   "profile": 1073,
+   "followers": 7720,
+   "follows": 105
+  },
+  {
+   "date": "2026-11-04",
+   "reach": 21352,
+   "views": 17962,
+   "profile": 937,
+   "followers": 7808,
+   "follows": 98
+  },
+  {
+   "date": "2026-11-05",
+   "reach": 16146,
+   "views": 17105,
+   "profile": 852,
+   "followers": 7898,
+   "follows": 81
+  },
+  {
+   "date": "2026-11-06",
+   "reach": 13237,
+   "views": 14516,
+   "profile": 676,
+   "followers": 7953,
+   "follows": 109
+  },
+  {
+   "date": "2026-11-07",
+   "reach": 16778,
+   "views": 20491,
+   "profile": 897,
+   "followers": 8067,
+   "follows": 108
+  },
+  {
+   "date": "2026-11-08",
+   "reach": 18665,
+   "views": 22464,
+   "profile": 1093,
+   "followers": 8180,
+   "follows": 121
+  },
+  {
+   "date": "2026-11-09",
+   "reach": 15921,
+   "views": 19627,
+   "profile": 1011,
+   "followers": 8261,
+   "follows": 67
+  },
+  {
+   "date": "2026-11-10",
+   "reach": 18316,
+   "views": 21392,
+   "profile": 1242,
+   "followers": 8336,
+   "follows": 75
+  },
+  {
+   "date": "2026-11-11",
+   "reach": 22277,
+   "views": 24373,
+   "profile": 1107,
+   "followers": 8393,
+   "follows": 69
+  },
+  {
+   "date": "2026-11-12",
+   "reach": 22065,
+   "views": 26659,
+   "profile": 1065,
+   "followers": 8457,
+   "follows": 72
+  },
+  {
+   "date": "2026-11-13",
+   "reach": 26819,
+   "views": 31904,
+   "profile": 1059,
+   "followers": 8527,
+   "follows": 97
+  },
+  {
+   "date": "2026-11-14",
+   "reach": 22487,
+   "views": 27908,
+   "profile": 988,
+   "followers": 8612,
+   "follows": 91
+  },
+  {
+   "date": "2026-11-15",
+   "reach": 26625,
+   "views": 32013,
+   "profile": 943,
+   "followers": 8685,
+   "follows": 81
+  },
+  {
+   "date": "2026-11-16",
+   "reach": 26548,
+   "views": 30945,
+   "profile": 1050,
+   "followers": 8776,
+   "follows": 129
+  },
+  {
+   "date": "2026-11-17",
+   "reach": 28098,
+   "views": 36701,
+   "profile": 936,
+   "followers": 8881,
+   "follows": 100
+  },
+  {
+   "date": "2026-11-18",
+   "reach": 29296,
+   "views": 35859,
+   "profile": 832,
+   "followers": 9036,
+   "follows": 138
+  },
+  {
+   "date": "2026-11-19",
+   "reach": 23229,
+   "views": 25854,
+   "profile": 452,
+   "followers": 9087,
+   "follows": 92
+  },
+  {
+   "date": "2026-11-20",
+   "reach": 21103,
+   "views": 26807,
+   "profile": 552,
+   "followers": 9178,
+   "follows": 132
+  },
+  {
+   "date": "2026-11-21",
+   "reach": 19133,
+   "views": 25306,
+   "profile": 503,
+   "followers": 9324,
+   "follows": 165
+  },
+  {
+   "date": "2026-11-22",
+   "reach": 28999,
+   "views": 39148,
+   "profile": 778,
+   "followers": 9556,
+   "follows": 283
+  },
+  {
+   "date": "2026-11-23",
+   "reach": 19982,
+   "views": 25985,
+   "profile": 673,
+   "followers": 9801,
+   "follows": 226
+  },
+  {
+   "date": "2026-11-24",
+   "reach": 25060,
+   "views": 32849,
+   "profile": 865,
+   "followers": 10045,
+   "follows": 243
+  },
+  {
+   "date": "2026-11-25",
+   "reach": 21192,
+   "views": 26857,
+   "profile": 684,
+   "followers": 10249,
+   "follows": 220
+  },
+  {
+   "date": "2026-11-26",
+   "reach": 23045,
+   "views": 34202,
+   "profile": 729,
+   "followers": 10440,
+   "follows": 195
+  },
+  {
+   "date": "2026-11-27",
+   "reach": 22404,
+   "views": 29497,
+   "profile": 679,
+   "followers": 10612,
+   "follows": 0
+  },
+  {
+   "date": "2026-11-28",
+   "reach": 1985,
+   "views": 2321,
+   "profile": 60,
+   "followers": 10757,
+   "follows": 0
+  }
+ ],
+ "reels": [
+  {
+   "id": "18510800476103611",
+   "permalink": "https://www.instagram.com/reel/DgHqinABfwe/",
+   "thumb": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/926071669_18634527793065152_8211398171651775563_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=SF26qrVrv7MQ7kNvwG_SR0e&_nc_oc=Adq9e1UdVAuXSfKsRBGdbLY63iANGbQzm1YsnAYzm37IpfWAgWvX0yVTBxNKfdbHpTI&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQJ0fwrinnaX0de8GjnWOVE1ItCiUbrUczkzPPorGAgErvp7ILfDJZb_GgUMBq4WbjBMZ9oxAAi-gA&_nc_ct=RQosPBUKFQ4AAAA&oh=00_AQXWVr-p5k97qFH0MZ7K5J4FaHTihXvjgXI9LcS0jLIFMQ&oe=6B10A573",
+   "caption": "Многие недооценивают силу окружения.\n\nПодобное притягивает подобное. Когда рядом люди с тем же настроем, не нужно изобретать колёса и тащить всё в одного. Я верю в силу синергии и неоднократно в ней убеждался сам.\n\nХочется быть здоровым - рядом должны быть здоровые. Богатым - богатые. Умным - умные.",
+   "timestamp": "2026-11-24T09:46:34+0000",
+   "views": 146,
+   "reach": 112,
+   "likes": 1,
+   "comments": 0,
+   "shares": 0,
+   "saved": 0,
+   "avgWatchSec": 4.354,
+   "watchHours": 0.13426583333333333,
+   "durationSec": 6.9,
+   "watchPct": 63,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 54.5,
+   "estFollows": 4.7
+  },
+  {
+   "id": "18095076548201768",
+   "permalink": "https://www.instagram.com/reel/DgHoSBTB9-m/",
+   "thumb": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/927256830_18634524763065152_310186891243282626_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=NurqXZpt1s0Q7kNvwFkmYfB&_nc_oc=AdrZ_9IfYvMmhGdH1gncqkvW_5jbaTVyc4JRzINfP8h7q-abst8A9Si2slP-5VFWvlI&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQKVUTcp2fGRQy8heKW5pygaV36TOBDiBVzoxci6b98AErG3mYmPA2uRXOOhiUcK0iT7bh-UXVVS_g&_nc_ct=RQosPBUKFQ4AAAA&oh=00_AQUH6QzR3PQk3WvZ7e3zXfC4cJhV4ZrtsTy5kOb9b3s2Cw&oe=6B10A6D8",
+   "caption": "Многие недооценивают силу окружения.\n\nПодобное притягивает подобное. Когда рядом люди с тем же настроем, не нужно изобретать колёса и тащить всё в одного. Я верю в силу синергии и неоднократно в ней убеждался сам.\n\nХочется быть здоровым - рядом должны быть здоровые. Богатым - богатые. Умным - умные.",
+   "timestamp": "2026-11-24T09:28:12+0000",
+   "views": 1450,
+   "reach": 770,
+   "likes": 53,
+   "comments": 5,
+   "shares": 0,
+   "saved": 1,
+   "avgWatchSec": 6.303,
+   "watchHours": 1.5724958333333334,
+   "durationSec": 7.7,
+   "watchPct": 82,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 55.2,
+   "estFollows": 54.9
+  },
+  {
+   "id": "18376373653245324",
+   "permalink": "https://www.instagram.com/reel/DgEd0I2jxmX/",
+   "thumb": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/922693618_18634212457065152_415653317477195862_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=EForZxz2EIMQ7kNvwGp7wRG&_nc_oc=AdqKFzpvzSp3bU3b5otyPPuIIKDgVQWlj2IYjBHVfJ2qGW9WUrRpNWi_GLTLPo0FqjU&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQJaac1gsjnbBoU_Sw6RIh1UvQ2BSaqYQa21Hlis18p4KtN48xOshyVVW1dmSiMVzFgAtO_AOgMTwg&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQV8VHtKTXgg3Ye2nd-vR9bIhApa9q3uvf47DRy-INWIRA&oe=6B10C0E1",
+   "caption": "«Возлюби ближнего своего, как самого себя».\nЕсли не умеешь с любовью относиться к себе - что ты дашь другому?\nЭто можно назвать как угодно. Но не любовью.\nА ты к себе как относишься?\n\n#любовьксебе #саморазвитие #мышление",
+   "timestamp": "2026-11-23T03:57:15+0000",
+   "views": 223,
+   "reach": 200,
+   "likes": 3,
+   "comments": 1,
+   "shares": 0,
+   "saved": 0,
+   "avgWatchSec": 4.593,
+   "watchHours": 0.25901111111111114,
+   "durationSec": 22.2,
+   "watchPct": 21,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 66.5,
+   "estFollows": 7.6
+  },
+  {
+   "id": "17892663318685887",
+   "permalink": "https://www.instagram.com/reel/DgEdcOkDsh8/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/920699564_18634211725065152_6413990706135960089_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=DiV0mq8O1vAQ7kNvwFRce72&_nc_oc=AdpNfi6UnLx5sDnFfC-V3Tk7QrujC9_pZ3OZAJBGm07xpM5nKFHJUQU6HxIm3MijCSM&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQIKLQKA1gxLn0zX8rfqQJRSJGmLoFLZTSIoJh3B3T7tcwWOu0p_sFstJ06jv-M6sJfgGFFmq-sksA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQVt5jP3BVQNJyNa4Qt19pc1RwJFv_U4DGrKKZWK0vIQjA&oe=6B10A34A",
+   "caption": "Свобода для меня - это владение.\nТы доволен тем, что имеешь? Счастлив в этом?\nЕсли да - ты уже свободен.\nА что свобода для тебя?\n\n#свобода #мышление #капитал",
+   "timestamp": "2026-11-23T03:54:00+0000",
+   "views": 1094,
+   "reach": 949,
+   "likes": 9,
+   "comments": 0,
+   "shares": 0,
+   "saved": 2,
+   "avgWatchSec": 6.422,
+   "watchHours": 1.6804455555555555,
+   "durationSec": 14.2,
+   "watchPct": 45,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 43.2,
+   "estFollows": 40.1
+  },
+  {
+   "id": "18128219410701550",
+   "permalink": "https://www.instagram.com/reel/DgCyLs4lOc2/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/914620342_18634021969065152_6433722446905684023_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=F8OOWAaI1MsQ7kNvwEA45Bq&_nc_oc=AdpmO-b2khUJllJhu_ZfhBRswvWub8ws9uOanzswWpGEA_kvTUDxcDEL6yH786Gc5XI&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQKiwrwi6F6hHzj13Z3PKaOy9h1x1FcmPyYciIjN85Xrk-nzEdc2GQBBYBGqkV_hclJ7yeOKiDpgPw&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQW6ut9XWep6LhuZIU2cypqC-FblTNzm69xveL6DKVjAow&oe=6B10CF61",
+   "caption": "Однажды перед тобой встанет выбор: остаться там, где всё привычно, или пойти туда, где начнётся новая жизнь.\nВыбирай то, что пугает больше.\nКакой выбор стоит перед тобой сейчас?\n\n#выбор #смелость #дисциплина",
+   "timestamp": "2026-11-22T12:16:46+0000",
+   "views": 135,
+   "reach": 112,
+   "likes": 2,
+   "comments": 2,
+   "shares": 0,
+   "saved": 0,
+   "avgWatchSec": 5.239,
+   "watchHours": 0.16299305555555554,
+   "durationSec": 14.1,
+   "watchPct": 37,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 67,
+   "estFollows": 2.1
+  },
+  {
+   "id": "17989884560909731",
+   "permalink": "https://www.instagram.com/reel/DgCc1mKlOY0/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/924731826_18633981529065152_7176586185878645927_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Wj5uxJBv4_MQ7kNvwGzaFac&_nc_oc=Adpq2g7xZcXuHANvPDC_Z_GxUh1jHUtGCyI1xhzmFgPl72phjA0VUztt1yGnCtaIYh0&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQK0Goaf2bQK5cIw0sx5Qe1vmZnI1lp8SVpkpokPZWeoJLxoT4uZGZpCK8BPp8Q-kLznig2lte838Q&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQXYpcSoSxA0vr7n3RTQ02ZLenZOKs37dRX3dksL6CfSEg&oe=6B10C7E8",
+   "caption": "Жизнь - не спринт. Спорт - не спринт. Инвестиции - не спринт.\nСпринт хорош в отдельных проектах. Всё остальное - марафон.\nТы сейчас бежишь спринт или марафон?\n\n#марафон #дисциплина #инвестиции",
+   "timestamp": "2026-11-22T09:10:14+0000",
+   "views": 1262,
+   "reach": 1147,
+   "likes": 4,
+   "comments": 0,
+   "shares": 0,
+   "saved": 0,
+   "avgWatchSec": 8.617,
+   "watchHours": 2.7529266666666667,
+   "durationSec": 33.3,
+   "watchPct": 26,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 34.1,
+   "estFollows": 20
+  },
+  {
+   "id": "18110361824249413",
+   "permalink": "https://www.instagram.com/reel/DgCcdcTlF58/",
+   "thumb": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/917724010_18633980329065152_550590439773171341_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Cjls6e--hA4Q7kNvwHeL0aA&_nc_oc=AdpdHQq9lS2SW4BykyTHCft23gGQUPiWps3wj6Bfg1plom3jTLxbAH-Kn46lEtI3wzM&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQLNyla70ZcK7XA5pjXTefKmlD7UGYy-NnnGQTc8gJ4XKFrObxWTXQooJyIJLs9ZtLoic7Pdvsb5DQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQU-E1Z8r4DLCX217s6VIW5jkql8-_E-5ywbBnq1r5KI8w&oe=6B1098B0",
+   "caption": "Быть лучше всех хотят многие.\nПлатить за это соразмерную цену готовы единицы.\nНикто не готов жить как Джордан - хотя бы месяц.\nА ты готов?\n\n#дисциплина #результат #мышление",
+   "timestamp": "2026-11-22T09:06:56+0000",
+   "views": 1304,
+   "reach": 1107,
+   "likes": 14,
+   "comments": 0,
+   "shares": 2,
+   "saved": 9,
+   "avgWatchSec": 9.99,
+   "watchHours": 3.0750016666666666,
+   "durationSec": 24.2,
+   "watchPct": 41,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 40.6,
+   "estFollows": 19.8
+  },
+  {
+   "id": "18100217180402808",
+   "permalink": "https://www.instagram.com/reel/DgCPqWLD5HJ/",
+   "thumb": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/923911537_18633956614065152_1702281866039081136_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ViuN4OBaAM8Q7kNvwH0WEzH&_nc_oc=Adrf0mXgbzsUxDwOCDllu479E5i3EMHC-p-xWMcQ_5yRTU6pLgODFq_qX5EIdxhVCcI&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQKlfWQpsLuQ-U2VmuJZ9J-ZoyDRFBx-SWAlw-ybqxluPmN7qBp57LRpqL5p4JuM6_qdO47TbZ2_RA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQUygNwB51xo2VBQWrit5y97JrKgBQgRnKhWvXDnUeZLgw&oe=6B10C574",
+   "caption": "Не умел плавать - и решил пройти дистанцию Ironman.\nДва года с этой целью просыпался и засыпал.\nПотерял ли я счастье по дороге? Нет. Оно было в самом пути.\n\n#ironman #цель #дисциплина",
+   "timestamp": "2026-11-22T07:15:07+0000",
+   "views": 595,
+   "reach": 492,
+   "likes": 9,
+   "comments": 2,
+   "shares": 0,
+   "saved": 2,
+   "avgWatchSec": 10.206,
+   "watchHours": 1.3891847222222222,
+   "durationSec": 25.1,
+   "watchPct": 41,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 44.1,
+   "estFollows": 17.2
+  },
+  {
+   "id": "18110175188288963",
+   "permalink": "https://www.instagram.com/reel/DgCPSrJDEUY/",
+   "thumb": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/921867356_18633955885065152_8085321855222800494_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=rNsU_5Gx0O8Q7kNvwHYmo6Q&_nc_oc=Adr5YaG1fB2V8D7HZD_v2pQezee09XEMcX39z2AAixKbjy_bab36K9sSpkR8l_MWH7E&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQIy7vKxw3EIg6-vm7lZCK-IzFRnSI-0ldDIJDI7FMU8UK8PwG0r4qkb7s_K_9sCLaKczJHzx2Wg3g&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQUNecP3uUpmo2lTXo6vlaRyZ1KisMQQSmY1HdWDC8x8TQ&oe=6B10C284",
+   "caption": "Хорошие привычки - твой союзник во времени. Плохие - враг.\nЧем плотнее наполнен день, тем больше в него помещается.\nКакая привычка работает на тебя прямо сейчас?\n\n#привычки #дисциплина #саморазвитие",
+   "timestamp": "2026-11-22T07:11:46+0000",
+   "views": 1442,
+   "reach": 1161,
+   "likes": 15,
+   "comments": 0,
+   "shares": 1,
+   "saved": 12,
+   "avgWatchSec": 8.445,
+   "watchHours": 2.7166055555555557,
+   "durationSec": 19.6,
+   "watchPct": 43,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 56.1,
+   "estFollows": 23.7
+  },
+  {
+   "id": "17993060847086186",
+   "permalink": "https://www.instagram.com/reel/DgA0lfvj8gY/",
+   "thumb": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/924043521_18633816961065152_1208809382077487136_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=zHVlxZxrKRIQ7kNvwHJSx6c&_nc_oc=AdoxVf_HCK2q3rU2kpVSM96pql83us4CgVSftur0wT0wSO2E0paylDFucFJPpJfFKT0&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQKvE5vWlQVzlC3BldzBXNVxdyHPV2Ej7oCwbgY6L5UJafuLTs7mOpc-Yq_8Eoeam1YWa3bE4qZ2YQ&_nc_ct=RQosPBUKFQwAAAA&oh=00_AQU8dMDQ_7IRbAcc2yk9RPK5wkv8X2CtJGQsR-CPnJ_2sg&oe=6B10989E",
+   "caption": "Джобс, Цукерберг, Гейтс бросили институт - и все знают их имена.\nТех, кто бросил и канул в никуда, больше 99%. Про них просто не рассказывает.\nНа чей пример ты ориентируешься?\n\n#ошибкавыжившего #мышление #предпринимательство",
+   "timestamp": "2026-11-21T17:59:17+0000",
+   "views": 1510,
+   "reach": 1249,
+   "likes": 13,
+   "comments": 1,
+   "shares": 0,
+   "saved": 1,
+   "avgWatchSec": 8.811,
+   "watchHours": 3.0863922222222224,
+   "durationSec": 22.4,
+   "watchPct": 39,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 38.1,
+   "estFollows": 8.4
+  },
+  {
+   "id": "17989618215092738",
+   "permalink": "https://www.instagram.com/reel/Df98sYdtme8/",
+   "thumb": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/915667159_18633490846065152_4908985924714540596_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=32XKDLoAT60Q7kNvwHA0ydj&_nc_oc=AdrIJvSk4rGxJLgBAuvjOzaU50UoZfqtvZNxvlyQJGSAp6Q2VbI0F2l4dbBsBs1lZzk&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQJp_8ZITJXt24-PE4OjZPPD8QWEVuZnyHdhjP8M-KR6L12sUWKwTqEBNpqAnERHl_Cv3UHJ0OToyg&_nc_ct=RQosPBUKFQ4AAAA&oh=00_AQUu89RX1UAUAARhkuA_5XTSu6aLqvh9cwyYHK5OIAOV7A&oe=6B10CFF0",
+   "caption": "До конца года - месяц. Ещё успеешь начать то, что откладывал весь год.\n\nЧеллендж «Час для себя»: 30 дней - по часу на одну твою цель. Встаёшь в своём ритме: 5:00, 6:00 или когда удобно.\n\nСтарт 30 ноября.\nАнкета - по ссылке в шапке профиля 👆",
+   "timestamp": "2026-11-20T15:19:05+0000",
+   "views": 3016,
+   "reach": 2006,
+   "likes": 118,
+   "comments": 2,
+   "shares": 30,
+   "saved": 25,
+   "avgWatchSec": 10.228,
+   "watchHours": 6.7109572222222225,
+   "durationSec": 53.2,
+   "watchPct": 19,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 61.5,
+   "estFollows": 97.7
+  },
+  {
+   "id": "17954506086049033",
+   "permalink": "https://www.instagram.com/reel/Df31lsTK8i-/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/915547614_18632885566065152_6323878211899669293_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=nm_t_iXqGGgQ7kNvwExIHM-&_nc_oc=AdoyoctG5pmV-ZE68Omm6tNrpI5tDB5Ywkel2j-d0cOVFMSdA2JLoNd6OOgmF3yoevE&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQI7woO07066P7dO-VgpQX7sT5DMbzAYiAbjSl43YiDioY48li7RyHjHDTuvv7IIIFs01V3QxMYHGQ&_nc_ct=RQosPBUKFQ4AAAA&oh=00_AQXBy31yVLj89q6ALjM2ZvsFMOfUw33NgLWJ28gxY4_J-Q&oe=6B10B767",
+   "caption": "Челлендж «Час для себя»:\n30 дней - по часу на свою цель 🎯 \nВстаёшь в своём ритме: 5:00, 6:00 или когда удобно.\nРядом команда и напарник - слиться не дадут.\n\nСтарт 30 ноября.\nПодробности в анкете в шапке профиля",
+   "timestamp": "2026-11-18T06:16:26+0000",
+   "views": 6486,
+   "reach": 4180,
+   "likes": 223,
+   "comments": 126,
+   "shares": 52,
+   "saved": 41,
+   "avgWatchSec": 11.459,
+   "watchHours": 16.830132777777777,
+   "durationSec": 65.2,
+   "watchPct": 18,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 62.3,
+   "estFollows": 155.4
+  },
+  {
+   "id": "18075753272590399",
+   "permalink": "https://www.instagram.com/reel/Df12ViuNUaU/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/913461326_18632675827065152_549841655738676476_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=2sDXiJNuvH0Q7kNvwGyjw5l&_nc_oc=AdoZnL_jcY1I4UojHf0e78eLVmwyuYy5kHW3ZzRerGQTRNtIm2JBSaqsmVwducoj8Yg&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQIs2OpivQZZ0q1FZAg2vsaSf8l_sqDmHWjT6ukbgShTCRS9asme5ZLHkJ7uzxL2xtE27ptOQpdEpg&_nc_ct=RQosPBUKFQ4AAAA&oh=00_AQVaXwwJ666yLmovemRy2AIS4jMqDwoGFKGE8zhS0rRbcQ&oe=6B10BA46",
+   "caption": "10 лет желания - 5 уроков действия ✨\n\nНе страшно начинать с нуля, страшно так и не начать.",
+   "timestamp": "2026-11-17T11:47:58+0000",
+   "views": 8182,
+   "reach": 5296,
+   "likes": 348,
+   "comments": 88,
+   "shares": 12,
+   "saved": 39,
+   "avgWatchSec": 21.217,
+   "watchHours": 34.08904111111111,
+   "durationSec": 57.1,
+   "watchPct": 37,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 40,
+   "estFollows": 124.4
+  },
+  {
+   "id": "18425763013156218",
+   "permalink": "https://www.instagram.com/reel/DfsCxndBDcF/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/905450893_18631371982065152_1750652234241231687_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=yQ4Jommq1ycQ7kNvwE3aFiQ&_nc_oc=Adr5QN51_uQddTjH0R4es__9qJGSNnlp-4vEtriYVelB_NbTIN8e-_DrQMjquIqVliI&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQJ5AEADiM41buPaLFlbrZQMvP4cQw2KXnYA2G6jKrVX16_1jthEfpjF0Ib_G-_qEvGRJilZvx1M1A&_nc_ct=RQosPBUKFQ4AAAA&oh=00_AQXGO_A-9aj-C5TMj2ghJKf8ffVUrfpZr7DOVGx8hMlFlQ&oe=6B10B7AF",
+   "caption": "Смотрю, как папа всё разрешает внуку, и думаю: а почему со мной так не работало? 😂",
+   "timestamp": "2026-11-13T16:21:27+0000",
+   "views": 4816,
+   "reach": 3131,
+   "likes": 126,
+   "comments": 2,
+   "shares": 9,
+   "saved": 5,
+   "avgWatchSec": 6.787,
+   "watchHours": 6.444121388888889,
+   "durationSec": 9.1,
+   "watchPct": 75,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 38.3,
+   "estFollows": 41
+  },
+  {
+   "id": "18399906451166660",
+   "permalink": "https://www.instagram.com/reel/Dfrv3QOtN1Y/",
+   "thumb": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/901941208_18631330192065152_1165936592608319162_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ySJypl0QDEgQ7kNvwEtzBBW&_nc_oc=AdrhHuVfhsgl74tZF6p1e1ytxLCY_Xy85EC7IsDZvQFtEJ8KrpR1vw4ce3KuY27QH1w&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQJKrs2E8j4vw6LlIQ0qUWtMxRxPLx42De5flUVupFk_ke12D6NR02ibtYKRAwHhpqstuLjln0gdwQ&_nc_ct=RQosPBUKFQ4AAAA&oh=00_AQU2JDNaLxqueEY147S7QxEpiYUZ2-DVFDAiG_Js1oLocA&oe=6B10A5AF",
+   "caption": "Многие уже списали этот год и принялись строить великие планы на следующий",
+   "timestamp": "2026-11-13T13:34:56+0000",
+   "views": 2713,
+   "reach": 1933,
+   "likes": 93,
+   "comments": 7,
+   "shares": 0,
+   "saved": 3,
+   "avgWatchSec": 6.225,
+   "watchHours": 3.30297,
+   "durationSec": 8.8,
+   "watchPct": 71,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 45.6,
+   "estFollows": 24.5
+  },
+  {
+   "id": "17999349549030472",
+   "permalink": "https://www.instagram.com/reel/DfosCmmNeFi/",
+   "thumb": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/900977697_18630957946065152_7090883551255858502_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ptu8RImMkHIQ7kNvwGkgP9z&_nc_oc=AdoIK8EpIaYnKt_rHcDTdM7kL1XXrnJ-u9_41VDcPSmVrLCwPYuszXqR8U8nHwkvcV4&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQIOElI61Fur2OjZN7h8BRnm-OfiRKRr-oibcB_HocabneUCUgVUgZrVeJYEIwJrfiz67oxXOcxixQ&_nc_ct=RQosPBUKFQ4AAAA&oh=00_AQWkiro4sRYJycIUnYK2eH8r7z4RQgyJRem8sm0y_ysX8g&oe=6B10B027",
+   "caption": "",
+   "timestamp": "2026-11-12T09:02:38+0000",
+   "views": 2946,
+   "reach": 1582,
+   "likes": 138,
+   "comments": 21,
+   "shares": 10,
+   "saved": 2,
+   "avgWatchSec": 7.119,
+   "watchHours": 3.6090355555555558,
+   "durationSec": null,
+   "watchPct": null,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 40,
+   "estFollows": 55.1
+  },
+  {
+   "id": "18108410186201514",
+   "permalink": "https://www.instagram.com/reel/DfmJERrNN2s/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/898245053_1430044165438815_2159823954018639277_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=sr7xj7iI07UQ7kNvwGpfDZ6&_nc_oc=AdruzPPy9_By-YkYl8wyaa_Q4ozWfnHi6k3pcDaUEAop90N1WO9XTicoVL-ErhG0iLI&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQIhWj3NHJA4sLKHBs3pOVHU5Qc2SejCeTJMePJJ1OAIY0NCHsavsELmS2OxUzsduqJ1gn-lHVyYyA&_nc_ct=RQosPBUKFQwAAAA&oh=00_AQW3m0Fjt5ciD_Gc8QGMlOiOXKk_bb_eztkk7Sa2Yt4Eyw&oe=6B10CD1D",
+   "caption": "С днём рождения, сыночек ❤️",
+   "timestamp": "2026-11-11T09:19:26+0000",
+   "views": 113957,
+   "reach": 97189,
+   "likes": 3150,
+   "comments": 44,
+   "shares": 1220,
+   "saved": 422,
+   "avgWatchSec": 7.276,
+   "watchHours": 199.736485,
+   "durationSec": 24.9,
+   "watchPct": 29,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 53.3,
+   "estFollows": 1684
+  },
+  {
+   "id": "18449900137134003",
+   "permalink": "https://www.instagram.com/reel/DfMj0VPBpjF/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/879543702_2036429000351864_5631450854373717291_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=uLlEKePHtvkQ7kNvwEgZhcD&_nc_oc=AdqeSfbnIShM23MR8IhINPnmoEIzq5hYcADZLLDLYWf31UwNr5jnkhgqS6XVKJCIbAk&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQLKobmaAcB_C1uWzcT9265TrmCyt9MIO1uFUQRlVUZEQg5bPpHWyDChe4OlprX0mZdBPLESVC88dQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQXejYoAuoECCaO29cawosBCcYGBL-MVtfw_tShhTXYOhQ&oe=6B10AD1D",
+   "caption": "Срочное победило важное. Весь день ушёл на мелочи, операционку и чужие вопросы. А когда дошёл до важного, уже не осталось ни времени, ни энергии. Скоро запущу инструмент, который решает эту проблему.\n#продуктивность #фокус #приоритеты",
+   "timestamp": "2026-11-01T10:54:03+0000",
+   "views": 2315,
+   "reach": 1670,
+   "likes": 74,
+   "comments": 2,
+   "shares": 2,
+   "saved": 6,
+   "avgWatchSec": 7.328,
+   "watchHours": 3.383183888888889,
+   "durationSec": null,
+   "watchPct": null,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 38.6,
+   "estFollows": 151.1
+  },
+  {
+   "id": "18111080741177336",
+   "permalink": "https://www.instagram.com/reel/DfFXgWOB4D6/",
+   "thumb": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/870141396_1461509192612136_4882362053346081429_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=dnCl-KbRqjoQ7kNvwGiS7H8&_nc_oc=Ado31BRas2HRVZ-XD47-FGa6CsKoTjuKtpevpZAdM82vkDi6IgRpsb1Yojrk8KAKuIw&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQKKq6Jjl8HNqUSRCsj9pbZVl9v2wE9iEb7wb5P7JSnhsyTfag_VroePvEOUsMXMLKgUNJE9Wa8S8A&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQU25aFZKb5_LXbkltu6n3J8LcS0t0Onx8DL5RgeYe8bbA&oe=6B109C22",
+   "caption": "Все хотят глобальных перемен и сразу. А маленькие шаги недооценивают. \nХотя именно из них и складывается большой путь.",
+   "timestamp": "2026-10-29T15:58:04+0000",
+   "views": 1602,
+   "reach": 1108,
+   "likes": 125,
+   "comments": 9,
+   "shares": 4,
+   "saved": 2,
+   "avgWatchSec": 21.135,
+   "watchHours": 6.487336111111111,
+   "durationSec": 85.3,
+   "watchPct": 25,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 52.1,
+   "estFollows": 99.7
+  },
+  {
+   "id": "17998063404041372",
+   "permalink": "https://www.instagram.com/reel/De13v3PhSDF/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/862320640_2562327890839316_86168496821089262_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=qM4eaTvnkbIQ7kNvwFGKgGI&_nc_oc=AdpfyVJb_2nJQ4BN2JCAc7knC1hbrRUVYawPbfFCH6uTNdr2GLniBXYU8LUD7eXp_-E&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQLCeL8T48hw8qfvNN9LGtMXnzv-CitXqqkQdH8YLb8VmRDRI9htJDphTPD-nX_iBrlfSB-t8-w6UQ&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQUyreCPzv3xqZXu_zA3QQcJjTH4SZ8_CH9wmQcJ7zwpkw&oe=6B10AD13",
+   "caption": "Десять киндеров на Новый год - подарок, который я помню больше 30 лет. Теперь такой же получил мой сын. А какой подарок из детства запомнился вам?",
+   "timestamp": "2026-10-23T15:28:33+0000",
+   "views": 3218,
+   "reach": 2427,
+   "likes": 228,
+   "comments": 24,
+   "shares": 14,
+   "saved": 8,
+   "avgWatchSec": 23.085,
+   "watchHours": 14.640005277777778,
+   "durationSec": 54,
+   "watchPct": 43,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 35.6,
+   "estFollows": 290.5
+  },
+  {
+   "id": "18637074907010654",
+   "permalink": "https://www.instagram.com/reel/De1dDfFBSfJ/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/867878801_18626376940065152_5380719674545032467_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=wM9JC3tvhRsQ7kNvwHdqxup&_nc_oc=AdrHZknnMNiIMAByHE1gmcUx3f9LHsQ3xBDXX_Rh9ZUALpdS2-FQwP4uxA3I1XYpWH4&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQL5OoTp1c6SIqYiThXI3AivMdyDIvwCrxPNviXncMqS8hQKS4S0gD8xJoxlPXLqmsTGX6_5MVbPOA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQUxiOW30Tm1xH0bLiHsoQs3lKZcwTQ-iTJQXszXueAx8w&oe=6B10CF05",
+   "caption": "Предприниматели реже жалуются на родителей.\n\nНе потому что им повезло больше.\nА потому что они быстрее понимают простую вещь:\n\nникто не придёт и не построит тебе жизнь.\n\nМожно бесконечно разбирать детство, обвинять родителей, начальника, страну, время.\nНо от этого ничего не меняется.\n\nПредпринимател",
+   "timestamp": "2026-10-23T11:31:38+0000",
+   "views": 1828,
+   "reach": 1256,
+   "likes": 124,
+   "comments": 17,
+   "shares": 11,
+   "saved": 12,
+   "avgWatchSec": 15.8,
+   "watchHours": 6.1973666666666665,
+   "durationSec": null,
+   "watchPct": null,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 51.2,
+   "estFollows": 187.7
+  },
+  {
+   "id": "17914512540280182",
+   "permalink": "https://www.instagram.com/reel/DezTN8fBLMd/",
+   "thumb": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/859025722_18623927353065152_7429018256555253483_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=OGXCGmX2ZfwQ7kNvwGKlcup&_nc_oc=AdoJzX5S7fa9tHvjT2KFFv28LyRmhXhLIIw7umAH7c-OB6IyPWXmwI0OlfzJbt3Q_vQ&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQIXXaaxWaFCopIUQLsGnI-mGPbdlkutriggOnK35b5cdzurFd73rm5_wv7Gm1qfnYeQfmCnYqLuYg&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQUcj50v-Q8smVC6Al-h98WX4vT4w5w-ZqWRfuCErcPd5w&oe=6B10CD75",
+   "caption": "120 километров за месяц.\n\nЕсли бы мне сказали об этом в начале подготовки, я бы сам не поверил.\n\nЗа этими километрами — 9 месяцев тренировок, ранние подъёмы, усталость, травма плеча и моменты, когда всё шло совсем не по плану.\n\nИногда приходилось сбавлять темп, давать себе время восстановиться. А по",
+   "timestamp": "2026-10-22T15:28:40+0000",
+   "views": 4880,
+   "reach": 4127,
+   "likes": 256,
+   "comments": 26,
+   "shares": 16,
+   "saved": 23,
+   "avgWatchSec": 20.213,
+   "watchHours": 21.56140388888889,
+   "durationSec": 67.8,
+   "watchPct": 30,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 42.7,
+   "estFollows": 298.3
+  },
+  {
+   "id": "17947933113074462",
+   "permalink": "https://www.instagram.com/reel/DewlnK5Boe_/",
+   "thumb": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/859811401_18623610724065152_2445603038797836708_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=3hTOUVGBbsMQ7kNvwGrI1Qd&_nc_oc=AdqRlQl4Q2GSxt_LjEOAVx2K0E5VkzJ5VQIOq6k5AWa1bpNjU2GC1yw14tjEqxhdsrg&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQK018I-F_HeRdPh3poT_C55zpg_FFDllRSNZQ_bfLO-3no8GNGMFDPVzk2UxD_VsgEADK2ksYAy1g&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQUyjmZ9M_sbfw2x8cYB3Vd7rIMiJgnRd--4BF9e_8XPFg&oe=6B10CC71",
+   "caption": "Часто мы годами откладываем перемены, потому что боимся потерять привычный комфорт.\n\nБоимся ошибиться, остаться без поддержки, начать всё с нуля.\n\nИстория моего барбера - хороший пример того, что иногда достаточно решиться, чтобы жизнь пошла совсем по другому пути.\n\nИногда самое дорогое, за что мы п",
+   "timestamp": "2026-10-21T14:10:00+0000",
+   "views": 1563,
+   "reach": 1029,
+   "likes": 142,
+   "comments": 16,
+   "shares": 10,
+   "saved": 7,
+   "avgWatchSec": 25.316,
+   "watchHours": 7.580816388888889,
+   "durationSec": 106.1,
+   "watchPct": 24,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 47.1,
+   "estFollows": 82.4
+  },
+  {
+   "id": "17959562235230902",
+   "permalink": "https://www.instagram.com/reel/DeuElvCh8ny/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/851411330_18623304910065152_8835974539438496915_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=iAtE3cMhKDwQ7kNvwGrNuRu&_nc_oc=AdoZCcuJEnIvsuL8Mao9YDGJvg47afQbxdYN8urR_a28B6wKj6tbKUmo01GTzrExQ6w&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQK4FNYpG4fLOiyInRdW73K9FIHpBGd5i9QpRXdxYbUW_lQqOR91VZGKCexGMOJt6QdH4ImaHRWFtA&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQWDMXrqP9ZgT24FR7GEpsDORf-xtiRaeTlRQLb4Xpx0tQ&oe=6B10A85E",
+   "caption": "В 6 утра редко хочется идти на тренировку.\n\nОсобенно когда за окном темно, а дома тепло.\n\nНо каждый раз, когда побеждаешь желание остаться в кровати, происходит кое-что важнее самой тренировки.\n\nТы учишься держать слово, данное самому себе.\n\nИ со временем понимаешь: дело не в спорте и не в ранних по",
+   "timestamp": "2026-10-20T14:49:04+0000",
+   "views": 1597,
+   "reach": 1231,
+   "likes": 119,
+   "comments": 16,
+   "shares": 6,
+   "saved": 9,
+   "avgWatchSec": 16.843,
+   "watchHours": 5.759403611111111,
+   "durationSec": 81.8,
+   "watchPct": 21,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 53.6,
+   "estFollows": 151.3
+  },
+  {
+   "id": "18079171124399228",
+   "permalink": "https://www.instagram.com/reel/Der9DtWhrGs/",
+   "thumb": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/850353260_18623058925065152_610230174772898165_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=3zhEKKiJ0jcQ7kNvwECK8LX&_nc_oc=Adp-Vz5cMBgxbq7G5big4_tpshlhrE_gnbO82fRF_X-n4Z21wZ3O6KacTkvKIRCxSEU&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=rZ5Y8vXuiWdY-hLKm4UK2w&_nc_tpa=Q5bMBQJTh0pOi18GqkiBZz6j_XuomapCqbNHbDoyGB6_m58RhMK2EVrTMQsEHHkN3vzMADLGqYwalaIOiw&_nc_ct=RQosPBUKFQQAAAA&oh=00_AQXkH7eusg2_b43qCbsCFNQrvdT2CgJnvz0-SOgp56CQeQ&oe=6B109CC7",
+   "caption": "",
+   "timestamp": "2026-10-19T18:57:54+0000",
+   "views": 3564,
+   "reach": 2470,
+   "likes": 79,
+   "comments": 28,
+   "shares": 18,
+   "saved": 5,
+   "avgWatchSec": 6.192,
+   "watchHours": 4.409046666666667,
+   "durationSec": null,
+   "watchPct": null,
+   "follows": null,
+   "profileVisits": null,
+   "skipRate": 52.9,
+   "estFollows": 111.8
+  }
+ ],
+ "audience": {
+  "city": [
+   [
+    "Almaty, Almaty Region",
+    1591
+   ],
+   [
+    "Pavlodar, Pavlodar Region",
+    809
+   ],
+   [
+    "Shymkent, South Kazakhstan Region",
+    676
+   ],
+   [
+    "Karaganda, Karaganda Region",
+    516
+   ],
+   [
+    "Aktobe, Aktobe Region",
+    488
+   ],
+   [
+    "Kaskelen, Almaty Region",
+    376
+   ],
+   [
+    "Kostanay, Kostanay Region",
+    324
+   ],
+   [
+    "Öskemen, East Kazakhstan Region",
+    323
+   ],
+   [
+    "Oral, West Kazakhstan Region",
+    314
+   ],
+   [
+    "Tselinograd, Akmola Region",
+    313
+   ],
+   [
+    "Aktau, Mangystau Region",
+    284
+   ],
+   [
+    "Semey, East Kazakhstan Region",
+    268
+   ],
+   [
+    "Shchuchinsk, Akmola Region",
+    264
+   ],
+   [
+    "Taraz, Jambyl Region",
+    261
+   ],
+   [
+    "Kokshetau, Akmola Region",
+    246
+   ],
+   [
+    "Atyrau, Atyrau Region",
+    240
+   ],
+   [
+    "Energeticheskiy, Almaty Region",
+    226
+   ],
+   [
+    "Zhanatas, Jambyl Region",
+    209
+   ],
+   [
+    "Petropavl, North Kazakhstan Region",
+    198
+   ],
+   [
+    "Kapchagay, Almaty Region",
+    137
+   ],
+   [
+    "Taldykorgan, Almaty Region",
+    106
+   ],
+   [
+    "Kyzylorda, Kyzylorda Region",
+    106
+   ],
+   [
+    "Ekibastuz, Pavlodar Region",
+    105
+   ],
+   [
+    "Chilik, Almaty Region",
+    96
+   ],
+   [
+    "Temirtau, Karaganda Region",
+    79
+   ],
+   [
+    "Talgar, Almaty Region",
+    79
+   ],
+   [
+    "Türkistan, South Kazakhstan Region",
+    75
+   ],
+   [
+    "Balkhash, Karaganda Region",
+    48
+   ],
+   [
+    "Chundzha, Almaty Region",
+    47
+   ],
+   [
+    "Rudnyy, Kostanay Region",
+    47
+   ],
+   [
+    "Zharkent, Almaty Region",
+    45
+   ],
+   [
+    "Esik, Almaty Region",
+    44
+   ],
+   [
+    "Aksay, West Kazakhstan Region",
+    40
+   ],
+   [
+    "Zhezkazgan, Karaganda Region",
+    37
+   ],
+   [
+    "Zhanaozen, Mangystau Region",
+    34
+   ],
+   [
+    "Alekseyevka, Akmola Region",
+    34
+   ],
+   [
+    "Boralday, Almaty Region",
+    33
+   ],
+   [
+    "Moscow, Moscow",
+    28
+   ],
+   [
+    "Male, Kaafu Atoll",
+    26
+   ],
+   [
+    "Shakhtinsk, Karaganda Region",
+    24
+   ],
+   [
+    "Aksu, Pavlodar Region",
+    22
+   ],
+   [
+    "Satpayev, Karaganda Region",
+    22
+   ],
+   [
+    "Saryözek, Almaty Region",
+    21
+   ],
+   [
+    "Bishkek, Bishkek",
+    20
+   ],
+   [
+    "Zhitikara, Kostanay Region",
+    20
+   ]
+  ],
+  "country": [
+   [
+    "KZ",
+    9745
+   ],
+   [
+    "RU",
+    174
+   ],
+   [
+    "MV",
+    37
+   ],
+   [
+    "UZ",
+    35
+   ],
+   [
+    "IN",
+    30
+   ],
+   [
+    "KG",
+    27
+   ],
+   [
+    "UA",
+    22
+   ],
+   [
+    "US",
+    18
+   ],
+   [
+    "IQ",
+    17
+   ],
+   [
+    "TH",
+    16
+   ],
+   [
+    "ID",
+    15
+   ],
+   [
+    "TR",
+    15
+   ],
+   [
+    "DE",
+    14
+   ],
+   [
+    "MA",
+    14
+   ],
+   [
+    "AE",
+    14
+   ],
+   [
+    "BR",
+    12
+   ],
+   [
+    "ES",
+    12
+   ],
+   [
+    "AZ",
+    11
+   ],
+   [
+    "EG",
+    10
+   ],
+   [
+    "IT",
+    9
+   ],
+   [
+    "BY",
+    8
+   ],
+   [
+    "GE",
+    8
+   ],
+   [
+    "PL",
+    8
+   ],
+   [
+    "KR",
+    7
+   ],
+   [
+    "TJ",
+    7
+   ],
+   [
+    "PK",
+    7
+   ],
+   [
+    "DZ",
+    6
+   ],
+   [
+    "MY",
+    6
+   ],
+   [
+    "PH",
+    5
+   ],
+   [
+    "VN",
+    5
+   ],
+   [
+    "GB",
+    4
+   ],
+   [
+    "IR",
+    4
+   ],
+   [
+    "CN",
+    4
+   ],
+   [
+    "PE",
+    4
+   ],
+   [
+    "CZ",
+    4
+   ],
+   [
+    "SA",
+    3
+   ],
+   [
+    "SG",
+    3
+   ],
+   [
+    "SN",
+    3
+   ],
+   [
+    "MX",
+    3
+   ],
+   [
+    "NL",
+    3
+   ],
+   [
+    "BG",
+    2
+   ],
+   [
+    "CA",
+    2
+   ],
+   [
+    "IL",
+    2
+   ],
+   [
+    "AU",
+    2
+   ],
+   [
+    "LK",
+    2
+   ]
+  ],
+  "age": [
+   [
+    "35-44",
+    4319
+   ],
+   [
+    "25-34",
+    2720
+   ],
+   [
+    "45-54",
+    1666
+   ],
+   [
+    "55-64",
+    645
+   ],
+   [
+    "65+",
+    588
+   ],
+   [
+    "18-24",
+    447
+   ],
+   [
+    "13-17",
+    28
+   ]
+  ],
+  "gender": [
+   [
+    "F",
+    4043
+   ],
+   [
+    "M",
+    3322
+   ],
+   [
+    "U",
+    3048
+   ]
+  ]
+ },
+ "errors": []
+}
